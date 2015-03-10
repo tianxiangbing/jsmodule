@@ -1,0 +1,18 @@
+{
+  "family": "tianxiangbing",
+  "name": "jsmodule",
+  "description": "js组件",
+  "version": "1.0.0",
+  "author": {
+    "name": "田想兵",
+    "url": "http://www.lovewebgames.com"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-cssmin": "~0.9.0",
+    "grunt-text-replace": "~0.3.12"
+  }
+}
