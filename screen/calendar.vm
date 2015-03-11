@@ -1,0 +1,8 @@
+
+$control.setTemplate("side.vm")
+
+ddd
+
+$set(modulename,calendar)
+
+$!modulename
