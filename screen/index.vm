@@ -1,3 +1,8 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,jsmodule)
+$set(title,js组件)
 <h3>
 js组件
 </h3>

@@ -3,13 +3,10 @@
 		<small>Download</small>
 		.zip file
 	</a>
-	<a href="https://github.com/tianxiangbing/$!modulename/tarball/master" class="button">
-		<small>Download</small>
-		.tar.gz file
+	<a href="https://github.com/tianxiangbing/$!modulename" class="button">
+		<small>Code</small>
+		源码
 	</a>
 	<p class="repo-owner"><a href="https://github.com/tianxiangbing/$!modulename"></a> is maintained by <a href="https://github.com/tianxiangbing">tianxiangbing</a>.</p>
 	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://tianxiangbing.github.com">GitHub</a></p>
 </aside>
-$!title
-$!modulename
-1111111111111
