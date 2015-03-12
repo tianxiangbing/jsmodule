@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+          <!DOCTYPE html>
 <html>
   <head>
     <meta charset='utf-8'>
@@ -8,12 +9,12 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <title>js组件</title> </head>
+    <title>js组件-日历组件</title> </head>
   <body>
     <header>
       <div class="inner">
-        <h1>Jsmodule</h1>
-        <h2>JS组件</h2>
+        <h1>Jsmodule-calendar</h1>
+        <h2>JS组件-日历组件</h2>
         <a href="https://github.com/tianxiangbing/jsmodule" class="button"><small>View project on</small> GitHub</a>
       </div>
     </header>
@@ -21,7 +22,7 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          
+<ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="index.html">JY库</a></li><li><a href="/dev.htm" target="_blank" style="color:yellow;font-weight:bold;">分享区</a></li><li><a href="/demo.html" style="color:yellow;font-weight:bold;">技术博文</a></li><li><a href="http://www.lovewebgames.com/flash/" target="_blank">Flash Games</a></li><li><a href="http://www.lovewebgames.com/api.html">API</a></li><li><a href="https://github.com/tianxiangbing/JY" target="_blank">下载</a></li><li><a href="/games.html">JY游戏</a></li></ul>
 ﻿<aside id="sidebar">
 	<a href="https://github.com/tianxiangbing/calendar/zipball/master" class="button">
 		<small>Download</small>
@@ -34,12 +35,83 @@
 	<p class="repo-owner"><a href="https://github.com/tianxiangbing/calendar"></a> is maintained by <a href="https://github.com/tianxiangbing">tianxiangbing</a>.</p>
 	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://tianxiangbing.github.com">GitHub</a></p>
 </aside>
+日历组件
+calendar
+1111111111111
 
-ddd
 
-
-
-$!modulename
+<article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+	<a id="user-content-calendar" class="anchor" href="#calendar" aria-hidden="true"><span class="octicon octicon-link"></span></a>calendar</h1>
+	<p>js日历控件
+	</p>
+	<h1>
+	<a id="user-content-用法" class="anchor" href="#%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>用法</h1>
+	<pre><code>    &lt;input type="text" id="calendar" value="2015-04-15"/&gt;
+		    &lt;script src="../src/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+		    &lt;script src="../src/calendar.js"&gt;&lt;/script&gt;
+		    &lt;script&gt;
+		    var calendar = new Calendar();
+		    calendar.init({target :$('#calendar')});
+		    &lt;/script&gt;
+	</code></pre>
+	<h1>
+	<a id="user-content-属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
+	<h2>
+	<a id="user-content-属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h2>
+	<h3>
+	<a id="user-content-date" class="anchor" href="#date" aria-hidden="true"><span class="octicon octicon-link"></span></a>date:</h3>
+	<pre><code>    当前日期.
+	</code></pre>
+	<h3>
+	<a id="user-content-separator" class="anchor" href="#separator" aria-hidden="true"><span class="octicon octicon-link"></span></a>separator:</h3>
+	<pre><code>    日期分隔符，默认"-".
+	</code></pre>
+	<h3>
+	<a id="user-content-id" class="anchor" href="#id" aria-hidden="true"><span class="octicon octicon-link"></span></a>id:</h3>
+	<pre><code>    日历容器ID
+	</code></pre>
+	<h3>
+	<a id="user-content-calendarcontainer" class="anchor" href="#calendarcontainer" aria-hidden="true"><span class="octicon octicon-link"></span></a>calendarContainer:</h3>
+	<pre><code>    日历容器对象
+	</code></pre>
+	<h3>
+	<a id="user-content-dayarr" class="anchor" href="#dayarr" aria-hidden="true"><span class="octicon octicon-link"></span></a>dayArr:</h3>
+	<pre><code>    ['日', '一', '二', '三', '四', '五', '六']
+	</code></pre>
+	<h3>
+	<a id="user-content-montharr" class="anchor" href="#montharr" aria-hidden="true"><span class="octicon octicon-link"></span></a>monthArr:</h3>
+	<pre><code>    ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+	</code></pre>
+	<h3>
+	<a id="user-content-isshow是否显示中" class="anchor" href="#isshow%E6%98%AF%E5%90%A6%E6%98%BE%E7%A4%BA%E4%B8%AD" aria-hidden="true"><span class="octicon octicon-link"></span></a>isShow:是否显示中</h3>
+	<h2>
+	<a id="user-content-方法" class="anchor" href="#%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>方法</h2>
+	<h3>
+	<a id="user-content-setrangefunctionrange" class="anchor" href="#setrangefunctionrange" aria-hidden="true"><span class="octicon octicon-link"></span></a>setRange:function(range)</h3>
+	<pre><code>设置日期可选范围的方法
+	</code></pre>
+	<h3>
+	<a id="user-content-initfunctionsettings" class="anchor" href="#initfunctionsettings" aria-hidden="true"><span class="octicon octicon-link"></span></a>init:function(settings)</h3>
+	<h3>
+	<a id="user-content-settings参数" class="anchor" href="#settings%E5%8F%82%E6%95%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>settings参数</h3>
+	<h4>
+	<a id="user-content-focusdate" class="anchor" href="#focusdate" aria-hidden="true"><span class="octicon octicon-link"></span></a>focusDate:</h4>
+	<pre><code>    当前选中日期{{2015-01-02}}
+	</code></pre>
+	<h4>
+	<a id="user-content-target" class="anchor" href="#target" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:</h4>
+	<pre><code>    触发日历的事件结点，可以是input或其他标签，如果是input会默认取value作为focusDate,
+		    否则取target的前一个input的value值，或取当前时间.
+	</code></pre>
+	<h4>
+	<a id="user-content-selectedfunctionab" class="anchor" href="#selectedfunctionab" aria-hidden="true"><span class="octicon octicon-link"></span></a>selected:function(a,b)</h4>
+	<pre><code>    选中后的回调事件，参数为(a)时间对象 ,(b)日历容器
+	</code></pre>
+	<h4>
+	<a id="user-content-beforeselectfunctionab" class="anchor" href="#beforeselectfunctionab" aria-hidden="true"><span class="octicon octicon-link"></span></a>beforeSelect:function(a,b)</h4>
+	<pre><code>    选择前触发方法，参数为(a)时间对象 ,(b)日历容器
+	</code></pre>
+</article>
         </section>
       </div>
     </div>

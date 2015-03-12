@@ -43,33 +43,34 @@ module.exports = function(grunt) {
                 to: content
             }]
         };
-
+                // console.log(fileName + ":::::content::::" + content);
         var controlList = content.match(new RegExp(/\$control\.setTemplate\(\"(\w+\.vm)\"\)/gm));
-        // console.log(controlList)
+         console.log("controlList:----------"+controlList)
         if (controlList) {
             var controlReplace = []
             controlList.forEach(function(item) {
                 var controlFileName = item.match(/(?!\")(\w+\.\w+)/g)[1];
                 var controlName = controlFileName.split('.')[0];
                 var controlContent = fs.readFileSync('control/' + controlFileName, "utf-8"); //控件内容
-                console.log(fileName + ":::::::::" + controlContent);
+                // console.log(fileName + ":::::content::::" + content);
                 // //变量替换
-                var varList = content.match(new RegExp(/\$set\([\w\,]+\)/gm));
-                console.log(varList)
+                var varList = content.match(new RegExp(/\$set\([\w\,\u4E00-\u9FA5\uF900-\uFA2D]+\)/gm));
+                console.log('*************::==>'+varList)
                 if (varList) {
                     var varReplace = []
                     varList.forEach(function(item) {
                         console.log("item111::::::"+item)
-                        var varArr = item.match(/(?!\(\))([\"\,\w+]+)/g)[1];
+                        var varArr = item.match(/(?!\(\))([\"\,\w+\u4E00-\u9FA5\uF900-\uFA2D]+)/g)[1];
                         var varName = varArr.split(',')[0];
                         var varvarlue = varArr.split(',')[1];
+                            console.log("varArr##########::"+varArr)
                         controlReplace.push({
                             from: item,
                             to: ''
                         });
                         // controlContent.replace(item, '');
                         var vlist = controlContent.match(new RegExp("\\$\\!" + varName, "g"));
-                        // console.log("\$\!" + varName + "vlist:" + vlist)
+                         console.log("\$\!" + varName + "vlist:" + vlist)
                         if (vlist) {
                             vlist.forEach(function(item) {
                                 console.log("item:::::" + item)
@@ -77,7 +78,6 @@ module.exports = function(grunt) {
                                 //     from: item,
                                 //     to: varvarlue
                                 // });
-                            console.log("vvv::"+varvarlue)
                                 controlContent=controlContent.replace(item, varvarlue);
                                 console.log(controlContent)
                             });
