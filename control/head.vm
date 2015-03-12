@@ -14,7 +14,7 @@
       <div class="inner">
         <h1>Jsmodule-$!modulename</h1>
         <h2>JS组件-$!title</h2>
-        <a href="https://github.com/tianxiangbing/jsmodule" class="button"><small>View project on</small> GitHub</a>
+        <a href="https://github.com/tianxiangbing/$!modulename" class="button"><small>代码在这里</small> GitHub</a>
       </div>
     </header>
 
