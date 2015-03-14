@@ -43,13 +43,24 @@
 	</p>
 	<h1>
 	<a id="user-content-用法" class="anchor" href="#%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>用法</h1>
-	<pre><code>    &lt;input type="text" id="calendar" value="2015-04-15"/&gt;
-		    &lt;script src="../src/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
-		    &lt;script src="../src/calendar.js"&gt;&lt;/script&gt;
-		    &lt;script&gt;
-		    var calendar = new Calendar();
-		    calendar.init({target :$('#calendar')});
-		    &lt;/script&gt;
+	<p>
+	<input type="text" id="calendar" value="2015-03-15"/>
+	<link rel="stylesheet" type="text/css" href="example/calendar/calendar.min.css">
+	<script src="example/calendar/jquery-1.9.1.min.js"></script>
+	<script src="example/calendar/calendar.min.js"></script>
+	<script>
+	var calendar = new Calendar();
+	calendar.init({target :$('#calendar'),range:['2015-3-5','2015-3-25']});
+	</script>
+	</p>
+	<pre><code>    
+&lt;input type="text" id="calendar" value="2015-03-15"/&gt;
+&lt;script src="../src/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="../src/calendar.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+var calendar = new Calendar();
+calendar.init({target :$('#calendar'),range:['2015-3-5','2015-3-25']});
+&lt;/script&gt;
 	</code></pre>
 	<h1>
 	<a id="user-content-属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
