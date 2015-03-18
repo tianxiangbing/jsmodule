@@ -1,0 +1,143 @@
+
+          <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='stylesheets/css.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <title>js组件-dialog对话框弹层</title> </head>
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Jsmodule-dailog</h1>
+        <h2>JS组件-dialog对话框弹层</h2>
+        <a href="https://github.com/tianxiangbing/dailog" class="button"><small>代码在这里</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+<ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="http://www.lovewebgames.com/flash/" target="_blank">Flash Games</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
+﻿<aside id="sidebar">
+	<a href="https://github.com/tianxiangbing/dailog/zipball/master" class="button">
+		<small>Download</small>
+		.zip file
+	</a>
+	<a href="https://github.com/tianxiangbing/dailog" class="button">
+		<small>Code</small>
+		源码
+	</a>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/dailog"></a> is maintained by <a href="https://github.com/tianxiangbing">tianxiangbing</a>.</p>
+	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://tianxiangbing.github.com">GitHub</a></p>
+</aside>
+
+
+<h1>
+<a id="dialog" class="anchor" href="#dialog" aria-hidden="true"><span class="octicon octicon-link"></span></a>dialog</h1>
+<p>js dialog弹窗
+  </p>
+	<h1>
+	<a id="用法" class="anchor" href="#%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>用法</h1>
+	<p>
+		<link rel="stylesheet" type="text/css" href="example/dialog/dialog.css">
+		<input type="button" id="btn_dialog" value="打开浮层"/>
+		<div id="dialog-content" style="display:none;">这是内容</div>
+		<script src="example/dialog/jquery-1.9.1.min.js"></script>
+		<script src="example/dialog/dialog-jquery.js"></script>
+		<script>
+		var dialog = new Dialog();
+		dialog.init({target:"#dialog-content",trigger:"#btn_dialog",mask:true,width:500,height:300,title:'标题'});
+		</script>
+	</p>
+	<pre><code>    
+&lt;input type="button" id="btn_dialog" value="打开浮层"/&gt;
+&lt;div id="dialog-content" style="display:none;"&gt;这是内容&lt;/div&gt;
+&lt;script src="../src/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="../src/dialog.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    var dialog = new Dialog();
+    dialog.init({target:"#dialog-content",trigger:"#btn_dialog",mask:true,width:500,height:300,title:'标题'});
+&lt;/script&gt;
+	</code></pre>
+	<h2>
+	<a id="或者用jquery方式调用" class="anchor" href="#%E6%88%96%E8%80%85%E7%94%A8jquery%E6%96%B9%E5%BC%8F%E8%B0%83%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者用jquery方式调用:</h2>
+	<p>
+		<input type="button" id="btn_dialogjquery" value="jq打开浮层"/>
+		<div id="dialog-contentjq" style="display:none;">这是内容22</div>
+		<script src="../src/dialog-jquery.js"></script>
+		<script>
+		$('#btn_dialogjquery').Dialog({target:"#dialog-contentjq",mask:true,width:500,height:300,title:'标题'})
+		</script>
+	</p>
+	<pre><code>    
+&lt;input type="button" id="btn_dialogjquery" value="jq打开浮层"/&gt;
+&lt;div id="dialog-contentjq" style="display:none;"&gt;这是内容22&lt;/div&gt;
+&lt;script src="../src/dialog-jquery.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	$('#btn_dialogjquery').Dialog({target:"#dialog-contentjq",mask:true,width:500,height:300,title:'标题'})
+&lt;/script&gt;
+	</code></pre>
+	<h1>
+	<a id="属性或方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E6%88%96%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性或方法</h1>
+	<h2>
+	<a id="属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h2>
+	<h3>
+	<a id="trigger" class="anchor" href="#trigger" aria-hidden="true"><span class="octicon octicon-link"></span></a>trigger:</h3>
+	<pre><code>    触发对象
+	</code></pre>
+	<h3>
+	<a id="target" class="anchor" href="#target" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:</h3>
+	<pre><code>    弹出内容，可以为#id,或者jquery对象
+	</code></pre>
+	<h3>
+	<a id="mask" class="anchor" href="#mask" aria-hidden="true"><span class="octicon octicon-link"></span></a>mask:</h3>
+	<pre><code>    是否有遮罩层
+	</code></pre>
+	<h3>
+	<a id="title" class="anchor" href="#title" aria-hidden="true"><span class="octicon octicon-link"></span></a>title:</h3>
+	<pre><code>    标题
+	</code></pre>
+	<h3>
+	<a id="zindex" class="anchor" href="#zindex" aria-hidden="true"><span class="octicon octicon-link"></span></a>zIndex:</h3>
+	<pre><code>    z-index
+	</code></pre>
+	<h3>
+	<a id="closetpl" class="anchor" href="#closetpl" aria-hidden="true"><span class="octicon octicon-link"></span></a>closeTpl:</h3>
+	<pre><code>    关闭html(默认:&lt;span class="ui-dialog-close js-dialog-close"&gt;x&lt;/span&gt;)
+	</code></pre>
+	<h3>
+	<a id="titletpl" class="anchor" href="#titletpl" aria-hidden="true"><span class="octicon octicon-link"></span></a>titleTpl:</h3>
+	<pre><code>    标题html(默认：&lt;div class="ui-dialog-title"&gt;&lt;/div&gt;) 
+	</code></pre>
+	<h2>
+	<a id="方法及回调" class="anchor" href="#%E6%96%B9%E6%B3%95%E5%8F%8A%E5%9B%9E%E8%B0%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>方法及回调</h2>
+	<h3>
+	<a id="show" class="anchor" href="#show" aria-hidden="true"><span class="octicon octicon-link"></span></a>show:</h3>
+	<pre><code>    显示弹层
+	</code></pre>
+	<h3>
+	<a id="hide" class="anchor" href="#hide" aria-hidden="true"><span class="octicon octicon-link"></span></a>hide:</h3>
+	<pre><code>    隐藏
+	</code></pre>
+	<h3>
+	<a id="beforeshowfunctioncontent" class="anchor" href="#beforeshowfunctioncontent" aria-hidden="true"><span class="octicon octicon-link"></span></a>beforeShow：function(content)</h3>
+	<pre><code>    显示前的方法回调,content是浮层内容对象
+	</code></pre>
+	<h3>
+	<a id="beforehidefunctioncontent" class="anchor" href="#beforehidefunctioncontent" aria-hidden="true"><span class="octicon octicon-link"></span></a>beforeHide：function(content)</h3>
+	<pre><code>    隐藏前的方法回调,content是浮层内容对象
+	</code></pre>
+	<h3>
+	<a id="setpositionfunction" class="anchor" href="#setpositionfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>setPosition:function()</h3>
+	<pre><code>    设置位置居中
+	</code></pre>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
