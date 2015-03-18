@@ -1,6 +1,5 @@
 $control.setTemplate("head.vm")
 $control.setTemplate("menu.vm")
-$control.setTemplate("side.vm")
 $set(modulename,jsmodule)
 $set(title,js组件)
 <h3>
@@ -10,6 +9,11 @@ js组件
 	<li>
 		<a href="calendar.html"><img  src="images/ui/calendar.png"/></a>
 		<a href="calendar.html">日历、日期、calendar</a>
-		<a href="https://github.com/tianxiangbing/calendar" target="_blank">Code</a>
+		<a href="https://github.com/tianxiangbing/calendar" target="_blank" class="a_code">Code</a>
+	</li>
+	<li>
+		<a href="dialog.html"><img  src="images/ui/dialog.png"/></a>
+		<a href="dialog.html">浮层、弹窗、dialog</a>
+		<a href="https://github.com/tianxiangbing/dialog" target="_blank" class="a_code">Code</a>
 	</li>
 </ul>

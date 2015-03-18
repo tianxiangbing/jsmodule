@@ -5,10 +5,12 @@
   src: local('Architects Daughter'), local('ArchitectsDaughter'), url(RXTgOOQ9AAtaVOHxx0IUBOkI_DLF4EgbZt3mhU8gQFo.woff) format('woff');
 }
 .uilist{list-style:none;padding:none;overflow: hidden;}
-.uilist li{float:left;padding:10px 20px;background-color:#fff;border:1px solid #ddd;}
+.uilist li{float:left;padding:10px 20px;background-color:#fff;border:1px solid #ddd;margin-right: 20px;}
 .uilist li:hover{border-color:#ddd;box-shadow:5px 5px 20px #666;}
 .uilist li a{display:block;}
-.uilist li img{width:200px;}
+.uilist li img{width:200px;height: 200px;}
+.uilist li .a_code{display: inline-block;padding:3px 5px;background-color: #f2f2f2;border:1px solid #ccc;border-radius: 2px;}
+.uilist li .a_code:hover{background-color:#fff;}
 .menu{position:absolute;right:0;top:-100px;overflow:hidden;height:38px;background-color:#0F67A1;border-bottom-left-radius: 2px;border-bottom-right-radius: 2px;  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);}
 .menu li{list-style:none;float:left;height:38px;line-height:38px;}
 .menu li a{font-size:14px;color:white;font-weight:bold;padding:0 10px;}
