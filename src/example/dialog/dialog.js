@@ -11,6 +11,7 @@ function Dialog() {
 	this.settings = {};
 	this.settings.closeTpl = $('<span class="ui-dialog-close js-dialog-close">x</span>');
 	this.settings.titleTpl = $('<div class="ui-dialog-title"></div>');
+	this.timer = null;
 }
 Dialog.prototype = {
 	init: function(settings) {
@@ -102,20 +103,26 @@ Dialog.prototype = {
 		this.setPosition();
 	},
 	setPosition: function() {
+		var _this = this;
 		this.mask.height(document.documentElement.scrollHeight || document.body.scrollHeight);
 		var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
 		var clientWidth = document.documentElement.clientWidth || document.body.clientWidth;
-		var top = (clientHeight - this.height) / 2 + document.body.scrollTop;
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		var top = (clientHeight - this.height) / 2 + scrollTop;
 		var left = (clientWidth - this.width) / 2;
 		if (left < 0) {
 			left = 0;
 		}
-		if (top < document.body.scrollTop) {
-			top = document.body.scrollTop;
+		if (top < scrollTop) {
+			top = scrollTop;
 		}
-		this.dialogContainer.css({
-			top: top,
-			left: left
-		})
+		clearTimeout(this.timer);
+		this.timer = setTimeout(function() {
+			_this.dialogContainer.animate({
+				top: top,
+				left: left
+			});
+			clearTimeout(_this.timer);
+		}, 100);
 	}
 }

@@ -16,4 +16,9 @@ js组件
 		<a href="dialog.html">浮层、弹窗、dialog</a>
 		<a href="https://github.com/tianxiangbing/dialog" target="_blank" class="a_code">Code</a>
 	</li>
+	<li>
+		<a href="p_upload.html"><img  src="images/ui/p_upload.png"/></a>
+		<a href="p_upload.html">h5上传图片、upload</a>
+		<a href="https://github.com/tianxiangbing/p_upload" target="_blank" class="a_code">Code</a>
+	</li>
 </ul>
