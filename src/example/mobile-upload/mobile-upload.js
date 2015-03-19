@@ -5,12 +5,12 @@
  * Time: 18:06:23
  * Contact: 55342775@qq.com
  */
-function P_upload() {
+function Mobile_upload() {
 	var rnd = Math.random().toString().replace('.', '');
 	this.id = 'upload_' + rnd;
 	this.fileInput;
 }
-P_upload.prototype = {
+Mobile_upload.prototype = {
 	init: function(settings) {
 		this.settings = $.extend({}, this.settings, settings);
 		this.target = this.settings.target;

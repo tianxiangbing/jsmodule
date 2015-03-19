@@ -1,10 +1,10 @@
-/*! p_upload - v1.0.0 - tianxiangbing - http://www.lovewebgames.com/jsmodule/p_upload.html2015-03-18 */
-function P_upload() {
+/*! mobile-upload - v1.0.0 - tianxiangbing - http://www.lovewebgames.com/jsmodule/p_upload.html 2015-03-19 */
+function Mobile_upload() {
 	var rnd = Math.random().toString().replace('.', '');
 	this.id = 'upload_' + rnd;
 	this.fileInput;
 }
-P_upload.prototype = {
+Mobile_upload.prototype = {
 	init: function(settings) {
 		this.settings = $.extend({}, this.settings, settings);
 		this.target = this.settings.target;
@@ -46,14 +46,15 @@ P_upload.prototype = {
 };
 
 (function($) {
-	$.fn.P_upload = function(settings) {
+	$.fn.Mobile_upload = function(settings) {
 		var list = [];
 		$(this).each(function() {
-			var upload = new P_upload();
+			var upload = new Mobile_upload();
 			var options = $.extend({
 				target: $(this)
 			}, settings);
 			upload.init(options);
+			list.push(upload);
 		});
 		return list;
 	}

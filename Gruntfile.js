@@ -48,13 +48,13 @@ module.exports = function(grunt) {
 				var controlContent = fs.readFileSync('control/' + controlFileName, "utf-8"); //控件内容
 				// console.log(fileName + ":::::content::::" + content);
 				// //变量替换
-				var varList = content.match(new RegExp(/\$set\([\w\,\u4E00-\u9FA5\uF900-\uFA2D]+\)/gm));
+				var varList = content.match(new RegExp(/\$set\([\w\,\u4E00-\u9FA5\uF900-\uFA2D\-]+\)/gm));
 				console.log('*************::==>' + varList)
 				if (varList) {
 					var varReplace = []
 					varList.forEach(function(item) {
 						console.log("item111::::::" + item)
-						var varArr = item.match(/(?!\(\))([\"\,\w+\u4E00-\u9FA5\uF900-\uFA2D]+)/g)[1];
+						var varArr = item.match(/(?!\(\))([\"\,\w+\u4E00-\u9FA5\uF900-\uFA2D\-]+)/g)[1];
 						var varName = varArr.split(',')[0];
 						var varvarlue = varArr.split(',')[1];
 						console.log("varArr##########::" + varArr)
