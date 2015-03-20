@@ -17,7 +17,7 @@ Mobile_upload.prototype = {
 		$(this.target).after('<input type="file"  accept="image/*" id="' + this.id + '"/>');
 		this.fileInput = $('#' + this.id);
 		this.name = this.settings.name || "files";
-		this.fileInput.hide();
+		this.fileInput.css({'opacity':'0',width:1});
 		if (this.settings.multiple) {
 			this.fileInput.attr('multiple', 'multiple');
 		}
