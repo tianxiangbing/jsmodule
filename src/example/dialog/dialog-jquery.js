@@ -79,7 +79,7 @@ Dialog.prototype = {
 			_this.setPosition();
 		})
 		$(window).keydown(function(e) {
-			if (e.keyCode === 27) {
+			if (e.keyCode === 27 && _this.showed) {
 				_this.hide();
 			}
 		});
@@ -194,7 +194,7 @@ Dialog.prototype = {
 	};
 	$.Dialog = function(settings) {
 		if (settings.type === "alert") {
-			var dialog = new Dialog();
+			var alert = new Dialog();
 			var html = '<div class="ui-alert-title">' + settings.content + '</div>';
 			var action = '';
 			if (settings.button) {
@@ -206,7 +206,7 @@ Dialog.prototype = {
 				settings.timer = 3000;
 			}
 			html += action;
-			var options = $.extend({
+			var alertOptions = $.extend({
 				target: html,
 				animate: true,
 				show: true,
@@ -217,10 +217,10 @@ Dialog.prototype = {
 					settings.callback && settings.callback();
 				}
 			}, settings);
-			dialog.init(options);
+			alert.init(alertOptions);
 			if (settings.timer) {
 				setTimeout(function() {
-					dialog.dispose();
+					alert.dispose();
 					settings.callback && settings.callback();
 				}, settings.timer);
 			}

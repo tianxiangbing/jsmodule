@@ -85,7 +85,7 @@ Dialog.prototype = {
 			_this.setPosition();
 		})
 		$(window).keydown(function(e) {
-			if (e.keyCode === 27) {
+			if (e.keyCode === 27 && _this.showed) {
 				_this.hide();
 			}
 		});
