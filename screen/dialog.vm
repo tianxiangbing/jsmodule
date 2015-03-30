@@ -17,7 +17,7 @@ $set(title,dialog对话框弹层)
 		<script src="example/dialog/dialog-jquery.js"></script>
 		<script>
 		var dialog = new Dialog();
-		dialog.init({target:"#dialog-content",trigger:"#btn_dialog",mask:true,width:500,height:300,title:'标题'});
+		dialog.init({target:"#dialog-content",trigger:"#btn_dialog",mask:true,width:500,height:300,title:'标题',animate:true});
 		</script>
 	</p>
 	<pre><code>    
@@ -37,7 +37,7 @@ $set(title,dialog对话框弹层)
 		<div id="dialog-contentjq" style="display:none;">这是内容22</div>
 		<script src="../src/dialog-jquery.js"></script>
 		<script>
-		$('#btn_dialogjquery').Dialog({target:"#dialog-contentjq",mask:true,width:500,height:300,title:'标题'})
+		$('#btn_dialogjquery').Dialog({target:"#dialog-contentjq",mask:true,width:500,height:300,title:'标题',animate:true})
 		</script>
 	</p>
 	<pre><code>    
@@ -63,7 +63,7 @@ $set(title,dialog对话框弹层)
     *js:
     $('#btn_alert').click(function(){
         $.alert('选好商品才能上传素材哦',true,function(){
-            alert('你点击了ok')
+		$.alert('你点击了ok',false,null,1000);
         })
     });
     $('#btn_alert2').click(function(){

@@ -7,7 +7,7 @@ $set(title,上传图片预览webkit)
 <a id="mobile-upload" class="anchor" href="#mobile-upload" aria-hidden="true"><span class="octicon octicon-link"></span></a>mobile-upload</h1>
 
 <p>手机上传图片
-例子见<a href="http://www.lovewebgames.com/jsmodule/mobile-upload.html">DEMO</a>  </p>
+</p>
 <p>
 <button id="btn_upload">upload</button>
 <span id="preview"></span>
