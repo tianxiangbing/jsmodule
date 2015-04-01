@@ -4,7 +4,10 @@ $control.setTemplate("side.vm")
 $set(modulename,scroll-load)
 $set(title,滚动加载)
 <link rel="stylesheet" type="text/css" href="example/scroll-load/wap-material.css">
-<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width"/>
+<div class="bgeeeeee fl" id="loadList" style="width:600px; float:none;">
+    <ul class="material-list">
+    </ul>
+</div>
 <p>js 滚动加载内容
   </p>
     <h1>
@@ -38,10 +41,7 @@ $set(title,滚动加载)
         <pre><code>格式化的回调方法，如果没传，就会以tpl参数进行handlebars的方式格式化 。</code></pre>
 <h2>tpl:</h2>
         <pre><code>handlebars的模板节点(string or object),要单独引用handlebars</code></pre>
-<div class="bgeeeeee fl" id="loadList" style="width:600px;">
-    <ul class="material-list">
-    </ul>
-</div>
+
 <script id="entry-template" type="text/x-handlebars-template" data-url="json/index.html">
 {{#each data}}
         <li>

@@ -153,11 +153,11 @@ Dialog.prototype = {
 		if (this.showed) {
 			var _this = this;
 			this.dialogContainer.show();
-			this.height = this.settings.height || this.dialogContainer.outerHeight();
-			this.width = this.settings.width || this.dialogContainer.outerWidth();
+			this.height = this.settings.height || (this.dialogContainer.outerHeight&&this.dialogContainer.outerHeight())|| this.dialogContainer.height();
+			this.width = this.settings.width || (this.dialogContainer.outerWidth&&this.dialogContainer.outerWidth())|| this.dialogContainer.width();
 			this.mask.height(document.documentElement.scrollHeight || document.body.scrollHeight);
-			var clientHeight =window.innerHeight;//可视区域
-			var clientWidth = window.innerWidth;
+			var clientHeight =window.innerHeight|| document.documentElement.clientHeight;//可视区域
+			var clientWidth = window.innerWidth|| document.documentElement.clientWidth;
 			var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
 			var top = (clientHeight - this.height) / 2 + scrollTop;
 			var left = (clientWidth - this.width) / 2;
