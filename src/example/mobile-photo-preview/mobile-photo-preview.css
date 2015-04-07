@@ -1,0 +1,14 @@
+/*
+ * Created with Sublime Text 2.
+ * User: 田想兵
+ * Date: 2015-04-02
+ * Time: 13:31:37
+ * Contact: 55342775@qq.com
+ */
+.ui-preview{background-color: #000;border:none;color:#fff;}
+#imgPreview>div{height:100%;float:left;box-sizing:border-box;display: inline-block;font-size: 0;position: relative;}
+#imgPreview>div img{position:absolute;}
+.ui-preview .imgViewTop{height: 24px;line-height: 24px;}
+.ui-preview .ui-dialog-close{font-size: 24px;z-index: 2;line-height: 1;right:0;padding:0 10px 3px 10px;}
+#imgPreview{position: absolute;}
+.pos-relative{position: relative;}

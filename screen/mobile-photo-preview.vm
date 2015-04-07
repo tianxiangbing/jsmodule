@@ -1,0 +1,93 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,mobile-photo-preview)
+$set(title,js手机端照片预览)
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<h1>
+<a id="mobile-photo-preview" class="anchor" href="#mobile-photo-preview" aria-hidden="true"><span class="octicon octicon-link"></span></a>mobile-photo-preview</h1>
+<h2>demo:(请使用手机浏览器模式访问该例子)</h2>
+<div class="preview-list">
+	<a href="http://ott.wansecheng.com/weidian/wdgoods/1421661435860.jpg" class="preview" ><img src="http://ott.wansecheng.com/weidian/wdgoods/1421661435860.jpg"></a>
+	<a href="http://ott.wansecheng.com/goods_image/201404/6920512702107/color.jpg" class="preview" ><img src="http://ott.wansecheng.com/goods_image/201404/6920512702107/color.jpg"></a>
+	<a href="https://ss0.bdstatic.com/5a21bjqh_Q23odCf/static/superplus/img/logo_white_ee663702.png" class="preview" ><img src="https://ss0.bdstatic.com/5a21bjqh_Q23odCf/static/superplus/img/logo_white_ee663702.png"></a>
+</div>
+<link rel="stylesheet" type="text/css" href="example/mobile-photo-preview/dialog.min.css">
+<link rel="stylesheet" type="text/css" href="example/mobile-photo-preview/mobile-photo-preview.min.css">
+<style>
+.preview-list img{width: 100px;height:100px;}
+.preview-list a{display: inline-block;background-color: #ccc;}
+.icon-del{background:url(icon-del-img.png) no-repeat;display: inline-block;width:20px;height: 20px;background-size: 20px 20px;position: absolute;left: 50%;top:.5rem;z-index: 3;}
+</style>
+<script src="example/mobile-photo-preview/zepto.min.js"></script>
+<script src="example/mobile-photo-preview/dialog.min.js"></script>
+<script src="example/mobile-photo-preview/mobile-photo-preview.min.js"></script>
+<script>
+$('.preview-list').MobilePhotoPreview({
+	trigger: '.preview'
+});
+</script>
+<h1>
+<a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
+<pre><code>    var photoPreview = new MobilePhotoPreview();
+	    photoPreview.init({
+	        target: $('.preview-list'),
+	        trigger: '.preview',
+	        show: function(c) {
+	            var del = $('&lt;span class="icon-del"&gt;&lt;span&gt;');
+	            $('.imgViewTop', c).append(del);
+	            del.tap(function() {
+	                photoPreview.current.remove();
+	                photoPreview.hide();
+	            });
+	        }
+	    });
+</code></pre>
+<h2>
+<a id="或者" class="anchor" href="#%E6%88%96%E8%80%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者：</h2>
+<pre><code>    $('.preview-list').MobilePhotoPreview({
+	        trigger: '.preview',
+	        show: function(c) {
+	            var del = $('&lt;span class="icon-del"&gt;&lt;span&gt;');
+	            $('.imgViewTop', c).append(del);
+	            var _this = this;
+	            del.tap(function() {
+	                _this.current.remove();
+	                _this.hide();
+	            });
+	        }
+	    });
+</code></pre>
+<p><em>注：两种方法没有本质的区别，推荐第一种。</em></p>
+<h1>
+<a id="api-属性方法及回调" class="anchor" href="#api-%E5%B1%9E%E6%80%A7%E6%96%B9%E6%B3%95%E5%8F%8A%E5%9B%9E%E8%B0%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>API 属性、方法及回调：</h1>
+<h2>
+<a id="target" class="anchor" href="#target" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:</h2>
+<pre><code>    表示是在这个容器内的元素会触发事件，它是一个范围，与trigger一同使用，委托事件节点，所以是必须的。建议不作根结点的委托.
+</code></pre>
+<h2>
+<a id="trigger" class="anchor" href="#trigger" aria-hidden="true"><span class="octicon octicon-link"></span></a>trigger:</h2>
+<pre><code>    表示触发事件的对象，它可以是动态的，默认是target下面的a链接触发
+</code></pre>
+<h2>
+<a id="show" class="anchor" href="#show" aria-hidden="true"><span class="octicon octicon-link"></span></a>show:</h2>
+<pre><code>    显示之后的回调，参数是dialog容器，当前this指向MobilePhotoPreview的实例。这是一个为了扩展更多功能的回调方法。为了更好的用到这个回调，你可以会对下面的属性有兴趣了解
+</code></pre>
+<h1>
+<a id="this下的属性及方法" class="anchor" href="#this%E4%B8%8B%E7%9A%84%E5%B1%9E%E6%80%A7%E5%8F%8A%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>this下的属性及方法：</h1>
+<h2>
+<a id="current" class="anchor" href="#current" aria-hidden="true"><span class="octicon octicon-link"></span></a>current:</h2>
+<pre><code>    当前的结点对象
+</code></pre>
+<h2>
+<a id="currentindex" class="anchor" href="#currentindex" aria-hidden="true"><span class="octicon octicon-link"></span></a>currentIndex:</h2>
+<pre><code>    当前索引
+</code></pre>
+<h2>
+<a id="objarr" class="anchor" href="#objarr" aria-hidden="true"><span class="octicon octicon-link"></span></a>objArr:</h2>
+<pre><code>    数组对象，在这里，你可以得到一个集合，包括索引、element、宽、高。这将会是很有用的东西。
+</code></pre>
+<h2>
+<a id="hide" class="anchor" href="#hide" aria-hidden="true"><span class="octicon octicon-link"></span></a>hide:</h2>
+<pre><code>    调用的是dialog的hide.
+</code></pre>

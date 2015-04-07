@@ -27,8 +27,13 @@ js组件
 		<a href="https://github.com/tianxiangbing/scroll-load" target="_blank" class="a_code">Code</a>
 	</li>
 	<li>
-		<a href="mobile-select-area.html"><img  src="images/ui/mobile-select-area.png"/></a>
-		<a href="mobile-select-area.html">手机选择地区联动仿ios</a>
-		<a href="https://github.com/tianxiangbing/mobile-select-area" target="_blank" class="a_code">Code</a>
+		<a href="mobile-select-area.html"><img  src="images/ui/mobile-select-area.png" alt="js手机选择地区联动仿ios" title="js手机选择地区联动仿ios"/></a>
+		<a href="mobile-select-area.html">js手机选择地区联动仿ios</a>
+		<a href="https://github.com/tianxiangbing/mobile-select-area" title="js手机选择地区联动仿ios"/ target="_blank" class="a_code">Code</a>
+	</li>
+	<li>
+		<a href="mobile-photo-preview.html"><img  src="images/ui/mobile-photo-preview.png"/></a>
+		<a href="mobile-photo-preview.html">js实现手机端图片预览</a>
+		<a href="https://github.com/tianxiangbing/mobile-photo-preview" target="_blank" class="a_code">Code</a>
 	</li>
 </ul>
