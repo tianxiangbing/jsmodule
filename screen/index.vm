@@ -2,9 +2,9 @@ $control.setTemplate("head.vm")
 $control.setTemplate("menu.vm")
 $set(modulename,jsmodule)
 $set(title,js组件)
-<h3>
+<h1>
 js组件
-</h3>
+</h1>
 <ul class="uilist">
 	<li>
 		<a href="calendar.html"><img  src="images/ui/calendar.png"/></a>

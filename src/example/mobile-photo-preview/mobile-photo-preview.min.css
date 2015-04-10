@@ -1,1 +1,2 @@
-.ui-preview{background-color:#000;border:none;color:#fff}#imgPreview>div{height:100%;float:left;box-sizing:border-box;display:inline-block;font-size:0;position:relative}#imgPreview,#imgPreview>div img{position:absolute}.ui-preview .imgViewTop{height:24px;line-height:24px}.ui-preview .ui-dialog-close{font-size:24px;z-index:2;line-height:1;right:0;padding:0 10px 3px}.pos-relative{position:relative}
+@import url('dialog.min.css');
+@import url('mobile-photo-preview.css');

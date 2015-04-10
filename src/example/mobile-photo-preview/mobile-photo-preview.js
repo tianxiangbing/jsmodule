@@ -1,10 +1,12 @@
 /*
  * Created with Sublime Text 2.
+ * license: http://www.lovewebgames.com/jsmodule/index.html
  * User: 田想兵
- * Date: 2015-03-31
- * Time: 09:49:11
+ * Date: 2015-04-08
+ * Time: 11:52:47
  * Contact: 55342775@qq.com
  */
+
 ;
 (function(root, factory) {
 	//amd
@@ -34,12 +36,14 @@
 		this.arr = [];
 		this.objArr = {};
 		this.dialog;
+		this.bloom;
 	};
 	MobilePhotoPreview.prototype = {
 		init: function(settings) {
 			this.settings = $.extend({}, settings);
 			this.target = $(this.settings.target);
 			this.trigger = this.settings.trigger || "a";
+			this.bloom = this.settings.bloom || false;
 			this.bindEvent();
 		},
 		touch: function(obj, parent, fn) {
@@ -79,24 +83,40 @@
 			var _this = this;
 			var start = {},
 				istartleft = 0,
-				end = {};
+				end = {},
+				move = false;
 			_this.imgPreview.on('touchstart', function(e) {
 				start = {
 					x: e.changedTouches[0].pageX,
 					y: e.changedTouches[0].pageY
 				};
+				if (e.targetTouches.length == 2) {
+					move = false;
+					return false;
+				}
 				istartleft = e.changedTouches[0].pageX;
 			});
 			_this.imgPreview.on('touchmove', function(e) {
+				if (e.targetTouches.length == 2) {
+					return false;
+				}
+				move = true;
 				end = {
 					x: e.changedTouches[0].pageX,
 					y: e.changedTouches[0].pageY
 				};
 				var curPos = $(this).position();
-				$(this).css({
-					left: curPos.left + (end.x - start.x),
-					top: curPos.top + (end.y - start.y)
-				});
+				if (!_this.bloom) {
+					//只移动x轴
+					$(this).css({
+						left: curPos.left + (end.x - start.x)
+					});
+				} else {
+					$(this).css({
+						left: curPos.left + (end.x - start.x),
+						top: curPos.top + (end.y - start.y)
+					});
+				}
 				start = end;
 				return false;
 			});
@@ -105,6 +125,10 @@
 					x: e.changedTouches[0].pageX,
 					y: e.changedTouches[0].pageY
 				};
+				if (e.targetTouches.length == 1) {
+					start = end;
+					return false;
+				}
 				var curPos = $(this).position();
 				var stopPos = {
 					left: curPos.left + (end.x - start.x),
@@ -132,6 +156,7 @@
 					_this.currentIndex = _this.arr.length - 1;
 				}
 				_this.go();
+				move = false;
 			});
 		},
 		go: function(noanimate) {
@@ -193,22 +218,26 @@
 				if (i == _this.currentIndex) {
 					isdisplay = 'style="display:block;"';
 				}
-				html += '<div ' + isdisplay + '><img src="' + item.attr('href') + '"/></div>';
-				(function(item, i) {
+				var src = item.attr('href') || item.children('input').val() || item.children('img').attr('src');
+				html += '<div ' + isdisplay + '><img src="' + src + '"/></div>';
+				(function(item, i, src) {
 					setTimeout(function() {
 						var img = new Image();
-						img.src = item.attr('href');
+						img.src = src;
 						if (img.complete) {
 							setObj.call(img, i);
 						} else {
 							img.onreadystatechange = function() {
-								if (this.readystate == "complete") {
+								if (this.readystate == "complete" || this.readyState == "loaded") {
 									setObj.call(this, i);
 								}
 							}
+							img.onload = function() {
+								setObj.call(this, i);
+							}
 						}
 					});
-				})(item, i);
+				})(item, i, src);
 			}
 			_this.imgPreview.html(html);
 			setTimeout(function() {
@@ -257,7 +286,7 @@
 			if (this.maxWidth < obj.width) {
 				obj.elem.width(this.maxWidth);
 				var h = this.maxWidth * obj.height / obj.width;
-				obj.elem.width(w);
+				obj.elem.height(h);
 				obj.height = h;
 				obj.width = this.maxWidth;
 			}
