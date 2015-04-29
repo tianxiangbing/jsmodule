@@ -1,18 +1,19 @@
 $control.setTemplate("head.vm")
 $control.setTemplate("menu.vm")
 $control.setTemplate("side.vm")
-$set(modulename,mobild-select-area)
+$set(modulename,mobile-select-area)
 $set(title,手机端选择地区联动)
 <h1>
 <a id="mobile-select-area" class="anchor" href="#mobile-select-area" aria-hidden="true"><span class="octicon octicon-link"></span></a>mobile-select-area</h1>
 
 <p>手机联动选择地区</p>
 <b style="color:red;">请切换手机调试模式或用手机浏览器访问此demo</b>
+<input type="text"/>
 <p>请选择地区:<input type="text" id="txt_area" value="浙江省 杭州市 滨江区"/><input type="hidden" id="hd_area" value="1,1,1"/></p>
 <link rel="stylesheet" type="text/css" href="example/mobile-select-area/mobile-select-area.css">
 <link rel="stylesheet" type="text/css" href="example/dialog/dialog.min.css">
 <script type="text/javascript" src="example/zepto.min.js"></script>
-<script type="text/javascript" src="example/dialog/dialog-jquery.min.js"></script>
+<script type="text/javascript" src="example/dialog/dialog.js"></script>
 <script type="text/javascript" src="example/mobile-select-area/mobile-select-area.js"></script>
 <script>
 var selectArea = new MobileSelectArea();

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='stylesheets/css.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <title>js组件-轮播图片-支持手机滑动</title> </head>
+  <body>
+    <header>
+      <div class="inner">
+        <h1>carousel-image</h1>
+        <h2>JS组件-轮播图片-支持手机滑动</h2>
+        <a href="https://github.com/tianxiangbing/carousel-image" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+<ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="http://www.lovewebgames.com/flash/" target="_blank">Flash Games</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
+﻿<aside id="sidebar">
+	<a href="https://github.com/tianxiangbing/carousel-image/zipball/master" target="_blank" class="button">
+		<small>Download</small>
+		.zip file
+	</a>
+	<a href="https://github.com/tianxiangbing/carousel-image" target="_blank" class="button">
+		<small>Code</small>
+		源码
+	</a>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/carousel-image" target="_blank">carousel-image</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://tianxiangbing.github.com" target="_blank"> GitHub</a></p>
+</aside>
+
+
+<link rel="stylesheet" type="text/css" href="example/carousel-image/carousel-image.css">
+          <h1>
+<a id="carousel-image" class="anchor" href="#carousel-image" aria-hidden="true"><span class="octicon octicon-link"></span></a>carousel-image</h1>
+
+<div class="carousel-image">
+	<div>
+		<a>
+			<img src="images/example/1.png"/>
+		</a>
+		<a>
+			<img src="images/example/2.png"/>
+		</a>
+		<a>
+			<img src="images/example/3.png"/>
+		</a>
+	</div>
+	<span class="carousel-num">
+	</span>
+</div>
+
+<script type="text/javascript" src="example/zepto.js"></script>
+<script type="text/javascript" src="example/require.js"></script>
+<script type="text/javascript">
+requirejs.config({
+	//By default load any module IDs from js/lib
+	baseUrl: 'example/carousel-image/',
+	paths: {
+		"$": '../zepto'
+	}
+});
+require(['carousel-image',"$"], function(CarouselImage,$) {
+	var cs = new CarouselImage();
+	cs.init({
+		target:$('.carousel-image'),
+		num:$('.carousel-num')
+	});
+});
+</script>
+<p>轮播图片，支持触摸滑动。</p>
+<h1>
+<a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
+<pre><code>&lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
+	&lt;script type="text/javascript" src="../src/carousel-image.js"&gt;&lt;/script&gt;
+	&lt;script&gt;
+	$('.carousel-image').CarouselImage({
+	    num :$('.carousel-num')
+	});
+	&lt;/script&gt;
+</code></pre>
+<h2>
+<a id="或者requirejs" class="anchor" href="#%E6%88%96%E8%80%85requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者requirejs：</h2>
+<pre><code>&lt;div class="carousel-image"&gt;
+	    &lt;div&gt;
+	        &lt;a&gt;
+	            &lt;img src="http://ott.wansecheng.com/weidian/wdgoods/1430073193462.jpg"/&gt;
+	        &lt;/a&gt;
+	        &lt;a&gt;
+	            &lt;img src="http://ott.wansecheng.com/weidian/wdgoods/1430073252953.png"/&gt;
+	        &lt;/a&gt;
+	        &lt;a&gt;
+	            &lt;img src="http://ott.wansecheng.com/weidian/wdgoods/1430073111420.jpg"/&gt;
+	        &lt;/a&gt;
+	    &lt;/div&gt;
+	    &lt;div class="carousel-num"&gt;
+	    &lt;/div&gt;
+	&lt;/div&gt;
+	&lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
+	&lt;script type="text/javascript" src="../src/require.js"&gt;&lt;/script&gt;
+	&lt;script&gt;
+	requirejs.config({
+	    //By default load any module IDs from js/lib
+	    baseUrl: '../src',
+	    paths: {
+	        $: 'zepto'
+	    }
+	});
+	require(['carousel-image','
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
+], function(CarouselImage,$) {
+	    var cs = new CarouselImage();
+	    cs.init({
+	        target:$('.carousel-image'),
+	        num:$('.carousel-num')
+	    });
+	});
+	&lt;/script&gt;
+</code></pre>
+<h1>
+<a id="api-属性方法及回调" class="anchor" href="#api-%E5%B1%9E%E6%80%A7%E6%96%B9%E6%B3%95%E5%8F%8A%E5%9B%9E%E8%B0%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>API 属性、方法及回调：</h1>
+<h2>
+<a id="target" class="anchor" href="#target" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:</h2>
+<pre><code>    表示是在这个容器内的元素会触发事件,它应该有个子级的容器，方便动画的优化
+</code></pre>
+<h2>
+<a id="num" class="anchor" href="#num" aria-hidden="true"><span class="octicon octicon-link"></span></a>num:</h2>
+<pre><code>    本意是以显示当前索引的数字表示，但现在用样式把数字隐藏了，如果要显示数字样式，可自行更改样式文件
+</code></pre>
+
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

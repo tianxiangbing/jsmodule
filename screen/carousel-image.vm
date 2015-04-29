@@ -1,0 +1,100 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,carousel-image)
+$set(title,轮播图片-支持手机滑动)
+<link rel="stylesheet" type="text/css" href="example/carousel-image/carousel-image.css">
+          <h1>
+<a id="carousel-image" class="anchor" href="#carousel-image" aria-hidden="true"><span class="octicon octicon-link"></span></a>carousel-image</h1>
+
+<div class="carousel-image">
+	<div>
+		<a>
+			<img src="images/example/1.png"/>
+		</a>
+		<a>
+			<img src="images/example/2.png"/>
+		</a>
+		<a>
+			<img src="images/example/3.png"/>
+		</a>
+	</div>
+	<span class="carousel-num">
+	</span>
+</div>
+
+<script type="text/javascript" src="example/zepto.js"></script>
+<script type="text/javascript" src="example/require.js"></script>
+<script type="text/javascript">
+requirejs.config({
+	//By default load any module IDs from js/lib
+	baseUrl: 'example/carousel-image/',
+	paths: {
+		"$": '../zepto'
+	}
+});
+require(['carousel-image',"$"], function(CarouselImage,$) {
+	var cs = new CarouselImage();
+	cs.init({
+		target:$('.carousel-image'),
+		num:$('.carousel-num')
+	});
+});
+</script>
+<p>轮播图片，支持触摸滑动。</p>
+<h1>
+<a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
+<pre><code>&lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
+	&lt;script type="text/javascript" src="../src/carousel-image.js"&gt;&lt;/script&gt;
+	&lt;script&gt;
+	$('.carousel-image').CarouselImage({
+	    num :$('.carousel-num')
+	});
+	&lt;/script&gt;
+</code></pre>
+<h2>
+<a id="或者requirejs" class="anchor" href="#%E6%88%96%E8%80%85requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者requirejs：</h2>
+<pre><code>&lt;div class="carousel-image"&gt;
+	    &lt;div&gt;
+	        &lt;a&gt;
+	            &lt;img src="http://ott.wansecheng.com/weidian/wdgoods/1430073193462.jpg"/&gt;
+	        &lt;/a&gt;
+	        &lt;a&gt;
+	            &lt;img src="http://ott.wansecheng.com/weidian/wdgoods/1430073252953.png"/&gt;
+	        &lt;/a&gt;
+	        &lt;a&gt;
+	            &lt;img src="http://ott.wansecheng.com/weidian/wdgoods/1430073111420.jpg"/&gt;
+	        &lt;/a&gt;
+	    &lt;/div&gt;
+	    &lt;div class="carousel-num"&gt;
+	    &lt;/div&gt;
+	&lt;/div&gt;
+	&lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
+	&lt;script type="text/javascript" src="../src/require.js"&gt;&lt;/script&gt;
+	&lt;script&gt;
+	requirejs.config({
+	    //By default load any module IDs from js/lib
+	    baseUrl: '../src',
+	    paths: {
+	        $: 'zepto'
+	    }
+	});
+	require(['carousel-image','$'], function(CarouselImage,$) {
+	    var cs = new CarouselImage();
+	    cs.init({
+	        target:$('.carousel-image'),
+	        num:$('.carousel-num')
+	    });
+	});
+	&lt;/script&gt;
+</code></pre>
+<h1>
+<a id="api-属性方法及回调" class="anchor" href="#api-%E5%B1%9E%E6%80%A7%E6%96%B9%E6%B3%95%E5%8F%8A%E5%9B%9E%E8%B0%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>API 属性、方法及回调：</h1>
+<h2>
+<a id="target" class="anchor" href="#target" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:</h2>
+<pre><code>    表示是在这个容器内的元素会触发事件,它应该有个子级的容器，方便动画的优化
+</code></pre>
+<h2>
+<a id="num" class="anchor" href="#num" aria-hidden="true"><span class="octicon octicon-link"></span></a>num:</h2>
+<pre><code>    本意是以显示当前索引的数字表示，但现在用样式把数字隐藏了，如果要显示数字样式，可自行更改样式文件
+</code></pre>

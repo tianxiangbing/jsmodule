@@ -60,6 +60,10 @@
 					settings.callback && settings.callback();
 				}, settings.timer);
 			}
+			alert.touch(alert.mask,function() {
+				alert.dispose();
+				settings.callback && settings.callback();
+			});
 		}
 		if (settings.type === "confirm") {
 			var dialog = new Dialog();
@@ -277,7 +281,13 @@
 				this.settings.beforeShow.call(this, this.dialogContainer);
 			}
 			this.showed = true;
+			$(this.settings.trigger).blur();
+
 			this.setPosition();
+			var _this = this;
+			setInterval(function(){
+				_this.setPosition();
+			},1000);
 			if (this.settings.animate) {
 				this.dialogContainer.addClass('zoomIn').removeClass('zoomOut').addClass('animated');
 			}
