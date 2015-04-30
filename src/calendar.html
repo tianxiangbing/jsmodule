@@ -72,6 +72,14 @@
             maxdays: 5,
             overdays: function(a) {
                 alert('添加已达上限 ' + a + ' 天');
+            },
+            filter:function(time){
+                var date = new Date(time);
+                // console.log(date.getDay())
+                if(date.getDay()==0||date.getDay()==6){
+                    return false;
+                }
+                return true;
             }
         });
     &lt;/script&gt;
@@ -193,6 +201,12 @@
 <a id="overdaysfunctiondaysnum" class="anchor" href="#overdaysfunctiondaysnum" aria-hidden="true"><span class="octicon octicon-link"></span></a>overdays:function(daysnum)</h3>
 
 <pre><code>    超出限定天数时的回调（多选时）
+</code></pre>
+
+<h3>
+<a id="overdaysfunctiondaysnum" class="anchor" href="#overdaysfunctiondaysnum" aria-hidden="true"><span class="octicon octicon-link"></span></a>filter:function(time)</h3>
+
+<pre><code>    根据返回bool来过滤是否该日期可以选择，time为时间戳
 </code></pre>
 
 <hr>

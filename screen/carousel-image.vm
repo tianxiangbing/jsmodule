@@ -79,7 +79,7 @@ require(['carousel-image',"$"], function(CarouselImage,$) {
 	        $: 'zepto'
 	    }
 	});
-	require(['carousel-image','$'], function(CarouselImage,$) {
+	require(['carousel-image',"$"], function(CarouselImage,$) {
 	    var cs = new CarouselImage();
 	    cs.init({
 	        target:$('.carousel-image'),
