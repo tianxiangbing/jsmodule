@@ -23,6 +23,14 @@ $set(title,日历组件)
             maxdays: 5,
             overdays: function(a) {
                 alert('添加已达上限 ' + a + ' 天');
+            },
+            filter:function(time){
+                var date = new Date(time);
+                // console.log(date.getDay())
+                if(date.getDay()==0||date.getDay()==6){
+                    return false;
+                }
+                return true;
             }
         });
 	</script>
