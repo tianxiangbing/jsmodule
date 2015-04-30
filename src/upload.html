@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='stylesheets/css.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <title>js组件-js异步上传文件</title> </head>
+  <body>
+    <header>
+      <div class="inner">
+        <h1>mobile-upload</h1>
+        <h2>JS组件-js异步上传文件</h2>
+        <a href="https://github.com/tianxiangbing/mobile-upload" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+<ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
+﻿<aside id="sidebar">
+	<a href="https://github.com/tianxiangbing/mobile-upload/zipball/master" target="_blank" class="button">
+		<small>Download</small>
+		.zip file
+	</a>
+	<a href="https://github.com/tianxiangbing/mobile-upload" target="_blank" class="button">
+		<small>Code</small>
+		源码
+	</a>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/mobile-upload" target="_blank">mobile-upload</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://tianxiangbing.github.com" target="_blank"> GitHub</a></p>
+</aside>
+
+
+          <h1>
+<a id="upload" class="anchor" href="#upload" aria-hidden="true"><span class="octicon octicon-link"></span></a>upload</h1>
+
+<p>js上传文件
+例子见<a href="http://www.lovewebgames.com/jsmodule/upload.html">DEMO</a><br>
+*这个组件继承自mobile-upload<a href="http://www.lovewebgames.com/jsmodule/mobile-upload.html">mobile-upload</a>  *</p>
+
+<button id="btn_upload">upload</button>
+<div id="preview"></div>
+<script src="example/jquery-1.11.2.js"></script>
+<script src="example/upload/mobile-upload.js"></script>
+<script src="example/upload/upload.js"></script>
+<script>
+        var upload = new Upload();
+        var loadArr = {};
+        upload.init({target:$('#btn_upload'),url:"json/data.asp",accept:"png,jpg",startUpload:function(input,i){
+            console.log('正在上传中....')
+            loadArr[i] = $('<span>正在上传中....</span>');
+            $('#preview').append(loadArr[i]);
+        }, callback:function(result,i){
+            eval( 'result='+result);
+            setTimeout(function(){
+                //看到正在上传中的效果加了定时器，实际应用中不需要
+                loadArr[i] .html('<img src="'+result.url+'" width="200" height="200"/><input type="hidden" value="'+result.url+'"/>');
+            },1000)
+        }});
+</script>
+<h2>
+<a id="用法" class="anchor" href="#%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>用法</h2>
+
+<pre><code>&lt;button id="btn_upload"&gt;upload&lt;/button&gt;
+&lt;script src="../src/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="../src/upload.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+var upload = new Upload();
+upload.init({target:$('#btn_upload'),url:"data.html", callback:function(result){
+    eval( 'result='+result);
+    $('body').append('&lt;img src="'+result.url+'" width="200" height="200"/&gt;&lt;input type="hidden" value="'+result.url+'"/&gt;');
+}});
+&lt;/script&gt;
+</code></pre>
+
+<hr>
+
+<h2>
+<a id="或者--requirejs" class="anchor" href="#%E6%88%96%E8%80%85--requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者  requirejs:</h2>
+
+<pre><code>&lt;button id="btn_upload"&gt;upload&lt;/button&gt;
+&lt;script type="text/javascript" src="../dest/require.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+requirejs.config({
+    //By default load any module IDs from js/lib
+    baseUrl: '../dest',
+    paths: {
+        $: 'jquery-1.11.2',
+        upload:"upload",
+        mobileUpload:"mobile-upload"
+    }
+});
+require(['upload',"$"], function(Upload,$) {
+    var upload = new Upload();
+    upload.init({target:$('#btn_upload'),url:"data.html", callback:function(result){
+        eval( 'result='+result);
+        $('body').append('&lt;img src="'+result.url+'" width="200" height="200"/&gt;&lt;input type="hidden" value="'+result.url+'"/&gt;');
+    }});
+});
+&lt;/script&gt;
+</code></pre>
+
+<h1>
+<a id="属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
+
+<h2>
+<a id="属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h2>
+
+<h3>
+<a id="target" class="anchor" href="#target" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:</h3>
+
+<pre><code>    上传的对象结点(jquery方式调用的为它本身)
+</code></pre>
+
+<h3>
+<a id="url" class="anchor" href="#url" aria-hidden="true"><span class="octicon octicon-link"></span></a>url:</h3>
+
+</code></pre>
+<pre><code>    上传提交地址
+</code></pre>
+
+<h3>
+<a id="url" class="anchor" href="#url" aria-hidden="true"><span class="octicon octicon-link"></span></a>accept:</h3>
+
+<pre><code>    文件格式，如"jpg,png,jpeg",不区分大小写
+</code></pre>
+<h2>
+<a id="方法" class="anchor" href="#%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>方法</h2>
+
+<h3>
+<a id="callbackfunctionresult" class="anchor" href="#callbackfunctionresult" aria-hidden="true"><span class="octicon octicon-link"></span></a>callback:function(result)</h3>
+
+<pre><code>    上传完成后的回调,参数result是返回的数据，这里只作字符串的处理，如果要转json可以使用JSON.parse或上面例子里的eval进行转换
+</code></pre>
+
+<h3>
+<a id="callbackfunctionresult" class="anchor" href="#callbackfunctionresult" aria-hidden="true"><span class="octicon octicon-link"></span></a>startUpload:function(input,i)</h3>
+
+<pre><code>上传开始时的回调，i 是一个随机的key,它与callback的i是一相同的，可以用它来串联这些回调，比如例子中的loading效果
+</code></pre>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
