@@ -44,10 +44,12 @@
 	<a id="user-content-用法" class="anchor" href="#%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>用法</h1>
 	<p>
 	<input type="text" style="width:350px;" id="calendar" value="2015-03-15"/>
+            <input type="text" class="calendar4" value="2015-05-20 21:34:29"/>
 	<link rel="stylesheet" type="text/css" href="example/calendar/calendar.min.css">
 	<script src="example/calendar/jquery-1.9.1.min.js"></script>
 	<script src="example/calendar/calendar-jquery.min.js"></script>
 	<script>
+            $(".calendar4").Calendar({time:true});
 	 var calendar = new Calendar();
         calendar.init({
             target: $('#calendar'),
@@ -72,6 +74,7 @@
     &lt;script src="../src/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
     &lt;script src="../src/calendar.js"&gt;&lt;/script&gt;
     &lt;script&gt;
+        $(".calendar4").Calendar({time:true});//时间选择
         var calendar = new Calendar();
         calendar.init({
             target: $('#calendar'),
@@ -92,7 +95,6 @@
         });
     &lt;/script&gt;
 </code></pre>
-	
 <h1>
 <a id="user-content-或者" class="anchor" href="#%E6%88%96%E8%80%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者</h1>
 <p>
@@ -164,7 +166,11 @@
 
 <h3>
 <a id="maxdays多选时最大天数" class="anchor" href="#maxdays%E5%A4%9A%E9%80%89%E6%97%B6%E6%9C%80%E5%A4%A7%E5%A4%A9%E6%95%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>maxdays:多选时最大天数</h3>
+<h3>
+<a id="montharr" class="anchor" href="#montharr" aria-hidden="true"><span class="octicon octicon-link"></span></a>time:bool</h3>
 
+<pre><code>  可选时分秒,此值为true时，toolbar也为true,默认当前时间
+</code></pre>
 <h2>
 <a id="方法" class="anchor" href="#%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>方法</h2>
 
