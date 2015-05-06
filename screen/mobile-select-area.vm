@@ -8,7 +8,6 @@ $set(title,手机端选择地区联动)
 
 <p>手机联动选择地区</p>
 <b style="color:red;">请切换手机调试模式或用手机浏览器访问此demo</b>
-<input type="text"/>
 <p>请选择地区:<input type="text" id="txt_area" value="浙江省 杭州市 滨江区"/><input type="hidden" id="hd_area" value="1,1,1"/></p>
 <link rel="stylesheet" type="text/css" href="example/mobile-select-area/mobile-select-area.css">
 <link rel="stylesheet" type="text/css" href="example/dialog/dialog.min.css">

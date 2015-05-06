@@ -13,7 +13,7 @@
 	} else if (typeof exports === 'object') { //umd
 		module.exports = factory();
 	} else {
-		root.ScrollLoad = factory(window.Zepto || window.jQuery || $);
+		root.CarouselImage = factory(window.Zepto || window.jQuery || $);
 	}
 })(this, function($) {
 	$.fn.CarouselImage = function(settings) {
@@ -39,13 +39,39 @@
 			this.animate = settings.animate || 500;
 			this.num = settings.num || null;
 			this.list = this.content.children();
+			this.list.width(this.container.width());
 			this.step = this.list.first().width();
 			this.content.width(this.list.length * this.step);
-			this.size = this.list.length;
-			this.content.css({
-				left: 0,
-				position: "absolute"
+			var img= new Image();
+			img.src = this.list.first().find('img').attr('src');
+			var _this = this;
+			$(img).on('load',function(){
+				var h = this.height;
+				var w = this.width;
+				_this.container.height( (_this.container.width()/w) *h);
 			});
+			this.size = this.list.length;
+			this.repeat = settings.repeat || false;
+			if (this.repeat) {
+				for (var i = 0, l = this.list.length; i < l; i++) {
+					var item = $(this.list[i]);
+					item.attr("data-index", i);
+				}
+				var firstc = this.list.first().clone();
+				var lastc = this.list.last().clone();
+				this.content.append(firstc);
+				this.content.prepend(lastc);
+				this.content.css({
+					left: -this.step,
+					position: "absolute"
+				});
+				this.content.width((this.list.length + 2) * this.step);
+			} else {
+				this.content.css({
+					left: 0,
+					position: "absolute"
+				});
+			}
 			// alert(this.content.width())
 			this.bindEvent();
 			this.auto();
@@ -71,6 +97,7 @@
 				move = false;
 			});
 			$(obj).on('click', trigger, click);
+
 			function click(e) {
 				return fn.call(this, e);
 			}
@@ -133,9 +160,9 @@
 				_this.go();
 				move = false;
 				_this.auto();
-				return false;
+				//return false;
 			});
-			_this.touch(_this.num,"i",  function() {
+			_this.touch(_this.num, "i", function() {
 				clearInterval(_this.interval);
 				_this.index = $(this).index();
 				_this.go();
@@ -158,24 +185,51 @@
 		},
 		go: function() {
 			var _this = this;
-			if (_this.index >= _this.size) {
-				_this.index = _this.size - 1;
-			}
-			if (_this.index < 0) {
-				_this.index = 0
-			}
 			var step = _this.step;
-			var left = -_this.index * step;
-			_this.content.animate({
-				left: left
-			}, _this.animate, $.proxy(_this.formatNum, _this));
+			if (this.repeat) {
+				var left = -(_this.index+1) * step;
+				if (_this.index < 0) {
+					left = 0
+				}
+				if (_this.index == 0) {
+					left = -step;
+				}
+				_this.content.animate({
+					left: left
+				}, _this.animate, function() {
+					if (_this.index < 0) {
+						_this.index = _this.list.size() - 1;
+						_this.content.css("left", -(_this.index+1) * step);
+					}
+					if (_this.index >= _this.list.size()) {
+						_this.index = 0;
+						_this.content.css("left", -1 * step);
+					}
+					_this.formatNum();
+				});
+			} else {
+				if (_this.index < 0) {
+					_this.index = 0
+				}
+				if (_this.index >= _this.size) {
+					_this.index = _this.size - 1;
+				}
+				var left = -_this.index * step;
+				_this.content.animate({
+					left: left
+				}, _this.animate, function() {
+					_this.formatNum();
+				});
+			}
 		},
 		auto: function() {
 			var _this = this;
 			this.interval = setInterval(function() {
 				_this.index++;
-				if (_this.index >= _this.size) {
-					_this.index = 0;
+				if(!_this.repeat){
+					if (_this.index >= _this.size) {
+						_this.index = 0;
+					}
 				}
 				_this.go();
 			}, this.timer);

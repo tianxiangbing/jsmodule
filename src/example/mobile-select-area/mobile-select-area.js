@@ -1,5 +1,6 @@
 /*
  * Created with Sublime Text 2.
+ * license: http://www.lovewebgames.com/jsmodule/index.html
  * User: 田想兵
  * Date: 2015-03-31
  * Time: 09:49:11
@@ -27,6 +28,7 @@
 		this.text = ['', '', ''];
 		this.level = 3;
 		this.mtop = 30;
+		this.separator = ' ';
 	};
 	MobileSelectArea.prototype = {
 		init: function(settings) {
@@ -34,6 +36,7 @@
 			this.trigger = $(this.settings.trigger);
 			this.trigger.attr("readonly", "readonly");
 			this.value = (this.settings.value && this.settings.value.split(",")) || [0, 0, 0];
+			this.text = this.settings.text || this.trigger.val().split(' ') || ['', '', ''];
 			this.oldvalue = this.value.concat([]);
 			this.clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
 			this.clientWidth = document.documentElement.clientWidth || document.body.clientWidth;
@@ -184,7 +187,7 @@
 			this.oldvalue = this.value.concat([]);
 			if (this.trigger[0].nodeType == 1) {
 				//input
-				this.trigger.val(this.text.join(' '));
+				this.trigger.val(this.text.join(this.separator));
 				this.trigger.attr('data-value', this.value.join(','));
 			}
 			this.trigger.next(':hidden').val(this.value.join(','));

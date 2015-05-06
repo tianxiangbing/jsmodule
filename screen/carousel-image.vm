@@ -7,17 +7,11 @@ $set(title,轮播图片-支持手机滑动)
           <h1>
 <a id="carousel-image" class="anchor" href="#carousel-image" aria-hidden="true"><span class="octicon octicon-link"></span></a>carousel-image</h1>
 
-<div class="carousel-image">
+<div class="carousel-image" style="width:320px;">
 	<div>
-		<a>
-			<img src="images/example/1.png"/>
-		</a>
-		<a>
-			<img src="images/example/2.png"/>
-		</a>
-		<a>
-			<img src="images/example/3.png"/>
-		</a>
+		<a href="mobile-upload.html"><img  src="images/ui/mobile-upload.png"/></a>
+		<a href="mobile-select-area.html"><img  src="images/ui/mobile-select-area.png" alt="js手机选择地区联动仿ios" title="js手机选择地区联动仿ios"/></a>
+		<a href="mobile-photo-preview.html"><img  src="images/ui/mobile-photo-preview.png"/></a>
 	</div>
 	<span class="carousel-num">
 	</span>
