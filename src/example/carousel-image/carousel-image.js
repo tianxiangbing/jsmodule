@@ -32,6 +32,8 @@
 	function CarouselImage() {}
 	CarouselImage.prototype = {
 		init: function(settings) {
+			var _this = this;
+			this.settings = settings;
 			this.index = 0;
 			this.container = settings.target;
 			this.content = this.container.children().first();
@@ -39,17 +41,6 @@
 			this.animate = settings.animate || 500;
 			this.num = settings.num || null;
 			this.list = this.content.children();
-			this.list.width(this.container.width());
-			this.step = this.list.first().width();
-			this.content.width(this.list.length * this.step);
-			var img= new Image();
-			img.src = this.list.first().find('img').attr('src');
-			var _this = this;
-			$(img).on('load',function(){
-				var h = this.height;
-				var w = this.width;
-				_this.container.height( (_this.container.width()/w) *h);
-			});
 			this.size = this.list.length;
 			this.repeat = settings.repeat || false;
 			if (this.repeat) {
@@ -62,20 +53,54 @@
 				this.content.append(firstc);
 				this.content.prepend(lastc);
 				this.content.css({
-					left: -this.step,
+					left: -this.container.width(),
 					position: "absolute"
 				});
-				this.content.width((this.list.length + 2) * this.step);
 			} else {
 				this.content.css({
 					left: 0,
 					position: "absolute"
 				});
 			}
+			this.setHeightWidth();
 			// alert(this.content.width())
 			this.bindEvent();
 			this.auto();
 			this.formatNum();
+		},
+		setHeightWidth: function() {
+			var settings = this.settings;
+			var _this = this;
+			var img = new Image();
+			img.src = this.list.first().find('img').attr('src');
+			_this.container.find('img').width(this.container.width());
+			if (settings.width) {
+				this.container.width(settings.width);
+				this.container.find('img').width(settings.width);
+			}
+			this.step = this.container.width();
+			this.content.width(this.list.length * this.step);
+			if (settings.height) {
+				this.container.height(this.container.height());
+				this.container.find('img').height(settings.height);
+			} else {
+				$(img).on('load', function() {
+					var h = this.height;
+					var w = this.width;
+					_this.container.height((_this.container.width() / w) * h);
+					_this.container.find('img').height(_this.container.height());
+					_this.content.width((_this.list.length + 2) * _this.step);
+					_this.content.css({
+						left: -_this.container.width(),
+						position: "absolute"
+					});
+				});
+			}
+			_this.content.width((_this.list.length + 2) * _this.step);
+			_this.content.css({
+				left: -_this.container.width(),
+				position: "absolute"
+			});
 		},
 		touch: function(obj, trigger, fn) {
 			var move;
@@ -168,6 +193,9 @@
 				_this.go();
 				_this.auto();
 			});
+			$(window).resize(function(){
+				_this.setHeightWidth();
+			});
 		},
 		formatNum: function() {
 			if (this.num) {
@@ -187,7 +215,7 @@
 			var _this = this;
 			var step = _this.step;
 			if (this.repeat) {
-				var left = -(_this.index+1) * step;
+				var left = -(_this.index + 1) * step;
 				if (_this.index < 0) {
 					left = 0
 				}
@@ -199,7 +227,7 @@
 				}, _this.animate, function() {
 					if (_this.index < 0) {
 						_this.index = _this.list.size() - 1;
-						_this.content.css("left", -(_this.index+1) * step);
+						_this.content.css("left", -(_this.index + 1) * step);
 					}
 					if (_this.index >= _this.list.size()) {
 						_this.index = 0;
@@ -226,7 +254,7 @@
 			var _this = this;
 			this.interval = setInterval(function() {
 				_this.index++;
-				if(!_this.repeat){
+				if (!_this.repeat) {
 					if (_this.index >= _this.size) {
 						_this.index = 0;
 					}
