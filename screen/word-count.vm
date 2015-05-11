@@ -1,0 +1,188 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,word-count)
+$set(title,文本框计数统计)
+<link rel="stylesheet" type="text/css" href="example/word-count/word-count.css">
+<h1>
+<a id="compute-words" class="anchor" href="#compute-words" aria-hidden="true"><span class="octicon octicon-link"></span></a>compute-words</h1>
+
+<p>文本框字数统计
+</p>
+
+<h1>
+<a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
+<div class="txt-count-container">
+    <div class="counter"><em>30</em></div>
+    <textarea name="txt" id="txt" cols="30" rows="10" class="txt">万色城是一个创业平台，所有万色城的网商通过加盟，注册一个属于自己的网上商城。推广自己的商城，销售商城的商品创造收益。每个网商拥有一个属于自己的独立域名。万色城是国内唯一全部实行“实名制”的网上商城，每一个网商，以自己真实的姓名、照片和信誉，作为诚信经营的保障。</textarea>
+</div>
+    <p><input type="button" value="点击提交" class="click"></p>
+    <script type="text/javascript" src="example/zepto.js"></script>
+    <script type="text/javascript" src="example/word-count/word-count.js"></script>
+    <script>
+        $(function() {
+            $(".click").click(function(){
+                if(!$('.txt').data('overflow') ){
+                    alert('ok')
+                }
+            });
+            $('.txt').WordCount({
+                max:200,
+                isOverflowCut: false,
+                overClass:"over-number",
+                num:$(" .counter em"),
+                withButton:".click",
+                minHeight:100,
+                overflowCallback: function() {
+                    //this.textBox.addClass('over-number');
+                    //$(".counter em").addClass('over-number');
+                },
+                changeCallback: function(num) {
+                    //var n = this.max - num;
+                    //$(" .counter em").html(n);
+                },
+                passClallback: function() {
+                    //this.textBox.removeClass('over-number');
+                    //$(".counter em").removeClass('over-number');
+                },
+                isByte: true//字节
+            });
+        });
+    </script>
+<pre><code>&lt;div class="txt-count-container"&gt;
+    &lt;div class="counter"&gt;&lt;em&gt;30&lt;/em&gt;&lt;/div&gt;
+    &lt;textarea name="txt" id="txt" cols="30" rows="10" class="txt"&gt;万色城是一个创业平台，所有万色城的网商通过加盟，注册一个属于自己的网上商城。推广自己的商城，销售商城的商品创造收益。每个网商拥有一个属于自己的独立域名。万色城是国内唯一全部实行“实名制”的网上商城，每一个网商，以自己真实的姓名、照片和信誉，作为诚信经营的保障。&lt;/textarea&gt;
+&lt;/div&gt;
+    &lt;p&gt;&lt;input type="button" value="点击提交" class="click"&gt;&lt;/p&gt;
+    &lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="../src/word-count.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        $(function() {
+            $(".click").click(function(){
+                if(!$('.txt').data('overflow') ){
+                    alert('ok')
+                }
+            });
+            $('.txt').WordCount({
+                max:200,
+                isOverflowCut: false,
+                overClass:"over-number",
+                num:$(" .counter em"),
+                withButton:".click",
+                minHeight:100,
+                overflowCallback: function() {
+                    //this.textBox.addClass('over-number');
+                    //$(".counter em").addClass('over-number');
+                },
+                changeCallback: function(num) {
+                    //var n = this.max - num;
+                    //$(" .counter em").html(n);
+                },
+                passClallback: function() {
+                    //this.textBox.removeClass('over-number');
+                    //$(".counter em").removeClass('over-number');
+                },
+                isByte: true//字节
+            });
+        });
+    &lt;/script&gt;
+</code></pre>
+
+<h1>
+<a id="或者" class="anchor" href="#%E6%88%96%E8%80%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者:</h1>
+
+<pre><code>var wc = new WordCount();
+wc .init({
+        trigger:$('.txt'),
+        max:200,
+        isOverflowCut: false,
+        overClass:"over-number",
+        num:$(" .counter em"),
+        withButton:".click",
+        minHeight:100,
+        overflowCallback: function() {
+            //this.textBox.addClass('over-number');
+            //$(".counter em").addClass('over-number');
+        },
+        changeCallback: function(num) {
+            //var n = this.max - num;
+            //$(" .counter em").html(n);
+        },
+        passClallback: function() {
+            //this.textBox.removeClass('over-number');
+            //$(".counter em").removeClass('over-number');
+        },
+        isByte: true//字节
+    });
+</code></pre>
+<h1>
+<a id="属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
+
+<h2>
+<a id="trigger--string--object" class="anchor" href="#trigger--string--object" aria-hidden="true"><span class="octicon octicon-link"></span></a>trigger  :string || object</h2>
+
+<pre><code>触发的文本框
+</code></pre>
+
+<h2>
+<a id="max--number" class="anchor" href="#max--number" aria-hidden="true"><span class="octicon octicon-link"></span></a>max  :number</h2>
+
+<pre><code>最大长度,如果不传会去取文本框的maxlength
+</code></pre>
+
+<h2>
+<a id="isoverflowcut--boollen" class="anchor" href="#isoverflowcut--boollen" aria-hidden="true"><span class="octicon octicon-link"></span></a>isOverflowCut  :boollen</h2>
+
+<pre><code>是否自动截取文本
+</code></pre>
+
+<h2>
+<a id="overclass-----string" class="anchor" href="#overclass-----string" aria-hidden="true"><span class="octicon octicon-link"></span></a>overClass     :string</h2>
+
+<pre><code>超出文本时的样式,会同时在num上和textbox上添加
+</code></pre>
+
+<h2>
+<a id="num---element" class="anchor" href="#num---element" aria-hidden="true"><span class="octicon octicon-link"></span></a>num   :element</h2>
+
+<pre><code>显示计数的结点
+</code></pre>
+
+<h2>
+<a id="minheight----number" class="anchor" href="#minheight----number" aria-hidden="true"><span class="octicon octicon-link"></span></a>minHeight:    number</h2>
+
+<pre><code>文本框的最小高度，因为这里做自适应高度的控制。如没有此参数时，不自适应高度。
+</code></pre>
+
+<h2>
+<a id="withbutton---element" class="anchor" href="#withbutton---element" aria-hidden="true"><span class="octicon octicon-link"></span></a>withButton:   element</h2>
+
+<pre><code>关联按钮
+</code></pre>
+
+<h2>
+<a id="isbyte---boollen" class="anchor" href="#isbyte---boollen" aria-hidden="true"><span class="octicon octicon-link"></span></a>isByte:   boollen</h2>
+
+<pre><code>是否按字节数来计算，true时：一个汉字作2个单位长度，false时汉字英文不作区分
+</code></pre>
+
+<h1>
+<a id="方法回调" class="anchor" href="#%E6%96%B9%E6%B3%95%E5%9B%9E%E8%B0%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>方法回调:</h1>
+
+<h2>
+<a id="overflowcallbackfunctionntextboxmax" class="anchor" href="#overflowcallbackfunctionntextboxmax" aria-hidden="true"><span class="octicon octicon-link"></span></a>overflowCallback:function(n,textbox,max)</h2>
+
+<pre><code>超出时的回调，this指向当前对象,n为长度,textbox是文本框结点对象,max为最大长度
+</code></pre>
+
+<h2>
+<a id="changecallbackfunctionntextboxmax" class="anchor" href="#changecallbackfunctionntextboxmax" aria-hidden="true"><span class="octicon octicon-link"></span></a>changeCallback:function(n,textbox,max)</h2>
+
+<pre><code>长度改变时的回调,n为长度,textbox是文本框结点对象,max为最大长度
+</code></pre>
+
+<h2>
+<a id="passclallbackfunctionntextboxmax" class="anchor" href="#passclallbackfunctionntextboxmax" aria-hidden="true"><span class="octicon octicon-link"></span></a>passClallback:function(n,textbox,max)</h2>
+
+<pre><code>长度通过时的回调,n为长度,textbox是文本框结点对象,max为最大长度
+</code></pre>

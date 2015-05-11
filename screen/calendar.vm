@@ -138,6 +138,10 @@ $set(title,日历组件)
 
 <pre><code>  可选时分秒,此值为true时，toolbar也为true,默认当前时间
 </code></pre>
+<h3>
+<a id="mutilSeparator" class="anchor" href="#mutilSeparator" aria-hidden="true"><span class="octicon octicon-link"></span></a>mutilSeparator:bool</h3>
+<pre><code>   多选日期时的分隔符，默认逗号分隔
+</code></pre>
 <h2>
 <a id="方法" class="anchor" href="#%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>方法</h2>
 

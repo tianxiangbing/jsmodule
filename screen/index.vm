@@ -60,4 +60,16 @@ js组件
 		<a href="https://github.com/tianxiangbing/upload" target="_blank" class="a_code">Code</a>
 		<a href="upload.html"  class="a_code">Demo & API</a>
 	</li>
+	<li>
+		<a href="click-progress.html"><img  src="images/ui/click-progress.png"/></a>
+		<a href="click-progress.html">点击的进度条，点越快涨越快</a>
+		<a href="https://github.com/tianxiangbing/click-progress" target="_blank" class="a_code">Code</a>
+		<a href="click-progress.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="word-count.html"><img  src="images/ui/word-count.png"/></a>
+		<a href="word-count.html">文本框计数统计、自适应高度</a>
+		<a href="https://github.com/tianxiangbing/word-count" target="_blank" class="a_code">Code</a>
+		<a href="word-count.html"  class="a_code">Demo & API</a>
+	</li>
 </ul>

@@ -1,0 +1,166 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,click-progress)
+$set(title,点击的进度条)
+          <h1>
+<a id="click-progress" class="anchor" href="#click-progress" aria-hidden="true"><span class="octicon octicon-link"></span></a>click-progress</h1>
+
+<p>点击的进度条
+</p>
+		<link rel="stylesheet" type="text/css" href="example/click-progress/click-progress.css">
+
+		<div class="progress"><div class="progress-finished"></div></div>
+        <input type="button" value="click" id="click"/>
+		<br/>
+		<br/>
+		<div class="transverse"><div class="progress-finished"></div></div>
+        <input type="button" value="click" id="click2"/>
+		<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+		<script type="text/javascript" src="example/click-progress/click-progress.js"></script>
+		<script>
+		$('#click').ClickProgress({
+			target:$('.progress'),
+			v:5,
+			a:1,
+			change:'height',
+			time:100,
+			clicked:function(a,b,c){
+				console.log(c,'加油')
+				},
+			progress:function(a,b,c){
+				console.log(c)
+				},
+			callback:function(){
+				console.log('完成了')
+			}
+		});
+		$('#click2').ClickProgress({
+			target:$('.transverse'),
+			v:5,
+			a:1,
+			change:'width',
+			time:70,
+			clicked:function(a,b,c){
+				console.log(c,'加油')
+				},
+			progress:function(a,b,c){
+				console.log(c)
+				},
+			callback:function(){
+				console.log('完成了')
+				clearInterval(_this.timer);
+			}
+		});
+		</script>
+<h1>
+<a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
+
+<pre><code>&lt;div class="progress"&gt;&lt;div class="progress-finished"&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;input type="button" value="click" id="click"/&gt;
+$('#click').ClickProgress({
+    target:$('.progress'),
+    v:5,
+    a:1,
+    change:'height',//width时是横向，可以看demo
+    time:30,
+    clicked:function(a,b,c){
+        console.log(c,'加油')
+        },
+    progress:function(a,b,c){
+        console.log(c)
+        },
+    callback:function(){
+        alert('完成了')
+    }
+});
+</code></pre>
+
+<h1>
+<a id="或者requirejs" class="anchor" href="#%E6%88%96%E8%80%85requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者requirejs</h1>
+
+<pre><code>requirejs.config({
+    //By default load any module IDs from js/lib
+    baseUrl: '../src',
+    paths: {
+        $: 'zepto'
+    }
+});
+require(['click-progress',"$"], function(ClickProgress,$) {
+    var cp = new ClickProgress();
+    cp.init({
+        trigger:$('#click'),
+        target:$('.progress'),
+        v:5,
+        a:1,
+        change:'height',
+        time:30,
+        clicked:function(a,b,c){
+            console.log(c,'加油')
+            },
+        progress:function(a,b,c){
+            console.log(c)
+            },
+        callback:function(){
+            alert('完成了')
+        }
+    });
+ });
+</code></pre>
+
+<h1>
+<a id="属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
+
+<h2>
+<a id="trigger" class="anchor" href="#trigger" aria-hidden="true"><span class="octicon octicon-link"></span></a>trigger:</h2>
+
+<pre><code>触发事件的对象
+</code></pre>
+
+<h2>
+<a id="target" class="anchor" href="#target" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:</h2>
+
+<pre><code>进度条对象dom，结果有两层
+</code></pre>
+
+<h2>
+<a id="v" class="anchor" href="#v" aria-hidden="true"><span class="octicon octicon-link"></span></a>v:</h2>
+
+<pre><code>每次点击的初始速度
+</code></pre>
+
+<h2>
+<a id="a" class="anchor" href="#a" aria-hidden="true"><span class="octicon octicon-link"></span></a>a:</h2>
+
+<pre><code>加速度，可以理解为重力或摩擦力
+</code></pre>
+
+<h2>
+<a id="changeheightwidth" class="anchor" href="#changeheightwidth" aria-hidden="true"><span class="octicon octicon-link"></span></a>change:height/width</h2>
+
+<pre><code>是改变的高度还是width,默认为height
+</code></pre>
+
+<h2>
+<a id="time" class="anchor" href="#time" aria-hidden="true"><span class="octicon octicon-link"></span></a>time:</h2>
+
+<pre><code>频率
+</code></pre>
+
+<h2>
+<a id="clickedfunctionabc" class="anchor" href="#clickedfunctionabc" aria-hidden="true"><span class="octicon octicon-link"></span></a>clicked:function(a,b,c)</h2>
+
+<pre><code>点击后的回调，a是trigger,b是target,c是当前的power值，下面的一样
+</code></pre>
+
+<h2>
+<a id="progressfunctionabc" class="anchor" href="#progressfunctionabc" aria-hidden="true"><span class="octicon octicon-link"></span></a>progress:function(a,b,c)</h2>
+
+<pre><code>每次进度改变的回调
+</code></pre>
+
+<h2>
+<a id="callbackfunctionabc" class="anchor" href="#callbackfunctionabc" aria-hidden="true"><span class="octicon octicon-link"></span></a>callback:function(a,b,c)</h2>
+
+<pre><code>结束后的回调，这里指达到100%;
+</code></pre>

@@ -107,3 +107,11 @@ require(['carousel-image',"$"], function(CarouselImage,$) {
 <a id="num" class="anchor" href="#num" aria-hidden="true"><span class="octicon octicon-link"></span></a>num:</h2>
 <pre><code>    本意是以显示当前索引的数字表示，但现在用样式把数字隐藏了，如果要显示数字样式，可自行更改样式文件
 </code></pre>
+<h2>
+<a id="width" class="anchor" href="#width" aria-hidden="true"><span class="octicon octicon-link"></span></a>width:</h2>
+<pre><code>    宽度  (如果不设置将按第一张图片的大小来等比压缩显示)
+</code></pre>
+<h2>
+<a id="height" class="anchor" href="#height" aria-hidden="true"><span class="octicon octicon-link"></span></a>height:</h2>
+<pre><code>    高度 (如果不设置将按第一张图片的大小来等比压缩显示)
+</code></pre>
