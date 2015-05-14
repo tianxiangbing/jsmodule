@@ -110,3 +110,6 @@ require(['upload',"$"], function(Upload,$) {
 
 <pre><code>上传开始时的回调，i 是一个随机的key,它与callback的i是一相同的，可以用它来串联这些回调，比如例子中的loading效果
 </code></pre>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

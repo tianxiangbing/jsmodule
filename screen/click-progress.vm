@@ -164,3 +164,6 @@ require(['click-progress',"$"], function(ClickProgress,$) {
 
 <pre><code>结束后的回调，这里指达到100%;
 </code></pre>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

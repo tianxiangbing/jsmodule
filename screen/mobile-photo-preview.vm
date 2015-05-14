@@ -91,3 +91,5 @@ $('.preview-list').MobilePhotoPreview({
 <a id="hide" class="anchor" href="#hide" aria-hidden="true"><span class="octicon octicon-link"></span></a>hide:</h2>
 <pre><code>    调用的是dialog的hide.
 </code></pre>
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

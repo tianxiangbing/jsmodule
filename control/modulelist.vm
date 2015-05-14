@@ -1,32 +1,3 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1;user-scalable=no;">
-    <link href='stylesheets/css.css' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <title>js组件-js组件</title> </head>
-  <body>
-    <header>
-      <div class="inner">
-        <h1>jsmodule</h1>
-        <h2>JS组件-js组件</h2>
-        <a href="https://github.com/tianxiangbing/jsmodule" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
-      </div>
-    </header>
-
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-<ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
-
-
-<h1>
-js组件
-</h1>
 <ul class="uilist">
 	<li>
 		<a href="calendar.html"><img  src="images/ui/calendar.png"/></a>
@@ -101,8 +72,3 @@ js组件
 		<a href="lazy-load.html"  class="a_code">Demo & API</a>
 	</li>
 </ul>
-        </section>
-      </div>
-    </div>
-  </body>
-</html>

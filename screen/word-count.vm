@@ -186,3 +186,6 @@ wc .init({
 
 <pre><code>长度通过时的回调,n为长度,textbox是文本框结点对象,max为最大长度
 </code></pre>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

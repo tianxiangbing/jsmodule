@@ -61,3 +61,6 @@ selectDate.init({trigger:'#txt_date'});
 
 <pre><code>    选中后的回调，默认有填充trigger的value值，以‘/’分隔
 </code></pre>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

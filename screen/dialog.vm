@@ -159,3 +159,5 @@ $set(title,dialog对话框弹层)
 	<a id="setpositionfunction" class="anchor" href="#setpositionfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>setPosition:function()</h3>
 	<pre><code>    设置位置居中
 	</code></pre>
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

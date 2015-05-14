@@ -208,3 +208,5 @@ $set(title,日历组件)
 
 <p>Task submitted by <a href="http://www.lovewebgames.com">田想兵</a></p>
 </article>
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

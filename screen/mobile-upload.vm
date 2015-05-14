@@ -88,3 +88,6 @@ upload.init({target:$('#btn_upload'),multiple:true,callback:function(result,name
 
 <pre><code>    上传完成后的回调,参数result是返回图片数据，name是文件名,postName是隐藏input的name，方便form提交时使用
 </code></pre>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

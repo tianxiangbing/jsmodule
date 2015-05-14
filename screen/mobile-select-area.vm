@@ -100,3 +100,6 @@ selectArea.init({trigger:$('#txt_area'),value:$('#hd_area').val(),data:'json/are
 
 <pre><code>    选中后的回调，默认有填充trigger的value值，以及赋值它后面紧跟着的hidden的value值，以逗号分隔id，空格分隔文字
 </code></pre>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

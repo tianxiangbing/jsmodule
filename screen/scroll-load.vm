@@ -69,3 +69,6 @@ $set(title,滚动加载)
 		loadmore:$('<li class="ui-loading">点击加载更多</li>')
 	});
 </script>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

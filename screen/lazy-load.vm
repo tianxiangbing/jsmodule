@@ -1,0 +1,118 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,lazy-load)
+$set(title,图片懒加载)
+          <h1>
+<a id="lazy-load" class="anchor" href="#lazy-load" aria-hidden="true"><span class="octicon octicon-link"></span></a>lazy-load</h1>
+
+<p>图片懒加载</p>
+<img data-src="images/ui/dialog.png" class="lazy-load" width="300" height="300"/>
+<input type="button" value="点击显示图片" id="btn_show"/>
+<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="example/lazy-load/lazy-load.js"></script>
+<script>
+var obj = new LazyLoad();
+obj.init({
+    elements:'.lazy-load',
+    container: $('#btn_show'),
+    effect: 'show',
+    event:'click',
+    effectArgs: null,
+    loadImg:'images/example/loading.gif',
+    load: null,
+    offset: 0
+});
+</script>
+<h1>
+<a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
+
+<pre><code>&lt;img data-src="http://ott.wansecheng.com/weidian/wdgoods/1429250625186.jpg" alt=""&gt;
+$('img').LazyLoad({
+    container: window,
+    event:'scroll',
+    effect: 'show',
+    effectArgs: 'slow',
+    loadImg:'loading.gif',
+    load: null,
+    offset: 0
+});
+</code></pre>
+
+<h1>
+<a id="或者" class="anchor" href="#%E6%88%96%E8%80%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者</h1>
+
+<pre><code>var obj = new LazyLoad();
+obj.init({
+    elements:'img',
+    container: window,
+    effect: 'show',
+    event:'scroll',
+    effectArgs: 'slow',
+    loadImg:'loading.gif',
+    load: null,
+    offset: 0
+});
+</code></pre>
+
+<hr>
+
+<h1>
+<a id="属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
+
+<h2>
+<a id="elements" class="anchor" href="#elements" aria-hidden="true"><span class="octicon octicon-link"></span></a>elements:</h2>
+
+<pre><code>dom的集合，一般为需要懒加载的img标签集合，如果是动态加载的内容，请在html加载完成之后再调用init
+</code></pre>
+
+<h2>
+<a id="init" class="anchor" href="#init" aria-hidden="true"><span class="octicon octicon-link"></span></a>init:</h2>
+
+<pre><code>初始化方法
+</code></pre>
+
+<h2>
+<a id="container---window" class="anchor" href="#container---window" aria-hidden="true"><span class="octicon octicon-link"></span></a>container:   window</h2>
+
+<pre><code>触发滚动条的容器，默认为window,可不传
+</code></pre>
+
+<h2>
+<a id="event" class="anchor" href="#event" aria-hidden="true"><span class="octicon octicon-link"></span></a>event:</h2>
+
+<pre><code>容器触发事件，默认为scroll
+</code></pre>
+
+<h2>
+<a id="effect" class="anchor" href="#effect" aria-hidden="true"><span class="octicon octicon-link"></span></a>effect:</h2>
+
+<pre><code>触发的事件方法，默认为 show
+</code></pre>
+
+<h2>
+<a id="effectargs" class="anchor" href="#effectargs" aria-hidden="true"><span class="octicon octicon-link"></span></a>effectArgs</h2>
+
+<pre><code>要给effect传的参数，可不传
+</code></pre>
+
+<h2>
+<a id="loadimg" class="anchor" href="#loadimg" aria-hidden="true"><span class="octicon octicon-link"></span></a>loadImg</h2>
+
+<pre><code>加载等待时显示的图片地址，默认是一个1pxx1px的图
+</code></pre>
+
+<h2>
+<a id="offset" class="anchor" href="#offset" aria-hidden="true"><span class="octicon octicon-link"></span></a>offset:</h2>
+
+<pre><code>与图片的差值，默认0
+</code></pre>
+
+<h2>
+<a id="loadfunctionimg" class="anchor" href="#loadfunctionimg" aria-hidden="true"><span class="octicon octicon-link"></span></a>load:function(img)</h2>
+
+<pre><code>加载完成的回调,this指向当前对象
+</code></pre>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")
