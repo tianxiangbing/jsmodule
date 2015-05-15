@@ -154,6 +154,14 @@ require(['carousel-image',"$"], function(CarouselImage,$) {
 <a id="height" class="anchor" href="#height" aria-hidden="true"><span class="octicon octicon-link"></span></a>height:</h2>
 <pre><code>    高度 (如果不设置将按第一张图片的大小来等比压缩显示)
 </code></pre>
+<h2>
+<a id="timer" class="anchor" href="#timer" aria-hidden="true"><span class="octicon octicon-link"></span></a>timer:</h2>
+<pre><code>   动画延时
+</code></pre>
+<h2>
+<a id="animate" class="anchor" href="#animate" aria-hidden="true"><span class="octicon octicon-link"></span></a>animate:</h2>
+<pre><code>  动画时间
+</code></pre>
 
 <h1>其它组件推荐</h1>
 $control.setTemplate("modulelist.vm")
