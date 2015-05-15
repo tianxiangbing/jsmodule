@@ -43,11 +43,18 @@
 			this.list = this.content.children();
 			this.size = this.list.length;
 			this.repeat = settings.repeat || false;
+			if (settings.width) {
+				this.container.width(settings.width);
+			}
+			if (settings.height) {
+				this.container.height(settings.height);
+			}
+			this.step = this.container.width();
+			for (var i = 0, l = this.list.length; i < l; i++) {
+				var item = $(this.list[i]);
+				item.find('img').addClass('carousel-' + i).attr("data-index", i);
+			}
 			if (this.repeat) {
-				for (var i = 0, l = this.list.length; i < l; i++) {
-					var item = $(this.list[i]);
-					item.attr("data-index", i);
-				}
 				var firstc = this.list.first().clone();
 				var lastc = this.list.last().clone();
 				this.content.append(firstc);
@@ -56,11 +63,13 @@
 					left: -this.container.width(),
 					position: "absolute"
 				});
+				this.content.width((this.list.length + 2) * this.step);
 			} else {
 				this.content.css({
 					left: 0,
 					position: "absolute"
 				});
+				this.content.width(this.list.length * this.step);
 			}
 			this.setHeightWidth();
 			// alert(this.content.width())
@@ -71,36 +80,72 @@
 		setHeightWidth: function() {
 			var settings = this.settings;
 			var _this = this;
-			var img = new Image();
-			img.src = this.list.first().find('img').attr('src');
-			_this.container.find('img').width(this.container.width());
-			if (settings.width) {
-				this.container.width(settings.width);
-				this.container.find('img').width(settings.width);
-			}
-			this.step = this.container.width();
-			this.content.width(this.list.length * this.step);
-			if (settings.height) {
-				this.container.height(this.container.height());
-				this.container.find('img').height(settings.height);
-			} else {
-				$(img).on('load', function() {
-					var h = this.height;
-					var w = this.width;
-					_this.container.height((_this.container.width() / w) * h);
-					_this.container.find('img').height(_this.container.height());
-					_this.content.width((_this.list.length + 2) * _this.step);
+			//_this.container.find('img').width(this.container.width());
+			this.container.find('a').css({
+				width: this.step,
+				height: this.container.height(),
+				position: 'relative'
+			});
+			this.container.find('img').each(function() {
+				var img = new Image();
+				img.src = $(this).attr('src');
+				var i = $(this).data('index');
+				;(function(img,i){
+					if (img.complete) {
+						setObj.call(img, i);
+					} else {
+						img.onreadystatechange = function() {
+							if (this.readystate == "complete" || this.readyState == "loaded") {
+								setObj.call(this, i);
+							}
+						}
+						img.onload = function() {
+							setObj.call(this, i);
+						}
+					}
+				})(img,i);
+			});
+
+			function setObj(i) {
+				var h = this.height;
+				var w = this.width;
+				var c = _this.container;
+				//console.log(h,w)
+				//if(i==4)debugger;
+				//未设置高度时，以第一个加完的图片的高度为准，其他图片都等比自缩放，小于容器时，原样显示
+				if (!_this.settings.height) {
+					var ch = (_this.container.width() / w) * h;
+					_this.settings.height = (_this.container.width() / w) * h;
+					_this.container.height(_this.settings.height);
+					_this.container.find('a').height(ch);
 					_this.content.css({
-						left: -_this.container.width(),
 						position: "absolute"
 					});
+				}
+				//set img width height
+				var imgw = _this.container.width();
+				var imgh = imgw / w * h;
+				if ($('.carousel-' + i,c).height() > _this.container.height()) {
+					//if(_this.container.height() == 200)debugger;
+					$('.carousel-' + i,c).height(_this.container.height());
+					$('.carousel-' + i,c).width(_this.container.height() / h * w);
+				}
+				if ($('.carousel-' + i,c).width() > _this.container.width()) {
+				if(imgh == 200)debugger;
+					$('.carousel-' + i,c).width(imgw);
+					$('.carousel-' + i,c).height(imgh);
+				}
+				//setposition
+				var iw = $('.carousel-' + i,c).width();
+				var ih = $('.carousel-' + i,c).height();
+				var top = (_this.container.height() - ih) / 2;
+				var left = (_this.container.width() - iw) / 2;
+				$('.carousel-' + i,c).css({
+					left: left,
+					top: top,
+					position: "absolute"
 				});
 			}
-			_this.content.width((_this.list.length + 2) * _this.step);
-			_this.content.css({
-				left: -_this.container.width(),
-				position: "absolute"
-			});
 		},
 		touch: function(obj, trigger, fn) {
 			var move;
@@ -193,7 +238,7 @@
 				_this.go();
 				_this.auto();
 			});
-			$(window).resize(function(){
+			$(window).resize(function() {
 				_this.setHeightWidth();
 			});
 		},

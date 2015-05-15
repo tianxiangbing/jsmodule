@@ -6,7 +6,7 @@ $set(title,轮播图片-支持手机滑动)
 <link rel="stylesheet" type="text/css" href="example/carousel-image/carousel-image.css">
           <h1>
 <a id="carousel-image" class="anchor" href="#carousel-image" aria-hidden="true"><span class="octicon octicon-link"></span></a>carousel-image</h1>
-
+<h2>自定义宽高</h2>
 <div class="carousel-image carousel-image1" style="width:320px;">
 	<div>
 		<a href="mobile-upload.html"><img  src="images/ui/mobile-upload.png"/></a>
@@ -16,16 +16,44 @@ $set(title,轮播图片-支持手机滑动)
 	<span class="carousel-num">
 	</span>
 </div>
-
-<div class="carousel-image carousel-image2">
+<h2>不定宽高自适应，循环</h2>
+      <!--scroll-->
+<div class="carousel-image carousel-image2" style="width:340px">
 	<div>
-		<a href="mobile-upload.html"><img  src="images/ui/mobile-upload.png"/></a>
-		<a href="mobile-select-area.html"><img  src="images/ui/mobile-select-area.png" alt="js手机选择地区联动仿ios" title="js手机选择地区联动仿ios"/></a>
-		<a href="mobile-photo-preview.html"><img  src="images/ui/mobile-photo-preview.png"/></a>
+		<a>
+			<img src="images/example/a4.png"/>
+		</a>
+		<a>
+			<img src="images/example/a1.png"/>
+		</a>
+		<a>
+			<img src="images/example/a2.png"/>
+		</a>
+		<a>
+			<img src="images/example/a3.png"/>
+		</a>
+		<a>
+			<img src="images/example/a5.png"/>
+		</a>
 	</div>
 	<span class="carousel-num">
 	</span>
 </div>
+
+<h2>不定宽高自适应，不循环</h2>
+<div class="carousel-image carousel-image3">
+	<div>
+		<a target="_blank" href="http://tt.ewanse.com/search/index?more=0&keywords=Apple%20Watch">
+			<img src="http://ott.wansecheng.com/weidian/advertise/1429860297667.jpg" />
+		</a>
+		<a target="_blank" href="javascript:;">
+			<img src="http://ott.wansecheng.com/weidian/advertise/1430102654706.jpg"/>
+		</a>
+	</div>
+	<span class="carousel-num">
+	</span>
+</div>
+
 <script type="text/javascript" src="example/zepto.js"></script>
 <script type="text/javascript" src="example/require.js"></script>
 <script type="text/javascript">
@@ -37,16 +65,18 @@ requirejs.config({
 	}
 });
 require(['carousel-image',"$"], function(CarouselImage,$) {
-	var cs = new CarouselImage();
-	cs.init({
-		target:$('.carousel-image1'),
-		num:$('.carousel-image1 .carousel-num')
+	$('.carousel-image1').CarouselImage({
+		num :$('.carousel-image1 .carousel-num'),
+		width:320,
+		height:240
 	});
 	$('.carousel-image2').CarouselImage({
 		num :$('.carousel-image2 .carousel-num'),
-		repeat:true,
-		width:320,
-		height:200
+		repeat:true
+	});
+	$('.carousel-image3').CarouselImage({
+		num :$('.carousel-image3 .carousel-num'),
+		timer:5000
 	});
 });
 </script>
@@ -56,8 +86,17 @@ require(['carousel-image',"$"], function(CarouselImage,$) {
 <pre><code>&lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
 	&lt;script type="text/javascript" src="../src/carousel-image.js"&gt;&lt;/script&gt;
 	&lt;script&gt;
-	$('.carousel-image').CarouselImage({
-	    num :$('.carousel-num')
+	$('.carousel-image1').CarouselImage({
+		num :$('.carousel-image1 .carousel-num'),
+		width:320,
+		height:240
+	});
+	$('.carousel-image2').CarouselImage({
+		num :$('.carousel-image2 .carousel-num'),
+		repeat:true
+	});
+	$('.carousel-image3').CarouselImage({
+		num :$('.carousel-image3 .carousel-num')
 	});
 	&lt;/script&gt;
 </code></pre>
