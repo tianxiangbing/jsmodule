@@ -8,7 +8,9 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <title>js组件-js异步上传文件</title> </head>
+    <title>js组件-js插件-jquery插件-js异步上传文件</title> </head>
+  <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。js异步上传文件" />
   <body>
     <header>
       <div class="inner">
@@ -71,7 +73,7 @@
 &lt;script src="../src/upload.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 var upload = new Upload();
-upload.init({target:$('#btn_upload'),url:"data.html", callback:function(result){
+upload.init({target:$('#btn_upload'),url:"data.html",accept:"png,jpg", callback:function(result){
     eval( 'result='+result);
     $('body').append('&lt;img src="'+result.url+'" width="200" height="200"/&gt;&lt;input type="hidden" value="'+result.url+'"/&gt;');
 }});
@@ -97,7 +99,7 @@ requirejs.config({
 });
 require(['upload',"$"], function(Upload,$) {
     var upload = new Upload();
-    upload.init({target:$('#btn_upload'),url:"data.html", callback:function(result){
+    upload.init({target:$('#btn_upload'),url:"data.html",accept:"png,jpg", callback:function(result){
         eval( 'result='+result);
         $('body').append('&lt;img src="'+result.url+'" width="200" height="200"/&gt;&lt;input type="hidden" value="'+result.url+'"/&gt;');
     }});
@@ -222,5 +224,6 @@ require(['upload',"$"], function(Upload,$) {
         </section>
       </div>
     </div>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255182337'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/stat.php%3Fid%3D1255182337' type='text/javascript'%3E%3C/script%3E"));</script>
   </body>
 </html>

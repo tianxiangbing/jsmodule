@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>hide weixin</title>
+</head>
+<body>
+	<script type="text/javascript">
+/**
+ * 隐藏微信网页右上角按钮
+ * @returns {undefined}
+ */
+function onBridgeReady() {
+    WeixinJSBridge.call('hideOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined") {
+    if (document.addEventListener) {
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    } else if (document.attachEvent) {
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+} else {
+    onBridgeReady();
+}
+		</script>
+</body>
+</html>

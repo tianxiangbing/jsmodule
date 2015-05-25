@@ -8,7 +8,9 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <title>js组件-dialog对话框弹层</title> </head>
+    <title>js组件-js插件-jquery插件-dialog对话框弹层</title> </head>
+  <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。dialog对话框弹层" />
   <body>
     <header>
       <div class="inner">
@@ -53,7 +55,7 @@
 		dialog.init({target:"#dialog-content",trigger:"#btn_dialog",mask:true,width:500,height:300,title:'标题',animate:true});
 		</script>
 	</p>
-	<pre><code>    
+	<pre><code>&lt;link rel="stylesheet" type="text/css" href="../dist/dialog.css"&gt;
 &lt;input type="button" id="btn_dialog" value="打开浮层"/&gt;
 &lt;div id="dialog-content" style="display:none;"&gt;这是内容&lt;/div&gt;
 &lt;script src="../src/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
@@ -62,7 +64,7 @@
     var dialog = new Dialog();
     dialog.init({target:"#dialog-content",trigger:"#btn_dialog",mask:true,width:500,height:300,title:'标题'});
 &lt;/script&gt;
-	</code></pre>
+</code></pre>
 	<h2>
 	<a id="或者用jquery方式调用" class="anchor" href="#%E6%88%96%E8%80%85%E7%94%A8jquery%E6%96%B9%E5%BC%8F%E8%B0%83%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者用jquery方式调用:</h2>
 	<p>
@@ -73,14 +75,14 @@
 		$('#btn_dialogjquery').Dialog({target:"#dialog-contentjq",mask:true,width:500,height:300,title:'标题',animate:true})
 		</script>
 	</p>
-	<pre><code>    
+	<pre><code>&lt;link rel="stylesheet" type="text/css" href="../dist/dialog.css"&gt;
 &lt;input type="button" id="btn_dialogjquery" value="jq打开浮层"/&gt;
 &lt;div id="dialog-contentjq" style="display:none;"&gt;这是内容22&lt;/div&gt;
 &lt;script src="../src/dialog-jquery.js"&gt;&lt;/script&gt;
 &lt;script&gt;
-	$('#btn_dialogjquery').Dialog({target:"#dialog-contentjq",mask:true,width:500,height:300,title:'标题'})
+$('#btn_dialogjquery').Dialog({target:"#dialog-contentjq",mask:true,width:500,height:300,title:'标题'})
 &lt;/script&gt;
-	</code></pre>
+</code></pre>
 	<h2>
 	继承类alert和confirm提示(jquery模式下)：
 	</h2>
@@ -88,32 +90,33 @@
 		<input type="button" id="btn_alert2" value="alert定时关闭"/>
 		<input type="button" id="btn_confirm" value="confirm三种按钮"/>
 		<input type="button" id="btn_confirmdefault" value="confirm默认"/>
-	<pre><code>    *html:
-    &lt;input type="button" id="btn_alert" value="alert"/&gt;
-    &lt;input type="button" id="btn_alert2" value="alert定时关闭"/&gt;
-    &lt;input type="button" id="btn_confirm" value="confirm三种按钮"/&gt;
-    &lt;input type="button" id="btn_confirmdefault" value="confirm默认"/&gt;
-    *js:
-    $('#btn_alert').click(function(){
-        $.alert('选好商品才能上传素材哦',true,function(){
-		$.alert('你点击了ok',false,null,1000);
-        })
-    });
-    $('#btn_alert2').click(function(){
-        $.alert('选好商品才能上传素材哦')
-    });
-    $('#btn_confirm').click(function(){
-        $.confirm('下载全部 9 张图片至本地相册?&lt;div class="confirm-title2"&gt;文字内容已复制&lt;/div&gt;',[{yes:"是"},{no:'否'},{close:'关闭'}],function(type){
-            $.alert('您点击了'+type);
-            this.hide();
-        });
+	<pre><code>*html:
+&lt;link rel="stylesheet" type="text/css" href="../dist/dialog.css"&gt;
+&lt;input type="button" id="btn_alert" value="alert"/&gt;
+&lt;input type="button" id="btn_alert2" value="alert定时关闭"/&gt;
+&lt;input type="button" id="btn_confirm" value="confirm三种按钮"/&gt;
+&lt;input type="button" id="btn_confirmdefault" value="confirm默认"/&gt;
+*js:
+$('#btn_alert').click(function(){
+    $.alert('选好商品才能上传素材哦',true,function(){
+        alert('你点击了ok')
     })
-    $('#btn_confirmdefault').click(function(){
-        $.confirm('你确定要删除这条消息吗? ',null,function(type){
-            $.alert('您点击了'+type);
-            this.hide();
-        });
-    })
+});
+$('#btn_alert2').click(function(){
+    $.alert('选好商品才能上传素材哦')
+});
+$('#btn_confirm').click(function(){
+    $.confirm('下载全部 9 张图片至本地相册?&lt;div class="confirm-title2"&gt;文字内容已复制&lt;/div&gt;',[{yes:"是"},{no:'否'},{close:'关闭'}],function(type){
+        $.alert('您点击了'+type);
+        this.hide();
+    });
+})
+$('#btn_confirmdefault').click(function(){
+    $.confirm('你确定要删除这条消息吗? ',null,function(type){
+        $.alert('您点击了'+type);
+        this.hide();
+    });
+})
 </code></pre>
 		<script>
 		$('#btn_alert').click(function(){
@@ -270,5 +273,6 @@
         </section>
       </div>
     </div>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255182337'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/stat.php%3Fid%3D1255182337' type='text/javascript'%3E%3C/script%3E"));</script>
   </body>
 </html>

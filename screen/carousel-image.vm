@@ -148,11 +148,11 @@ require(['carousel-image',"$"], function(CarouselImage,$) {
 </code></pre>
 <h2>
 <a id="width" class="anchor" href="#width" aria-hidden="true"><span class="octicon octicon-link"></span></a>width:</h2>
-<pre><code>    宽度  (如果不设置将按第一张图片的大小来等比压缩显示)
+<pre><code>    宽度  (如果不设置将按第一张<b>加载完成</b>图片的大小来等比压缩显示)
 </code></pre>
 <h2>
 <a id="height" class="anchor" href="#height" aria-hidden="true"><span class="octicon octicon-link"></span></a>height:</h2>
-<pre><code>    高度 (如果不设置将按第一张图片的大小来等比压缩显示)
+<pre><code>    高度 (如果不设置将按第一张<b>加载完成</b>图片的大小来等比压缩显示)
 </code></pre>
 <h2>
 <a id="timer" class="anchor" href="#timer" aria-hidden="true"><span class="octicon octicon-link"></span></a>timer:</h2>

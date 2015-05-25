@@ -10,7 +10,7 @@
 (function(root, factory) {
 	//amd
 	if (typeof define === 'function' && define.amd) {
-		define(['$', 'mobileUpload'], factory);
+		define(['$', 'mobile-upload'], factory);
 	} else if (typeof exports === 'object') { //umd
 		module.exports = factory();
 	} else {
@@ -73,6 +73,7 @@
 				_this.settings.callback && _this.settings.callback($(this.contentWindow.document).find('body').html(),key);
 			});
 			_this.createFile();
+			return true;
 		}
 	});
 	//实现继承并可调用base方法

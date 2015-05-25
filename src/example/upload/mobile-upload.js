@@ -102,8 +102,9 @@
 				if (_this.settings.iframe) {
 					//ifrmae post
 					var key = "up_" + Math.random().toString().replace('.', '');
-					_this.settings.startUpload && _this.settings.startUpload(_this.target, key);
-					_this.postFrame(this, e, key);
+					if (_this.postFrame(this, e, key)) {
+						_this.settings.startUpload && _this.settings.startUpload(_this.target, key);
+					}
 				} else
 				if (files) {
 					for (var i = files.length - 1; i >= 0; i--) {
