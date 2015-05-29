@@ -1,18 +1,20 @@
 $control.setTemplate("head.vm")
 $control.setTemplate("menu.vm")
 $control.setTemplate("side.vm")
-$set(modulename,click-progress)
+$set(modulename,image-zooming)
 $set(title,图片放大镜)
           <h1>
 <a id="image-zooming" class="anchor" href="#image-zooming" aria-hidden="true"><span class="octicon octicon-link"></span></a>image-zooming</h1>
 
 <p>图片放大镜
 </p>
+        <h1>
+<a id="image-zooming-demo" class="anchor" href="#image-zooming-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>DEMO如下：</h1>
 <div>
-	<h1>始终显示放大镜</h1>
+	<h2>始终显示放大镜</h2>
 	<img id="img1" width="300px" height="300px" src="images/example/a.png" alt="">
 	<p id="info1"></p>
-	<h1>只在点击触摸时显示放大镜</h1>
+	<h2>只在点击触摸时显示放大镜</h2>
 	<img id="img2" width="300px" height="300px"  src="images/example/a.png" alt="">
 	<p id="info2"></p>
 	<script type="text/javascript" src="example/zepto.js"></script>
@@ -142,3 +144,6 @@ $set(title,图片放大镜)
 
 <pre><code>放大镜移动的回调方法，其中参数a是{x:11,y:11}的位置对象，b\c是要定位的位置对象，d是放大镜的dom对象
 </code></pre>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")
