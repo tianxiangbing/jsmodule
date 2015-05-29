@@ -1,0 +1,144 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,click-progress)
+$set(title,图片放大镜)
+          <h1>
+<a id="image-zooming" class="anchor" href="#image-zooming" aria-hidden="true"><span class="octicon octicon-link"></span></a>image-zooming</h1>
+
+<p>图片放大镜
+</p>
+<div>
+	<h1>始终显示放大镜</h1>
+	<img id="img1" width="300px" height="300px" src="images/example/a.png" alt="">
+	<p id="info1"></p>
+	<h1>只在点击触摸时显示放大镜</h1>
+	<img id="img2" width="300px" height="300px"  src="images/example/a.png" alt="">
+	<p id="info2"></p>
+	<script type="text/javascript" src="example/zepto.js"></script>
+	<script type="text/javascript" src="example/image-zooming/image-zooming.js"></script>
+	<script>
+		$('#img1').ImageZooming({
+			times: 2,
+			always: true,
+			callback: function(a, b, c, d) {
+				$('#info1').html('x: '+a.x+'    y:'+a.y);
+			}
+		});
+		$('#img2').ImageZooming({
+			times: 2,
+			always: false,
+			callback: function(a, b, c, d) {
+				$('#info2').html('x: '+a.x+'    y:'+a.y);
+			}
+		});
+	</script>
+</div>
+<h1>
+<a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
+
+<pre><code>&lt;h1&gt;始终显示放大镜&lt;/h1&gt;
+&lt;img id="img1" src="a.png" alt=""&gt;
+&lt;p id="info1"&gt;&lt;/p&gt;
+&lt;h1&gt;只在点击触摸时显示放大镜&lt;/h1&gt;
+&lt;img id="img2" src="a.png" alt=""&gt;
+&lt;p id="info2"&gt;&lt;/p&gt;
+&lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="../src/image-zooming.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    $('#img1').ImageZooming({
+        times: 2,
+        always: true,
+        callback: function(a, b, c, d) {
+            $('#info1').html('x: '+a.x+'    y:'+a.y);
+        }
+    });
+    $('#img2').ImageZooming({
+        times: 2,
+        always: false,
+        callback: function(a, b, c, d) {
+            $('#info2').html('x: '+a.x+'    y:'+a.y);
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h1>
+<a id="或者requirejs" class="anchor" href="#%E6%88%96%E8%80%85requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者requirejs</h1>
+
+<pre><code>&lt;h1&gt;始终显示放大镜&lt;/h1&gt;
+    &lt;img id="img1" src="a.png" alt=""&gt;
+    &lt;p id="info1"&gt;&lt;/p&gt;
+&lt;h1&gt;只在点击触摸时显示放大镜&lt;/h1&gt;
+    &lt;img id="img2" src="a.png" alt=""&gt;
+    &lt;p id="info2"&gt;&lt;/p&gt;
+    &lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="../src/require.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+    requirejs.config({
+        //By default load any module IDs from js/lib
+        baseUrl: '../src',
+        paths: {
+            $: 'zepto'
+        }
+    });
+    require(['image-zooming',"$"], function(ImageZooming,$){
+        var lz = new ImageZooming();
+        lz.init({
+            target: $('#img1'),
+            times: 2,
+            always: true,
+            callback: function(a, b, c, d) {
+                $('#info1').html('x: ' + a.x + '    y:' + a.y);
+            }
+        });
+        var lz2 = new ImageZooming();
+        lz2.init({
+            target: $('#img2'),
+            times: 2,
+            always: false,
+            callback: function(a, b, c, d) {
+                $('#info2').html('x: ' + a.x + '    y:' + a.y);
+            }
+        });
+    });
+</code></pre>
+
+<h1>
+<a id="属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
+
+<h2>
+<a id="target----domstring" class="anchor" href="#target----domstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>target    dom|string</h2>
+
+<pre><code>需要放大的图片对象（仅支持图片&lt;img&gt;）
+</code></pre>
+
+<h2>
+<a id="times-----int" class="anchor" href="#times-----int" aria-hidden="true"><span class="octicon octicon-link"></span></a>times     int</h2>
+
+<pre><code>放大的倍数，默认是2倍
+</code></pre>
+
+<h2>
+<a id="height---int" class="anchor" href="#height---int" aria-hidden="true"><span class="octicon octicon-link"></span></a>height:   int</h2>
+
+<pre><code>放大镜的高度，默认100px
+</code></pre>
+
+<h2>
+<a id="width----int" class="anchor" href="#width----int" aria-hidden="true"><span class="octicon octicon-link"></span></a>width:    int</h2>
+
+<pre><code>放大镜的宽度，默认100px
+</code></pre>
+
+<h2>
+<a id="always----bool" class="anchor" href="#always----bool" aria-hidden="true"><span class="octicon octicon-link"></span></a>always    bool</h2>
+
+<pre><code>是否始终显示，默认为false,这时，需要放大时，可以鼠标点击图片或触摸时才显示放大镜.
+</code></pre>
+
+<h2>
+<a id="callback-----functionabcd" class="anchor" href="#callback-----functionabcd" aria-hidden="true"><span class="octicon octicon-link"></span></a>callback:     function(a,b,c,d)</h2>
+
+<pre><code>放大镜移动的回调方法，其中参数a是{x:11,y:11}的位置对象，b\c是要定位的位置对象，d是放大镜的dom对象
+</code></pre>
