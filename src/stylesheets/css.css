@@ -2,7 +2,6 @@
   font-family: 'Architects Daughter';
   font-style: normal;
   font-weight: 400;
-  src: local('Architects Daughter'), local('ArchitectsDaughter'), url(RXTgOOQ9AAtaVOHxx0IUBOkI_DLF4EgbZt3mhU8gQFo.woff) format('woff');
 }
 .uilist{list-style:none;padding:none;overflow: hidden;}
 .uilist li{margin-bottom:20px; float:left;padding:10px 20px;background-color:#fff;border:1px solid #ddd;margin-right: 20px;}

@@ -3,7 +3,7 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1;user-scalable=no;">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
     <link href='stylesheets/css.css' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
@@ -52,7 +52,7 @@
 		<script src="example/dialog/dialog-jquery.js"></script>
 		<script>
 		var dialog = new Dialog();
-		dialog.init({target:"#dialog-content",trigger:"#btn_dialog",mask:true,width:500,height:300,title:'标题',animate:true});
+		dialog.init({target:"#dialog-content",trigger:"#btn_dialog",mask:true,width:300,height:200,title:'标题',animate:true});
 		</script>
 	</p>
 	<pre><code>&lt;link rel="stylesheet" type="text/css" href="../dist/dialog.css"&gt;
@@ -62,7 +62,7 @@
 &lt;script src="../src/dialog.js"&gt;&lt;/script&gt;
 &lt;script&gt;
     var dialog = new Dialog();
-    dialog.init({target:"#dialog-content",trigger:"#btn_dialog",mask:true,width:500,height:300,title:'标题'});
+    dialog.init({target:"#dialog-content",trigger:"#btn_dialog",mask:true,width:300,height:200,title:'标题'});
 &lt;/script&gt;
 </code></pre>
 	<h2>
@@ -70,9 +70,8 @@
 	<p>
 		<input type="button" id="btn_dialogjquery" value="jq打开浮层"/>
 		<div id="dialog-contentjq" style="display:none;">这是内容22</div>
-		<script src="../src/dialog-jquery.js"></script>
 		<script>
-		$('#btn_dialogjquery').Dialog({target:"#dialog-contentjq",mask:true,width:500,height:300,title:'标题',animate:true})
+		$('#btn_dialogjquery').Dialog({target:"#dialog-contentjq",mask:true,width:300,height:200,title:'标题',animate:true})
 		</script>
 	</p>
 	<pre><code>&lt;link rel="stylesheet" type="text/css" href="../dist/dialog.css"&gt;
@@ -80,7 +79,7 @@
 &lt;div id="dialog-contentjq" style="display:none;"&gt;这是内容22&lt;/div&gt;
 &lt;script src="../src/dialog-jquery.js"&gt;&lt;/script&gt;
 &lt;script&gt;
-$('#btn_dialogjquery').Dialog({target:"#dialog-contentjq",mask:true,width:500,height:300,title:'标题'})
+$('#btn_dialogjquery').Dialog({target:"#dialog-contentjq",mask:true,width:300,height:200,title:'标题'})
 &lt;/script&gt;
 </code></pre>
 	<h2>

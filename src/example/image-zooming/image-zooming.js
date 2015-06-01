@@ -76,10 +76,12 @@
 			//target事件
 			$(this.settings.target).on('touchstart', function(e) {
 				_this.event['mousedown'].call(this, e, _this);
+				return false;
 			});
 			$(this.settings.target).on('mousedown', function(e) {
 				_this.event['mousedown'].call(this, e, _this);
 				ismove = true;
+				return false;
 			});
 			$(this.settings.target).on('touchmove', function(e) {
 				/*var touch = e.changedTouches[0];
