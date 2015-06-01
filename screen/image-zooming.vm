@@ -12,10 +12,10 @@ $set(title,图片放大镜)
 <a id="image-zooming-demo" class="anchor" href="#image-zooming-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>DEMO如下：</h1>
 <div>
 	<h2>始终显示放大镜</h2>
-	<img id="img1" width="300px" height="300px" src="images/example/a.png" alt="">
+	<img id="img1" width="300px" height="300px" src="images/example/z1.jpg" alt="">
 	<p id="info1"></p>
 	<h2>只在点击触摸时显示放大镜</h2>
-	<img id="img2" width="300px" height="300px"  src="images/example/a.png" alt="">
+	<img id="img2" width="300px" height="300px"  src="images/example/z1.jpg" alt="">
 	<p id="info2"></p>
 	<script type="text/javascript" src="example/zepto.js"></script>
 	<script type="text/javascript" src="example/image-zooming/image-zooming.js"></script>
@@ -30,6 +30,7 @@ $set(title,图片放大镜)
 		$('#img2').ImageZooming({
 			times: 2,
 			always: false,
+                                handle:true,
 			callback: function(a, b, c, d) {
 				$('#info2').html('x: '+a.x+'    y:'+a.y);
 			}
@@ -40,10 +41,10 @@ $set(title,图片放大镜)
 <a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
 
 <pre><code>&lt;h1&gt;始终显示放大镜&lt;/h1&gt;
-&lt;img id="img1" src="a.png" alt=""&gt;
+&lt;img id="img1" src="z1.jpg" alt=""&gt;
 &lt;p id="info1"&gt;&lt;/p&gt;
 &lt;h1&gt;只在点击触摸时显示放大镜&lt;/h1&gt;
-&lt;img id="img2" src="a.png" alt=""&gt;
+&lt;img id="img2" src="z1.jpg" alt=""&gt;
 &lt;p id="info2"&gt;&lt;/p&gt;
 &lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="../src/image-zooming.js"&gt;&lt;/script&gt;
@@ -69,10 +70,10 @@ $set(title,图片放大镜)
 <a id="或者requirejs" class="anchor" href="#%E6%88%96%E8%80%85requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者requirejs</h1>
 
 <pre><code>&lt;h1&gt;始终显示放大镜&lt;/h1&gt;
-    &lt;img id="img1" src="a.png" alt=""&gt;
+    &lt;img id="img1" src="z1.jpg" alt=""&gt;
     &lt;p id="info1"&gt;&lt;/p&gt;
 &lt;h1&gt;只在点击触摸时显示放大镜&lt;/h1&gt;
-    &lt;img id="img2" src="a.png" alt=""&gt;
+    &lt;img id="img2" src="z1.jpg" alt=""&gt;
     &lt;p id="info2"&gt;&lt;/p&gt;
     &lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" src="../src/require.js"&gt;&lt;/script&gt;
@@ -137,6 +138,12 @@ $set(title,图片放大镜)
 <a id="always----bool" class="anchor" href="#always----bool" aria-hidden="true"><span class="octicon octicon-link"></span></a>always    bool</h2>
 
 <pre><code>是否始终显示，默认为false,这时，需要放大时，可以鼠标点击图片或触摸时才显示放大镜.
+</code></pre>
+
+<h2>
+<a id="handle----bool" class="anchor" href="#handle----bool" aria-hidden="true"><span class="octicon octicon-link"></span></a>handle    bool</h2>
+
+<pre><code>是否显示一个手柄，默认不显示，( 建议在触屏中显示手柄 )
 </code></pre>
 
 <h2>

@@ -40,8 +40,8 @@
 				width: 100,
 				height: 100,
 				always: false,
-				times: 2 //放大倍数
-					,
+				times: 2, //放大倍数
+				handle: false,
 				callback: null
 			}, settings);
 			this.settings.target = $(this.settings.target);
@@ -65,35 +65,35 @@
 			_this.zoom.on('mousedown', function(e) {
 				ismove = true;
 			});
-			$('body').on('mouseup','#'+_this.id, function(e) {
+			$('body').on('mouseup', '#' + _this.id, function(e) {
 				ismove = false;
 				return _this.event['mouseup'].call(this, e, _this);
 			});
-			$('body').on('mousemove','#'+_this.id, function(e) {
+			$('body').on('mousemove', '#' + _this.id, function(e) {
 				return ismove && _this.event['zoommove'].call(this, e, _this);
 			});
 
 			//target事件
-			$(this.settings.target).on('touchstart',  function(e) {
+			$(this.settings.target).on('touchstart', function(e) {
 				_this.event['mousedown'].call(this, e, _this);
 			});
-			$(this.settings.target).on('mousedown',  function(e) {
+			$(this.settings.target).on('mousedown', function(e) {
 				_this.event['mousedown'].call(this, e, _this);
 				ismove = true;
 			});
-			$(this.settings.target).on('touchmove',  function(e) {
+			$(this.settings.target).on('touchmove', function(e) {
 				/*var touch = e.changedTouches[0];
 				_this.setPosition.call(_this, touch.pageX, touch.pageY, this);
 				return false;*/
 				return _this.event['mousemove'].call(this, e, _this);
 			});
-			$(this.settings.target).on('mousemove',  function(e) {
+			$(this.settings.target).on('mousemove', function(e) {
 				return ismove && _this.event['mousemove'].call(this, e, _this);
 			});
-			$(this.settings.target).on('touchend',  function(e) {
+			$(this.settings.target).on('touchend', function(e) {
 				return _this.event['mouseup'].call(this, e, _this);
 			});
-			$(this.settings.target).on('mouseup',  function(e) {
+			$(this.settings.target).on('mouseup', function(e) {
 				return _this.event['mouseup'].call(this, e, _this);
 			});
 		},
@@ -125,10 +125,22 @@
 		},
 		createZooming: function(img) {
 			if (this.zoom.size() === 0) {
-				this.zoom = $('<div id="'+this.id+'" style="position:absolute;background:none;"/>');
+				this.zoom = $('<div id="' + this.id + '" style="position:absolute;background:none;"/>');
 				$('body').append(this.zoom);
 				this.zoom.height(this.settings.height);
 				this.zoom.width(this.settings.width);
+				if (this.settings.handle) {
+					this.handle = $('<div class="zoom-handle"/>');
+					this.zoom.append(this.handle);
+					this.handle.css({
+						'border': '1px solid #ccc',
+						height: this.settings.height / 2,
+						width: 10,
+						top: this.settings.height,
+						left: this.settings.width / 2 - 5,
+						position: 'absolute'
+					});
+				}
 				this.zoom.css({
 					'background': 'url(' + $(img).attr('src') + ') no-repeat ',
 					'borderRadius': this.settings.width + 'px ' + this.settings.height + 'px',
@@ -138,6 +150,10 @@
 			this.zoom.show();
 		},
 		setPosition: function(x, y, img) {
+
+			if (this.settings.handle) {
+				y -= (this.settings.height / 2 + this.handle.height() / 2);
+			}
 			var offset = $(img).offset();
 			var imgh = $(img).height();
 			var imgw = $(img).width();
@@ -150,7 +166,6 @@
 				x: x - this.settings.width / 2,
 				y: y - this.settings.height / 2
 			};
-
 			var bsize = {
 				x: imgw * this.settings.times,
 				y: imgh * this.settings.times
