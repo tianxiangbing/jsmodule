@@ -8,17 +8,17 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <title>js组件-js插件-jquery插件-图片放大镜</title> </head>
+    <title>js组件-js插件-jquery插件-ajax分页插件paging</title> </head>
   <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
-  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。图片放大镜" />
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。ajax分页插件paging" />
   <body>
     <header>
       <div class="inner">
-        <h1>image-zooming</h1>
-        <h2>JS组件-图片放大镜</h2>
-        <a href="https://github.com/tianxiangbing/image-zooming" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+        <h1>paging</h1>
+        <h2>JS组件-ajax分页插件paging</h2>
+        <a href="https://github.com/tianxiangbing/paging" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
         <div style="position:absolute;right:180px;top:0px;">
-          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=image-zooming&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=paging&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
         </div>
       </div>
     </header>
@@ -28,166 +28,122 @@
         <section id="main-content">
 <ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
 ﻿<aside id="sidebar">
-	<a href="https://github.com/tianxiangbing/image-zooming/archive/master.zip" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/paging/archive/master.zip" target="_blank" class="button">
 		<small>Download</small>
 		.zip file
 	</a>
-	<a href="https://github.com/tianxiangbing/image-zooming" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/paging" target="_blank" class="button">
 		<small>Code</small>
 		源码
 	</a>
-	<p class="repo-owner"><a href="https://github.com/tianxiangbing/image-zooming" target="_blank">image-zooming</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/paging" target="_blank">paging</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
 	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://www.github.com/tianxiangbing" target="_blank"> GitHub</a></p>
 </aside>
 
 
           <h1>
-<a id="image-zooming" class="anchor" href="#image-zooming" aria-hidden="true"><span class="octicon octicon-link"></span></a>image-zooming</h1>
+<a id="paging" class="anchor" href="#paging" aria-hidden="true"><span class="octicon octicon-link"></span></a>paging</h1>
 
-<p>图片放大镜
-</p>
-        <h1>
-<a id="image-zooming-demo" class="anchor" href="#image-zooming-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>DEMO如下：</h1>
-<div>
-	<h2>始终显示放大镜</h2>
-	<img id="img1" width="300px" height="300px" src="images/example/z1.jpg" alt="">
-	<p id="info1"></p>
-	<h2>只在点击触摸时显示放大镜</h2>
-	<img id="img2" width="300px" height="300px"  src="images/example/z1.jpg" alt="">
-	<p id="info2"></p>
-	<script type="text/javascript" src="example/zepto.js"></script>
-	<script type="text/javascript" src="example/image-zooming/image-zooming.js"></script>
-	<script>
-		$('#img1').ImageZooming({
-			times: 2,
-			always: true,
-			callback: function(a, b, c, d) {
-				$('#info1').html('x: '+a.x+'    y:'+a.y);
-			}
-		});
-		$('#img2').ImageZooming({
-			times: 2,
-			always: false,
-                                handle:true,
-			callback: function(a, b, c, d) {
-				$('#info2').html('x: '+a.x+'    y:'+a.y);
-			}
-		});
-	</script>
-</div>
+<p>分页控件paging</p>
+<div id="pageTool"></div>
+<div id="pageToolbar"></div>
+<link rel="stylesheet" type="text/css" href="example/paging/paging.css">
+<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="example/paging/paging.js"></script>
+<script>
+$('#pageTool').Paging({pagesize:10,count:100});
+$('#pageToolbar').Paging({pagesize:10,count:85,toolbar:true});
+</script>
+
 <h1>
 <a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
 
-<pre><code>&lt;h1&gt;始终显示放大镜&lt;/h1&gt;
-&lt;img id="img1" src="z1.jpg" alt=""&gt;
-&lt;p id="info1"&gt;&lt;/p&gt;
-&lt;h1&gt;只在点击触摸时显示放大镜&lt;/h1&gt;
-&lt;img id="img2" src="z1.jpg" alt=""&gt;
-&lt;p id="info2"&gt;&lt;/p&gt;
-&lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="../src/image-zooming.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-    $('#img1').ImageZooming({
-        times: 2,
-        always: true,
-        callback: function(a, b, c, d) {
-            $('#info1').html('x: '+a.x+'    y:'+a.y);
-        }
-    });
-    $('#img2').ImageZooming({
-        times: 2,
-        always: false,
-        callback: function(a, b, c, d) {
-            $('#info2').html('x: '+a.x+'    y:'+a.y);
-        }
-    });
-&lt;/script&gt;
+<pre><code>&lt;div id="pageTool"&gt;&lt;/div&gt;
+$('#pageTool').Paging({pagesize:10,count:100});
 </code></pre>
 
 <h1>
-<a id="或者requirejs" class="anchor" href="#%E6%88%96%E8%80%85requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者requirejs</h1>
+<a id="或者" class="anchor" href="#%E6%88%96%E8%80%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者</h1>
 
-<pre><code>&lt;h1&gt;始终显示放大镜&lt;/h1&gt;
-    &lt;img id="img1" src="z1.jpg" alt=""&gt;
-    &lt;p id="info1"&gt;&lt;/p&gt;
-&lt;h1&gt;只在点击触摸时显示放大镜&lt;/h1&gt;
-    &lt;img id="img2" src="z1.jpg" alt=""&gt;
-    &lt;p id="info2"&gt;&lt;/p&gt;
-    &lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
-    &lt;script type="text/javascript" src="../src/require.js"&gt;&lt;/script&gt;
-    &lt;script&gt;
-    requirejs.config({
-        //By default load any module IDs from js/lib
-        baseUrl: '../src',
-        paths: {
-            $: 'zepto'
-        }
-    });
-    require(['image-zooming',"$"], function(ImageZooming,$){
-        var lz = new ImageZooming();
-        lz.init({
-            target: $('#img1'),
-            times: 2,
-            always: true,
-            callback: function(a, b, c, d) {
-                $('#info1').html('x: ' + a.x + '    y:' + a.y);
-            }
-        });
-        var lz2 = new ImageZooming();
-        lz2.init({
-            target: $('#img2'),
-            times: 2,
-            always: false,
-            callback: function(a, b, c, d) {
-                $('#info2').html('x: ' + a.x + '    y:' + a.y);
-            }
-        });
-    });
+<pre><code>var p = new Paging();
+p.init({target:'#pageTool',pagesize:10,count:100});
 </code></pre>
+
+<hr>
 
 <h1>
 <a id="属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
 
 <h2>
-<a id="target----domstring" class="anchor" href="#target----domstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>target    dom|string</h2>
+<a id="pagesize" class="anchor" href="#pagesize" aria-hidden="true"><span class="octicon octicon-link"></span></a>pagesize:</h2>
 
-<pre><code>需要放大的图片对象（仅支持图片&lt;img&gt;）
+<pre><code>每页的条数
 </code></pre>
 
 <h2>
-<a id="times-----int" class="anchor" href="#times-----int" aria-hidden="true"><span class="octicon octicon-link"></span></a>times     int</h2>
+<a id="current" class="anchor" href="#current" aria-hidden="true"><span class="octicon octicon-link"></span></a>current:</h2>
 
-<pre><code>放大的倍数，默认是2倍
+<pre><code>当前页码，默认为1
 </code></pre>
 
 <h2>
-<a id="height---int" class="anchor" href="#height---int" aria-hidden="true"><span class="octicon octicon-link"></span></a>height:   int</h2>
+<a id="prevtpl" class="anchor" href="#prevtpl" aria-hidden="true"><span class="octicon octicon-link"></span></a>prevTpl</h2>
 
-<pre><code>放大镜的高度，默认100px
+<pre><code>上一页的模板,默认“上一页”
 </code></pre>
 
 <h2>
-<a id="width----int" class="anchor" href="#width----int" aria-hidden="true"><span class="octicon octicon-link"></span></a>width:    int</h2>
+<a id="nexttpl" class="anchor" href="#nexttpl" aria-hidden="true"><span class="octicon octicon-link"></span></a>nextTpl</h2>
 
-<pre><code>放大镜的宽度，默认100px
+<pre><code>下一页的模板，默认“下一页”
 </code></pre>
 
 <h2>
-<a id="always----bool" class="anchor" href="#always----bool" aria-hidden="true"><span class="octicon octicon-link"></span></a>always    bool</h2>
+<a id="firsttpl" class="anchor" href="#firsttpl" aria-hidden="true"><span class="octicon octicon-link"></span></a>firstTpl</h2>
 
-<pre><code>是否始终显示，默认为false,这时，需要放大时，可以鼠标点击图片或触摸时才显示放大镜.
+<pre><code>首页的模板，默认“首页”
 </code></pre>
 
 <h2>
-<a id="handle----bool" class="anchor" href="#handle----bool" aria-hidden="true"><span class="octicon octicon-link"></span></a>handle    bool</h2>
+<a id="lasttpl" class="anchor" href="#lasttpl" aria-hidden="true"><span class="octicon octicon-link"></span></a>lastTpl</h2>
 
-<pre><code>是否显示一个手柄，默认不显示，( 建议在触屏中显示手柄 )
+<pre><code>末页的模板，默认“末页”
 </code></pre>
 
 <h2>
-<a id="callback-----functionabcd" class="anchor" href="#callback-----functionabcd" aria-hidden="true"><span class="octicon octicon-link"></span></a>callback:     function(a,b,c,d)</h2>
+<a id="ellipsetpl" class="anchor" href="#ellipsetpl" aria-hidden="true"><span class="octicon octicon-link"></span></a>ellipseTpl</h2>
 
-<pre><code>放大镜移动的回调方法，其中参数a是{x:11,y:11}的位置对象，b\c是要定位的位置对象，d是放大镜的dom对象
+<pre><code>省略号的模板，默认“...”
+</code></pre>
+
+<h2>
+<a id="toolbar-bool" class="anchor" href="#toolbar-bool" aria-hidden="true"><span class="octicon octicon-link"></span></a>toolbar: bool</h2>
+
+<pre><code>是否显示工具栏,默认为false
+</code></pre>
+
+<h2>
+<a id="pagesizelist" class="anchor" href="#pagesizelist" aria-hidden="true"><span class="octicon octicon-link"></span></a>pageSizeList:[]</h2>
+
+<pre><code>当显示工具栏时有效，可设置每页条数，默认为[5,10,15,20]
+</code></pre>
+
+<h2>
+<a id="changepagesizefunctionps" class="anchor" href="#changepagesizefunctionps" aria-hidden="true"><span class="octicon octicon-link"></span></a>changePagesize:function(ps)</h2>
+
+<pre><code>修改每页的条数,参数为int
+</code></pre>
+
+<h2>
+<a id="gofunctionp" class="anchor" href="#gofunctionp" aria-hidden="true"><span class="octicon octicon-link"></span></a>go:function(p)</h2>
+
+<pre><code>跳转至某一页,默认到current
+</code></pre>
+
+<h2>
+<a id="renderfunctionops" class="anchor" href="#renderfunctionops" aria-hidden="true"><span class="octicon octicon-link"></span></a>render:function(ops)</h2>
+
+<pre><code>重新渲染,ops:{count:int,pagesize:int,current:int,pagecount:int}
 </code></pre>
 
 <h1>其它组件推荐</h1>

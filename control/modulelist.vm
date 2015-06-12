@@ -77,4 +77,10 @@
 		<a href="https://github.com/tianxiangbing/image-zooming" target="_blank" class="a_code">Code</a>
 		<a href="image-zooming.html"  class="a_code">Demo & API</a>
 	</li>
+	<li>
+		<a href="paging.html"><img  src="images/ui/paging.jpg"/></a>
+		<a href="paging.html">ajax分页插件paging</a>
+		<a href="https://github.com/tianxiangbing/paging" target="_blank" class="a_code">Code</a>
+		<a href="paging.html"  class="a_code">Demo & API</a>
+	</li>
 </ul>
