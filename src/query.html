@@ -8,17 +8,17 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <title>js组件-js插件-jquery插件-点击的进度条</title> </head>
+    <title>js组件-js插件-jquery插件-获取url参数和form表单json格式</title> </head>
   <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
-  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。点击的进度条" />
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。获取url参数和form表单json格式" />
   <body>
     <header>
       <div class="inner">
-        <h1>click-progress</h1>
-        <h2>JS组件-点击的进度条</h2>
-        <a href="https://github.com/tianxiangbing/click-progress" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+        <h1>query</h1>
+        <h2>JS组件-获取url参数和form表单json格式</h2>
+        <a href="https://github.com/tianxiangbing/query" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
         <div style="position:absolute;right:180px;top:0px;">
-          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=click-progress&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=query&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
         </div>
       </div>
     </header>
@@ -28,180 +28,76 @@
         <section id="main-content">
 <ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
 ﻿<aside id="sidebar">
-	<a href="https://github.com/tianxiangbing/click-progress/archive/master.zip" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/query/archive/master.zip" target="_blank" class="button">
 		<small>Download</small>
 		.zip file
 	</a>
-	<a href="https://github.com/tianxiangbing/click-progress" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/query" target="_blank" class="button">
 		<small>Code</small>
 		源码
 	</a>
-	<p class="repo-owner"><a href="https://github.com/tianxiangbing/click-progress" target="_blank">click-progress</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/query" target="_blank">query</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
 	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://www.github.com/tianxiangbing" target="_blank"> GitHub</a></p>
 </aside>
 
 
+
           <h1>
-<a id="click-progress" class="anchor" href="#click-progress" aria-hidden="true"><span class="octicon octicon-link"></span></a>click-progress</h1>
+<a id="query" class="anchor" href="#query" aria-hidden="true"><span class="octicon octicon-link"></span></a>query</h1>
 
-<p>点击的进度条
-</p>
-		<link rel="stylesheet" type="text/css" href="example/click-progress/click-progress.css">
-
-		<div class="progress"><div class="progress-finished"></div></div>
-        <input type="button" value="click" id="click"/>
-		<br/>
-		<br/>
-		<div class="transverse"><div class="progress-finished"></div></div>
-        <input type="button" value="click" id="click2"/>
-		<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
-		<script type="text/javascript" src="example/click-progress/click-progress.js"></script>
-		<script>
-		$('#click').ClickProgress({
-			target:$('.progress'),
-			v:5,
-			a:1,
-			change:'height',
-			time:100,
-			clicked:function(a,b,c){
-				console.log(c,'加油')
-				},
-			progress:function(a,b,c){
-				console.log(c)
-				},
-			callback:function(){
-				console.log('完成了')
-			}
-		});
-		$('#click2').ClickProgress({
-			target:$('.transverse'),
-			v:5,
-			a:1,
-			change:'width',
-			time:70,
-			clicked:function(a,b,c){
-				console.log(c,'加油')
-				},
-			progress:function(a,b,c){
-				console.log(c)
-				},
-			callback:function(){
-				console.log('完成了')
-				clearInterval(_this.timer);
-			}
-		});
-		</script>
+	<p>对表单和url的操作</p>
+	<p>
+	<img src="images/ui/query.jpg" alt="" width="400px"></p>
+	<p>
+	如图所示，它的主要作用就是取url的参数，和格式化form表单里的参数。</p>
+<h1>Demo:</h1>
+<a href="?a=1%E4%B8%AD%E6%96%87%E6%B1%89%E5%AD%97&b=2#c=3">点我加参数</a>
+<a href="javascript:void(0)" id="getParam">点我取参数</a>
+<div id="form">
+	<p>用户名：<input type="text" name="name"/></p>
+	<p>　邮箱：<input type="text" name="email"/></p>
+	<p>手机号：<input type="text" name="phone"/></p>
+	<p>　地址：<input type="text" name="addr"/></p>
+	<p><input type="button" id="submit" value="提交"></p>
+	<div id="result" style="height:150px;border:1px solid #ddd;overflow:auto;"></div>
+</div>
+<script src="example/jquery-1.11.2.js"></script>
+<script src="example/query/query.js"></script>
+<script>
+	$('#getParam').click(function(){
+		$('#result').append('a='+Query.getQuery('a')+"<br/>b="+Query.getQuery('b')+'<br/>c='+Query.getQuery('c',"#"))
+	});
+	$('#submit').click(function(){
+		var json = Query.getForm($('#form'));
+		$('#result').append('<p>'+ JSON.stringify(json) +'</p>');
+	});
+</script>
 <h1>
-<a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
+<a id="用法" class="anchor" href="#%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>用法</h1>
 
-<pre><code>&lt;div class="progress"&gt;&lt;div class="progress-finished"&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;input type="button" value="click" id="click"/&gt;
-$('#click').ClickProgress({
-    target:$('.progress'),
-    v:5,
-    a:1,
-    change:'height',//width时是横向，可以看demo
-    time:30,
-    clicked:function(a,b,c){
-        console.log(c,'加油')
-        },
-    progress:function(a,b,c){
-        console.log(c)
-        },
-    callback:function(){
-        alert('完成了')
-    }
-});
+<pre><code>Query.getQuery('a')
+var json = Query.getForm($('#form'));
 </code></pre>
 
 <h1>
-<a id="或者requirejs" class="anchor" href="#%E6%88%96%E8%80%85requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者requirejs</h1>
-
-<pre><code>requirejs.config({
-    //By default load any module IDs from js/lib
-    baseUrl: '../src',
-    paths: {
-        $: 'zepto'
-    }
-});
-require(['click-progress',"$"], function(ClickProgress,$) {
-    var cp = new ClickProgress();
-    cp.init({
-        trigger:$('#click'),
-        target:$('.progress'),
-        v:5,
-        a:1,
-        change:'height',
-        time:30,
-        clicked:function(a,b,c){
-            console.log(c,'加油')
-            },
-        progress:function(a,b,c){
-            console.log(c)
-            },
-        callback:function(){
-            alert('完成了')
-        }
-    });
- });
-</code></pre>
-
-<h1>
-<a id="属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
+<a id="参数说明" class="anchor" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数说明</h1>
 
 <h2>
-<a id="trigger" class="anchor" href="#trigger" aria-hidden="true"><span class="octicon octicon-link"></span></a>trigger:</h2>
+<a id="getquery-argnametypewin" class="anchor" href="#getquery-argnametypewin" aria-hidden="true"><span class="octicon octicon-link"></span></a>getQuery: (argname,type,win)</h2>
 
-<pre><code>触发事件的对象
+<pre><code>取url参数
+argname 是要取的参数名，如a=1这里要传"a";
+type是指取的类型，默认是"?"，可以传"#"取锚点值
+win是指要取的window对象，默认为当前的window.
 </code></pre>
 
 <h2>
-<a id="target" class="anchor" href="#target" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:</h2>
+<a id="getformform" class="anchor" href="#getformform" aria-hidden="true"><span class="octicon octicon-link"></span></a>getForm:(form)</h2>
 
-<pre><code>进度条对象dom，结果有两层
+<pre><code>取form参数
+form为当前的dom节点，可以是div或其他的类型的节点，不一定要&lt;form&gt;
 </code></pre>
 
-<h2>
-<a id="v" class="anchor" href="#v" aria-hidden="true"><span class="octicon octicon-link"></span></a>v:</h2>
-
-<pre><code>每次点击的初始速度
-</code></pre>
-
-<h2>
-<a id="a" class="anchor" href="#a" aria-hidden="true"><span class="octicon octicon-link"></span></a>a:</h2>
-
-<pre><code>加速度，可以理解为重力或摩擦力
-</code></pre>
-
-<h2>
-<a id="changeheightwidth" class="anchor" href="#changeheightwidth" aria-hidden="true"><span class="octicon octicon-link"></span></a>change:height/width</h2>
-
-<pre><code>是改变的高度还是width,默认为height
-</code></pre>
-
-<h2>
-<a id="time" class="anchor" href="#time" aria-hidden="true"><span class="octicon octicon-link"></span></a>time:</h2>
-
-<pre><code>频率
-</code></pre>
-
-<h2>
-<a id="clickedfunctionabc" class="anchor" href="#clickedfunctionabc" aria-hidden="true"><span class="octicon octicon-link"></span></a>clicked:function(a,b,c)</h2>
-
-<pre><code>点击后的回调，a是trigger,b是target,c是当前的power值，下面的一样
-</code></pre>
-
-<h2>
-<a id="progressfunctionabc" class="anchor" href="#progressfunctionabc" aria-hidden="true"><span class="octicon octicon-link"></span></a>progress:function(a,b,c)</h2>
-
-<pre><code>每次进度改变的回调
-</code></pre>
-
-<h2>
-<a id="callbackfunctionabc" class="anchor" href="#callbackfunctionabc" aria-hidden="true"><span class="octicon octicon-link"></span></a>callback:function(a,b,c)</h2>
-
-<pre><code>结束后的回调，这里指达到100%;
-</code></pre>
 
 <h1>其它组件推荐</h1>
 <ul class="uilist">

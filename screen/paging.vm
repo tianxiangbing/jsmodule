@@ -43,6 +43,11 @@ p.init({target:'#pageTool',pagesize:10,count:100});
 </code></pre>
 
 <h2>
+<a id="pagesize" class="anchor" href="#pagesize" aria-hidden="true"><span class="octicon octicon-link"></span></a>callback:function(page,size,count)</h2>
+
+<pre><code>翻页时的回调方法，page为当前页码,size为每页条数，count为总页数
+</code></pre>
+<h2>
 <a id="current" class="anchor" href="#current" aria-hidden="true"><span class="octicon octicon-link"></span></a>current:</h2>
 
 <pre><code>当前页码，默认为1

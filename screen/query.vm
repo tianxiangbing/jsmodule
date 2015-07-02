@@ -1,0 +1,65 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,query)
+$set(title,获取url参数和form表单json格式)
+
+          <h1>
+<a id="query" class="anchor" href="#query" aria-hidden="true"><span class="octicon octicon-link"></span></a>query</h1>
+
+	<p>对表单和url的操作</p>
+	<p>
+	<img src="images/ui/query.jpg" alt="" width="400px"></p>
+	<p>
+	如图所示，它的主要作用就是取url的参数，和格式化form表单里的参数。</p>
+<h1>Demo:</h1>
+<a href="?a=1%E4%B8%AD%E6%96%87%E6%B1%89%E5%AD%97&b=2#c=3">点我加参数</a>
+<a href="javascript:void(0)" id="getParam">点我取参数</a>
+<div id="form">
+	<p>用户名：<input type="text" name="name"/></p>
+	<p>　邮箱：<input type="text" name="email"/></p>
+	<p>手机号：<input type="text" name="phone"/></p>
+	<p>　地址：<input type="text" name="addr"/></p>
+	<p><input type="button" id="submit" value="提交"></p>
+	<div id="result" style="height:150px;border:1px solid #ddd;overflow:auto;"></div>
+</div>
+<script src="example/jquery-1.11.2.js"></script>
+<script src="example/query/query.js"></script>
+<script>
+	$('#getParam').click(function(){
+		$('#result').append('a='+Query.getQuery('a')+"<br/>b="+Query.getQuery('b')+'<br/>c='+Query.getQuery('c',"#"))
+	});
+	$('#submit').click(function(){
+		var json = Query.getForm($('#form'));
+		$('#result').append('<p>'+ JSON.stringify(json) +'</p>');
+	});
+</script>
+<h1>
+<a id="用法" class="anchor" href="#%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>用法</h1>
+
+<pre><code>Query.getQuery('a')
+var json = Query.getForm($('#form'));
+</code></pre>
+
+<h1>
+<a id="参数说明" class="anchor" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数说明</h1>
+
+<h2>
+<a id="getquery-argnametypewin" class="anchor" href="#getquery-argnametypewin" aria-hidden="true"><span class="octicon octicon-link"></span></a>getQuery: (argname,type,win)</h2>
+
+<pre><code>取url参数
+argname 是要取的参数名，如a=1这里要传"a";
+type是指取的类型，默认是"?"，可以传"#"取锚点值
+win是指要取的window对象，默认为当前的window.
+</code></pre>
+
+<h2>
+<a id="getformform" class="anchor" href="#getformform" aria-hidden="true"><span class="octicon octicon-link"></span></a>getForm:(form)</h2>
+
+<pre><code>取form参数
+form为当前的dom节点，可以是div或其他的类型的节点，不一定要&lt;form&gt;
+</code></pre>
+
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

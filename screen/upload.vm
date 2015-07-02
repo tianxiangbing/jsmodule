@@ -7,13 +7,12 @@ $set(title,js异步上传文件)
 <a id="upload" class="anchor" href="#upload" aria-hidden="true"><span class="octicon octicon-link"></span></a>upload</h1>
 
 <p>js上传文件
-例子见<a href="http://www.lovewebgames.com/jsmodule/upload.html">DEMO</a><br>
-*这个组件继承自mobile-upload<a href="http://www.lovewebgames.com/jsmodule/mobile-upload.html">mobile-upload</a>  *</p>
+例子见<a href="http://www.lovewebgames.com/jsmodule/upload.html">DEMO</a>
+</p>
 
 <button id="btn_upload">upload</button>
 <div id="preview"></div>
 <script src="example/jquery-1.11.2.js"></script>
-<script src="example/upload/mobile-upload.js"></script>
 <script src="example/upload/upload.js"></script>
 <script>
         var upload = new Upload();
@@ -58,8 +57,7 @@ requirejs.config({
     baseUrl: '../dest',
     paths: {
         $: 'jquery-1.11.2',
-        upload:"upload",
-        mobileUpload:"mobile-upload"
+        upload:"upload"
     }
 });
 require(['upload',"$"], function(Upload,$) {

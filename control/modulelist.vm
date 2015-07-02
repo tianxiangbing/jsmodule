@@ -83,4 +83,10 @@
 		<a href="https://github.com/tianxiangbing/paging" target="_blank" class="a_code">Code</a>
 		<a href="paging.html"  class="a_code">Demo & API</a>
 	</li>
+	<li>
+		<a href="query.html"><img  src="images/ui/query.jpg"/></a>
+		<a href="query.html">url参数和表单json参数</a>
+		<a href="https://github.com/tianxiangbing/query" target="_blank" class="a_code">Code</a>
+		<a href="query.html"  class="a_code">Demo & API</a>
+	</li>
 </ul>

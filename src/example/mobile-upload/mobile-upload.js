@@ -31,9 +31,11 @@
 	};
 
 	function Mobile_upload() {
+		window.uploadCount =window.uploadCount||0;
+		window.uploadCount++;
 		var rnd = Math.random().toString().replace('.', '');
-		this.id = 'upload_' + rnd;
-		this.fileInput;
+		this.id = 'upload_' + rnd+window.uploadCount.toString();
+		this.fileInput=null;
 	}
 	Mobile_upload.prototype = {
 		init: function(settings) {
@@ -95,15 +97,16 @@
 		},
 		bindFileChange: function() {
 			var _this = this;
-			$('#' + _this.id).off('change');
-			$('#' + _this.id).on('change', function(e) {
+			$(_this.fileInput).off('change');
+			$(_this.fileInput).on('change', function(e) {
 				var reg_type = /^image\//i;
 				var files = e.target.files;
 				if (_this.settings.iframe) {
 					//ifrmae post
 					var key = "up_" + Math.random().toString().replace('.', '');
-					_this.settings.startUpload && _this.settings.startUpload(_this.target, key);
-					_this.postFrame(this, e, key);
+					if (_this.postFrame(this, e, key)) {
+						_this.settings.startUpload && _this.settings.startUpload(_this.fileInput,_this.target, key);
+					}
 				} else
 				if (files) {
 					for (var i = files.length - 1; i >= 0; i--) {
@@ -118,12 +121,12 @@
 								}
 								if (window.FileReader) {
 									var reader = new FileReader();
-									_this.settings.startUpload && _this.settings.startUpload(_this.target, i);
+									_this.settings.startUpload && _this.settings.startUpload(_this.fileInput,_this.target, i);
 									reader.onload = function() {
 										//清除缓存
 										_this.createFile();
 										_this.bindFileEvent();
-										_this.settings.imageReady && _this.settings.imageReady(_this.target, this.result, i);
+										_this.settings.imageReady && _this.settings.imageReady(_this.fileInput,_this.target, this.result, i);
 										if (_this.settings.ajax) {
 											var data = {};
 											data[_this.settings.ajax.name || 'file'] = this.result;
@@ -134,11 +137,11 @@
 												dataType: 'json',
 												success: function(result) {
 													if (_this.settings.callback) {
-														_this.settings.callback(result, i);
+														_this.settings.callback(result, file, _this.name,_this.target, i);
 													}
 												},
 												complete: function() {
-													_this.settings.endUpload && _this.settings.endUpload(_this.target, i);
+													_this.settings.endUpload && _this.settings.endUpload(_this.fileInput,_this.target, i);
 												}
 											});
 											this.result = null;
@@ -146,7 +149,7 @@
 											reader = null;
 										} else
 										if (_this.settings.callback) {
-											_this.settings.callback(this.result, file, _this.name, i);
+											_this.settings.callback(this.result, file, _this.name,_this.target, i);
 										}
 									};
 									reader.readAsDataURL(file);

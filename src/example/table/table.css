@@ -1,0 +1,13 @@
+@import url(https://cdn.rawgit.com/tianxiangbing/paging/master/src/paging.css);
+@import url(https://cdn.rawgit.com/tianxiangbing/dialog/master/src/dialog.css);
+body{font-size: 12px;}
+/* 列表 */
+.tab-list{font-size: 12px;width: 100%;border-collapse: collapse;}
+.tab-list a{color:#2b6cbc;}
+.tab-list thead {background-color: #f6f6f6;line-height: 32px;}
+.tab-list tbody{line-height: 32px;}
+.tab-list tbody>tr:nth-child(even){background-color:#f6f6f6; }
+.tab-list thead th{color:#999;text-align: center;font-weight: normal;border:none;padding:0;margin:0;}
+.tab-list tbody td{text-align: center;}
+.tab-list input.checkbox{vertical-align: -3px;margin-right: 5px;}
+.tab-list .first-cell{padding-left:15px;text-align: left;}

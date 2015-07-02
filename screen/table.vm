@@ -1,0 +1,135 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,table)
+$set(title,表格渲染组件)
+<link rel="stylesheet" type="text/css" href="example/table/table.css">
+
+<h1>
+<a id="table" class="anchor" href="#table" aria-hidden="true"><span class="octicon octicon-link"></span></a>table</h1>
+
+<p>表格的渲染组件</p>
+<div style="width:600px;">
+	<div class="form">
+		名称: <input type="text" name="gname"> <a href="#" id="search">search</a>
+	</div>
+	<div id="tab-list" ajaxurl="json/list.html">
+		loading...
+	</div>
+	<div id="pager"></div>
+</div>
+<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="example/handlebars-v3.0.0.js"></script>
+<script type="text/javascript" src="example/paging/paging.js"></script>
+<script type="text/javascript" src="example/query/query.js"></script>
+<script type="text/javascript" src="example/dialog/dialog.js"></script>
+<script type="text/javascript" src="example/table/table.js"></script>
+<script type="text/x-handlebars-template" id="tpl-list">
+	<table class="tab-list">
+			<thead>
+					<tr>
+							<th class="first-cell">序号</th>
+							<th>商品条码</th>
+							<th>商品名称</th>
+							<th>状态</th>
+							<th>操作</th>
+					</tr>
+			</thead>
+			<tbody>
+					{{#each data}}
+					<tr>
+							<td class="first-cell">{{@index}}</td>
+							<td>{{goods_bn}}</td>
+							<td>{{goods_name}}</td>
+							<td>上架</td>
+							<td><a class="js-ajax" js-ajax-param="id={{goods_id}}" href="action.json">下架</a> <a class="js-delete" href="action.json">删除</a></td>
+					</tr>
+					{{/each}}
+			</tbody>
+	</table>
+</script>
+
+<script>
+var table = new Table($('#tab-list'), $('#tpl-list'), $('#pager'), {}, $('#search'));
+table.init({type:'get'});
+</script>
+<p><em>如上图所示，功能基本包括常用表格中遇到的分页、搜索、删除、AJAX操作。由于是用的HANDLEBARS渲染的，所以样式可能很好的控制，要加新的功能也较容易。</em></p>
+
+<h1>
+<a id="调用例子" class="anchor" href="#%E8%B0%83%E7%94%A8%E4%BE%8B%E5%AD%90" aria-hidden="true"><span class="octicon octicon-link"></span></a>调用例子</h1>
+
+<h2>
+<a id="html" class="anchor" href="#html" aria-hidden="true"><span class="octicon octicon-link"></span></a>html</h2>
+
+<pre><code>&lt;div class="form"&gt;
+    名称: &lt;input type="text" name="gname"&gt; &lt;a href="#" id="search"&gt;search&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id="tab-list" ajaxurl="list.json"&gt;
+    loading...
+&lt;/div&gt;
+&lt;div id="pager"&gt;&lt;/div&gt;
+</code></pre>
+
+<h2>
+<a id="模板" class="anchor" href="#%E6%A8%A1%E6%9D%BF" aria-hidden="true"><span class="octicon octicon-link"></span></a>模板</h2>
+
+<pre><code>&lt;script type="text/x-handlebars-template" id="tpl-list"&gt;
+    &lt;table class="tab-list"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                    &lt;th class="first-cell"&gt;序号&lt;/th&gt;
+                    &lt;th&gt;商品条码&lt;/th&gt;
+                    &lt;th&gt;商品名称&lt;/th&gt;
+                    &lt;th&gt;状态&lt;/th&gt;
+                    &lt;th&gt;操作&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            {{#each data}}
+            &lt;tr&gt;
+                    &lt;td class="first-cell"&gt;{{@index}}&lt;/td&gt;
+                    &lt;td&gt;{{goods_bn}}&lt;/td&gt;
+                    &lt;td&gt;{{goods_name}}&lt;/td&gt;
+                    &lt;td&gt;上架&lt;/td&gt;
+                    &lt;td&gt;&lt;a class="js-ajax" js-ajax-param="id={{goods_id}}" href="action.json"&gt;下架&lt;/a&gt; &lt;a class="js-delete" href="action.json"&gt;删除&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            {{/each}}
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/script&gt;
+</code></pre>
+
+<h2>
+<a id="js" class="anchor" href="#js" aria-hidden="true"><span class="octicon octicon-link"></span></a>js</h2>
+
+<pre><code>&lt;script&gt;
+    var table = new Table($('#tab-list'), $('#tpl-list'), $('#pager'), {}, $('#search'));
+    table.init({type:'post'});
+&lt;/script&gt;
+</code></pre>
+
+<hr>
+
+<h1>
+<a id="属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
+
+<h2>
+<a id="constuctorfunctiontable-temp-page-param-search-callback-filtercon" class="anchor" href="#constuctorfunctiontable-temp-page-param-search-callback-filtercon" aria-hidden="true"><span class="octicon octicon-link"></span></a>constuctor:function(table, temp, page, param, search, callback, filterCon)</h2>
+
+<pre><code>构造函数，table是指存放表格的容器，可以是一个空的div，也可以是table里的一个tbody；
+temp是指表格的模板，这里是script节点的jquery对象
+page 需要放置分页控件的容器
+param 初始化带的参数 type json
+search 搜索按钮节点，你的祖先级中要有一个class为form的节点，会利用[query](https://github.com/tianxiangbing/query)格式化里面为参数，进行查询数据操作
+callback 加载后的回调
+filterCon 筛选过滤
+</code></pre>
+
+<h2>
+<a id="initfunctionsettings" class="anchor" href="#initfunctionsettings" aria-hidden="true"><span class="octicon octicon-link"></span></a>init:function(settings)</h2>
+
+<pre><code>init是启动方法，目前的settings中仅包含{type:'get'} ，ajax请求的类型
+</code></pre>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

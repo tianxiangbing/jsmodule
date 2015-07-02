@@ -8,17 +8,17 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <title>js组件-js插件-jquery插件-点击的进度条</title> </head>
+    <title>js组件-js插件-jquery插件-表格渲染组件</title> </head>
   <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
-  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。点击的进度条" />
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。表格渲染组件" />
   <body>
     <header>
       <div class="inner">
-        <h1>click-progress</h1>
-        <h2>JS组件-点击的进度条</h2>
-        <a href="https://github.com/tianxiangbing/click-progress" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+        <h1>table</h1>
+        <h2>JS组件-表格渲染组件</h2>
+        <a href="https://github.com/tianxiangbing/table" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
         <div style="position:absolute;right:180px;top:0px;">
-          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=click-progress&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=table&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
         </div>
       </div>
     </header>
@@ -28,179 +28,145 @@
         <section id="main-content">
 <ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
 ﻿<aside id="sidebar">
-	<a href="https://github.com/tianxiangbing/click-progress/archive/master.zip" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/table/archive/master.zip" target="_blank" class="button">
 		<small>Download</small>
 		.zip file
 	</a>
-	<a href="https://github.com/tianxiangbing/click-progress" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/table" target="_blank" class="button">
 		<small>Code</small>
 		源码
 	</a>
-	<p class="repo-owner"><a href="https://github.com/tianxiangbing/click-progress" target="_blank">click-progress</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/table" target="_blank">table</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
 	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://www.github.com/tianxiangbing" target="_blank"> GitHub</a></p>
 </aside>
 
 
-          <h1>
-<a id="click-progress" class="anchor" href="#click-progress" aria-hidden="true"><span class="octicon octicon-link"></span></a>click-progress</h1>
-
-<p>点击的进度条
-</p>
-		<link rel="stylesheet" type="text/css" href="example/click-progress/click-progress.css">
-
-		<div class="progress"><div class="progress-finished"></div></div>
-        <input type="button" value="click" id="click"/>
-		<br/>
-		<br/>
-		<div class="transverse"><div class="progress-finished"></div></div>
-        <input type="button" value="click" id="click2"/>
-		<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
-		<script type="text/javascript" src="example/click-progress/click-progress.js"></script>
-		<script>
-		$('#click').ClickProgress({
-			target:$('.progress'),
-			v:5,
-			a:1,
-			change:'height',
-			time:100,
-			clicked:function(a,b,c){
-				console.log(c,'加油')
-				},
-			progress:function(a,b,c){
-				console.log(c)
-				},
-			callback:function(){
-				console.log('完成了')
-			}
-		});
-		$('#click2').ClickProgress({
-			target:$('.transverse'),
-			v:5,
-			a:1,
-			change:'width',
-			time:70,
-			clicked:function(a,b,c){
-				console.log(c,'加油')
-				},
-			progress:function(a,b,c){
-				console.log(c)
-				},
-			callback:function(){
-				console.log('完成了')
-				clearInterval(_this.timer);
-			}
-		});
-		</script>
-<h1>
-<a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
-
-<pre><code>&lt;div class="progress"&gt;&lt;div class="progress-finished"&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;input type="button" value="click" id="click"/&gt;
-$('#click').ClickProgress({
-    target:$('.progress'),
-    v:5,
-    a:1,
-    change:'height',//width时是横向，可以看demo
-    time:30,
-    clicked:function(a,b,c){
-        console.log(c,'加油')
-        },
-    progress:function(a,b,c){
-        console.log(c)
-        },
-    callback:function(){
-        alert('完成了')
-    }
-});
-</code></pre>
+<link rel="stylesheet" type="text/css" href="example/table/table.css">
 
 <h1>
-<a id="或者requirejs" class="anchor" href="#%E6%88%96%E8%80%85requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者requirejs</h1>
+<a id="table" class="anchor" href="#table" aria-hidden="true"><span class="octicon octicon-link"></span></a>table</h1>
 
-<pre><code>requirejs.config({
-    //By default load any module IDs from js/lib
-    baseUrl: '../src',
-    paths: {
-        $: 'zepto'
-    }
-});
-require(['click-progress',"$"], function(ClickProgress,$) {
-    var cp = new ClickProgress();
-    cp.init({
-        trigger:$('#click'),
-        target:$('.progress'),
-        v:5,
-        a:1,
-        change:'height',
-        time:30,
-        clicked:function(a,b,c){
-            console.log(c,'加油')
-            },
-        progress:function(a,b,c){
-            console.log(c)
-            },
-        callback:function(){
-            alert('完成了')
-        }
-    });
- });
+<p>表格的渲染组件</p>
+<div style="width:600px;">
+	<div class="form">
+		名称: <input type="text" name="gname"> <a href="#" id="search">search</a>
+	</div>
+	<div id="tab-list" ajaxurl="json/list.html">
+		loading...
+	</div>
+	<div id="pager"></div>
+</div>
+<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="example/handlebars-v3.0.0.js"></script>
+<script type="text/javascript" src="example/paging/paging.js"></script>
+<script type="text/javascript" src="example/query/query.js"></script>
+<script type="text/javascript" src="example/dialog/dialog.js"></script>
+<script type="text/javascript" src="example/table/table.js"></script>
+<script type="text/x-handlebars-template" id="tpl-list">
+	<table class="tab-list">
+			<thead>
+					<tr>
+							<th class="first-cell">序号</th>
+							<th>商品条码</th>
+							<th>商品名称</th>
+							<th>状态</th>
+							<th>操作</th>
+					</tr>
+			</thead>
+			<tbody>
+					{{#each data}}
+					<tr>
+							<td class="first-cell">{{@index}}</td>
+							<td>{{goods_bn}}</td>
+							<td>{{goods_name}}</td>
+							<td>上架</td>
+							<td><a class="js-ajax" js-ajax-param="id={{goods_id}}" href="action.json">下架</a> <a class="js-delete" href="action.json">删除</a></td>
+					</tr>
+					{{/each}}
+			</tbody>
+	</table>
+</script>
+
+<script>
+var table = new Table($('#tab-list'), $('#tpl-list'), $('#pager'), {}, $('#search'));
+table.init({type:'get'});
+</script>
+<p><em>如上图所示，功能基本包括常用表格中遇到的分页、搜索、删除、AJAX操作。由于是用的HANDLEBARS渲染的，所以样式可能很好的控制，要加新的功能也较容易。</em></p>
+
+<h1>
+<a id="调用例子" class="anchor" href="#%E8%B0%83%E7%94%A8%E4%BE%8B%E5%AD%90" aria-hidden="true"><span class="octicon octicon-link"></span></a>调用例子</h1>
+
+<h2>
+<a id="html" class="anchor" href="#html" aria-hidden="true"><span class="octicon octicon-link"></span></a>html</h2>
+
+<pre><code>&lt;div class="form"&gt;
+    名称: &lt;input type="text" name="gname"&gt; &lt;a href="#" id="search"&gt;search&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id="tab-list" ajaxurl="list.json"&gt;
+    loading...
+&lt;/div&gt;
+&lt;div id="pager"&gt;&lt;/div&gt;
 </code></pre>
+
+<h2>
+<a id="模板" class="anchor" href="#%E6%A8%A1%E6%9D%BF" aria-hidden="true"><span class="octicon octicon-link"></span></a>模板</h2>
+
+<pre><code>&lt;script type="text/x-handlebars-template" id="tpl-list"&gt;
+    &lt;table class="tab-list"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                    &lt;th class="first-cell"&gt;序号&lt;/th&gt;
+                    &lt;th&gt;商品条码&lt;/th&gt;
+                    &lt;th&gt;商品名称&lt;/th&gt;
+                    &lt;th&gt;状态&lt;/th&gt;
+                    &lt;th&gt;操作&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            {{#each data}}
+            &lt;tr&gt;
+                    &lt;td class="first-cell"&gt;{{@index}}&lt;/td&gt;
+                    &lt;td&gt;{{goods_bn}}&lt;/td&gt;
+                    &lt;td&gt;{{goods_name}}&lt;/td&gt;
+                    &lt;td&gt;上架&lt;/td&gt;
+                    &lt;td&gt;&lt;a class="js-ajax" js-ajax-param="id={{goods_id}}" href="action.json"&gt;下架&lt;/a&gt; &lt;a class="js-delete" href="action.json"&gt;删除&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            {{/each}}
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/script&gt;
+</code></pre>
+
+<h2>
+<a id="js" class="anchor" href="#js" aria-hidden="true"><span class="octicon octicon-link"></span></a>js</h2>
+
+<pre><code>&lt;script&gt;
+    var table = new Table($('#tab-list'), $('#tpl-list'), $('#pager'), {}, $('#search'));
+    table.init({type:'post'});
+&lt;/script&gt;
+</code></pre>
+
+<hr>
 
 <h1>
 <a id="属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
 
 <h2>
-<a id="trigger" class="anchor" href="#trigger" aria-hidden="true"><span class="octicon octicon-link"></span></a>trigger:</h2>
+<a id="constuctorfunctiontable-temp-page-param-search-callback-filtercon" class="anchor" href="#constuctorfunctiontable-temp-page-param-search-callback-filtercon" aria-hidden="true"><span class="octicon octicon-link"></span></a>constuctor:function(table, temp, page, param, search, callback, filterCon)</h2>
 
-<pre><code>触发事件的对象
+<pre><code>构造函数，table是指存放表格的容器，可以是一个空的div，也可以是table里的一个tbody；
+temp是指表格的模板，这里是script节点的jquery对象
+page 需要放置分页控件的容器
+param 初始化带的参数 type json
+search 搜索按钮节点，你的祖先级中要有一个class为form的节点，会利用[query](https://github.com/tianxiangbing/query)格式化里面为参数，进行查询数据操作
+callback 加载后的回调
+filterCon 筛选过滤
 </code></pre>
 
 <h2>
-<a id="target" class="anchor" href="#target" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:</h2>
+<a id="initfunctionsettings" class="anchor" href="#initfunctionsettings" aria-hidden="true"><span class="octicon octicon-link"></span></a>init:function(settings)</h2>
 
-<pre><code>进度条对象dom，结果有两层
-</code></pre>
-
-<h2>
-<a id="v" class="anchor" href="#v" aria-hidden="true"><span class="octicon octicon-link"></span></a>v:</h2>
-
-<pre><code>每次点击的初始速度
-</code></pre>
-
-<h2>
-<a id="a" class="anchor" href="#a" aria-hidden="true"><span class="octicon octicon-link"></span></a>a:</h2>
-
-<pre><code>加速度，可以理解为重力或摩擦力
-</code></pre>
-
-<h2>
-<a id="changeheightwidth" class="anchor" href="#changeheightwidth" aria-hidden="true"><span class="octicon octicon-link"></span></a>change:height/width</h2>
-
-<pre><code>是改变的高度还是width,默认为height
-</code></pre>
-
-<h2>
-<a id="time" class="anchor" href="#time" aria-hidden="true"><span class="octicon octicon-link"></span></a>time:</h2>
-
-<pre><code>频率
-</code></pre>
-
-<h2>
-<a id="clickedfunctionabc" class="anchor" href="#clickedfunctionabc" aria-hidden="true"><span class="octicon octicon-link"></span></a>clicked:function(a,b,c)</h2>
-
-<pre><code>点击后的回调，a是trigger,b是target,c是当前的power值，下面的一样
-</code></pre>
-
-<h2>
-<a id="progressfunctionabc" class="anchor" href="#progressfunctionabc" aria-hidden="true"><span class="octicon octicon-link"></span></a>progress:function(a,b,c)</h2>
-
-<pre><code>每次进度改变的回调
-</code></pre>
-
-<h2>
-<a id="callbackfunctionabc" class="anchor" href="#callbackfunctionabc" aria-hidden="true"><span class="octicon octicon-link"></span></a>callback:function(a,b,c)</h2>
-
-<pre><code>结束后的回调，这里指达到100%;
+<pre><code>init是启动方法，目前的settings中仅包含{type:'get'} ，ajax请求的类型
 </code></pre>
 
 <h1>其它组件推荐</h1>
