@@ -8,17 +8,17 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <title>js组件-js插件-jquery插件-表格渲染组件</title> </head>
+    <title>js组件-js插件-jquery插件-自动搜索框</title> </head>
   <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
-  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。表格渲染组件" />
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。自动搜索框" />
   <body>
     <header>
       <div class="inner">
-        <h1>table</h1>
-        <h2>JS组件-表格渲染组件</h2>
-        <a href="https://github.com/tianxiangbing/table" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+        <h1>autosearch</h1>
+        <h2>JS组件-自动搜索框</h2>
+        <a href="https://github.com/tianxiangbing/autosearch" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
         <div style="position:absolute;right:180px;top:0px;">
-          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=table&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=autosearch&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
         </div>
       </div>
     </header>
@@ -28,147 +28,147 @@
         <section id="main-content">
 <ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
 ﻿<aside id="sidebar">
-	<a href="https://github.com/tianxiangbing/table/archive/master.zip" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/autosearch/archive/master.zip" target="_blank" class="button">
 		<small>Download</small>
 		.zip file
 	</a>
-	<a href="https://github.com/tianxiangbing/table" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/autosearch" target="_blank" class="button">
 		<small>Code</small>
 		源码
 	</a>
-	<p class="repo-owner"><a href="https://github.com/tianxiangbing/table" target="_blank">table</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/autosearch" target="_blank">autosearch</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
 	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://www.github.com/tianxiangbing" target="_blank"> GitHub</a></p>
 </aside>
 
 
-<link rel="stylesheet" type="text/css" href="example/table/table.css">
-
 <h1>
-<a id="table" class="anchor" href="#table" aria-hidden="true"><span class="octicon octicon-link"></span></a>table</h1>
-
-<p>表格的渲染组件</p>
-<div style="width:600px;">
-	<div class="form">
-		名称: <input type="text" name="gname"> <a href="#" id="search">search</a>
-	</div>
-	<div id="tab-list" ajaxurl="json/list.html">
-		loading...
-	</div>
-	<div id="pager"></div>
-</div>
-<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
-<script type="text/javascript" src="example/handlebars-v3.0.0.js"></script>
-<script type="text/javascript" src="example/paging/paging.js"></script>
-<script type="text/javascript" src="example/query/query.js"></script>
-<script type="text/javascript" src="example/dialog/dialog.js"></script>
-<script type="text/javascript" src="example/table/table.js"></script>
-<script type="text/x-handlebars-template" id="tpl-list">
-	<table class="tab-list">
-			<thead>
-					<tr>
-							<th class="first-cell">序号</th>
-							<th>商品条码</th>
-							<th>商品名称</th>
-							<th>状态</th>
-							<th>操作</th>
-					</tr>
-			</thead>
-			<tbody>
-					{{#each data}}
-					<tr>
-							<td class="first-cell">{{@index}}</td>
-							<td>{{goods_bn}}</td>
-							<td>{{goods_name}}</td>
-							<td>上架</td>
-							<td><a class="js-ajax" js-ajax-param="id={{goods_id}}" href="json/data.asp">下架</a> <a class="js-delete" href="json/data.asp">删除</a></td>
-					</tr>
-					{{/each}}
-			</tbody>
-	</table>
-</script>
-
-<script>
-var table = new Table($('#tab-list'), $('#tpl-list'), $('#pager'), {}, $('#search'));
-table.init({type:'get'});
-</script>
-<p><em>如上图所示，功能基本包括常用表格中遇到的分页、搜索、删除、AJAX操作。由于是用的HANDLEBARS渲染的，所以样式可能很好的控制，要加新的功能也较容易。</em></p>
-
+<a id="autosearch" class="anchor" href="#autosearch" aria-hidden="true"><span class="octicon octicon-link"></span></a>autosearch</h1>
+<p>自动搜索</p>
+    <link rel="stylesheet" href="example/autosearch/autosearch.css">
+    <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="example/autosearch/autosearch.js"></script>
 <h1>
-<a id="调用例子" class="anchor" href="#%E8%B0%83%E7%94%A8%E4%BE%8B%E5%AD%90" aria-hidden="true"><span class="octicon octicon-link"></span></a>调用例子</h1>
-
-<h2>
-<a id="html" class="anchor" href="#html" aria-hidden="true"><span class="octicon octicon-link"></span></a>html</h2>
-
-<pre><code>&lt;div class="form"&gt;
-    名称: &lt;input type="text" name="gname"&gt; &lt;a href="#" id="search"&gt;search&lt;/a&gt;
-&lt;/div&gt;
-&lt;div id="tab-list" ajaxurl="list.json"&gt;
-    loading...
-&lt;/div&gt;
-&lt;div id="pager"&gt;&lt;/div&gt;
+<a id="例1" class="anchor" href="#%E4%BE%8B1" aria-hidden="true"><span class="octicon octicon-link"></span></a>例1：</h1>
+    <input type="text"  class="autosearch"><input type="hidden" name="hd_id" id="hd_id">
+    <script>
+    $.get('json/autosearch.txt',function(result){
+         var input = $('.autosearch');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input,autoShow:true,data:result,valueObj:'#hd_id',valueName:"id"});
+    },'json')
+    </script>
+<pre><code>&lt;input type="text"  class="autosearch"&gt;&lt;input type="hidden" name="hd_id" id="hd_id"&gt;
+    &lt;script src="../src/jquery-1.11.2.js"&gt;&lt;/script&gt;
+    &lt;script src="../src/autosearch.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+    $.get('json/autosearch.txt',function(result){
+         var input = $('.autosearch');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input,autoShow:true,data:result,valueObj:'#hd_id',valueName:"id"});
+    },'json')
+    &lt;/script&gt;
 </code></pre>
-
-<h2>
-<a id="模板" class="anchor" href="#%E6%A8%A1%E6%9D%BF" aria-hidden="true"><span class="octicon octicon-link"></span></a>模板</h2>
-
-<pre><code>&lt;script type="text/x-handlebars-template" id="tpl-list"&gt;
-    &lt;table class="tab-list"&gt;
-        &lt;thead&gt;
-            &lt;tr&gt;
-                    &lt;th class="first-cell"&gt;序号&lt;/th&gt;
-                    &lt;th&gt;商品条码&lt;/th&gt;
-                    &lt;th&gt;商品名称&lt;/th&gt;
-                    &lt;th&gt;状态&lt;/th&gt;
-                    &lt;th&gt;操作&lt;/th&gt;
-            &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-            {{#each data}}
-            &lt;tr&gt;
-                    &lt;td class="first-cell"&gt;{{@index}}&lt;/td&gt;
-                    &lt;td&gt;{{goods_bn}}&lt;/td&gt;
-                    &lt;td&gt;{{goods_name}}&lt;/td&gt;
-                    &lt;td&gt;上架&lt;/td&gt;
-                    &lt;td&gt;&lt;a class="js-ajax" js-ajax-param="id={{goods_id}}" href="action.json"&gt;下架&lt;/a&gt; &lt;a class="js-delete" href="action.json"&gt;删除&lt;/a&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-            {{/each}}
-        &lt;/tbody&gt;
-    &lt;/table&gt;
-&lt;/script&gt;
-</code></pre>
-
-<h2>
-<a id="js" class="anchor" href="#js" aria-hidden="true"><span class="octicon octicon-link"></span></a>js</h2>
-
-<pre><code>&lt;script&gt;
-    var table = new Table($('#tab-list'), $('#tpl-list'), $('#pager'), {}, $('#search'));
-    table.init({type:'post'});
-&lt;/script&gt;
-</code></pre>
-
-<hr>
-
+<p><code>直接的调用,使用静态固定的数据源</code></p>
 <h1>
-<a id="属性和方法" class="anchor" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性和方法</h1>
+<a id="例2" class="anchor" href="#%E4%BE%8B2" aria-hidden="true"><span class="octicon octicon-link"></span></a>例2：</h1>
 
-<h2>
-<a id="constuctorfunctiontable-temp-page-param-search-callback-filtercon" class="anchor" href="#constuctorfunctiontable-temp-page-param-search-callback-filtercon" aria-hidden="true"><span class="octicon octicon-link"></span></a>constuctor:function(table, temp, page, param, search, callback, filterCon)</h2>
-
-<pre><code>构造函数，table是指存放表格的容器，可以是一个空的div，也可以是table里的一个tbody；
-temp是指表格的模板，这里是script节点的jquery对象
-page 需要放置分页控件的容器
-param 初始化带的参数 type json
-search 搜索按钮节点，你的祖先级中要有一个class为form的节点，会利用[query](https://github.com/tianxiangbing/query)格式化里面为参数，进行查询数据操作
-callback 加载后的回调
-filterCon 筛选过滤
+    <!-- ajax请求 -->
+    <input type="text"  class="autosearch2">
+    <script>
+         var input = $('.autosearch2');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input ,autoShow:false,data:function(callback){
+                $.get('json/autosearch.txt',{key:input.val()},function(result){
+                callback(result);
+                },'json');
+            }
+        });
+    </script>
+<pre><code>&lt;!-- ajax请求 --&gt;
+    &lt;input type="text"  class="autosearch2"&gt;
+    &lt;script&gt;
+         var input = $('.autosearch2');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input ,autoShow:false,data:function(callback){
+                $.get('json/autosearch.txt',{key:input.val()},function(result){
+                callback(result);
+                },'json');
+            }
+        });
+    &lt;/script&gt;
 </code></pre>
-
-<h2>
-<a id="initfunctionsettings" class="anchor" href="#initfunctionsettings" aria-hidden="true"><span class="octicon octicon-link"></span></a>init:function(settings)</h2>
-
-<pre><code>init是启动方法，目前的settings中仅包含{type:'get'} ，ajax请求的类型
+<p><code>数据源会变化</code></p>
+<h1>
+<a id="例3" class="anchor" href="#%E4%BE%8B3" aria-hidden="true"><span class="octicon octicon-link"></span></a>例3：</h1>
+    <!-- 多个 -->
+    <input type="text"  class="autosearch3">
+    <script>
+    $.get('json/autosearch.txt',function(result){
+         var input = $('.autosearch3');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input,autoShow:false,data:result,mutil:true
+            });
+    },'json')
+    </script>
+<pre><code>&lt;!-- 多个 --&gt;
+    &lt;input type="text"  class="autosearch3"&gt;
+    &lt;script&gt;
+    $.get('json/autosearch.txt',function(result){
+         var input = $('.autosearch3');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input,autoShow:false,data:result,mutil:true
+            });
+    },'json')
+    &lt;/script&gt;
 </code></pre>
-
+<h1>
+<a id="属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h1>
+<h2>
+<a id="input-dom" class="anchor" href="#input-dom" aria-hidden="true"><span class="octicon octicon-link"></span></a>input: [DOM]</h2>
+<pre><code>输入框,jquery DOM对象
+</code></pre>
+<h2>
+<a id="dataobjfunction" class="anchor" href="#dataobjfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>data:[obj|function]</h2>
+<pre><code>数据源，这里可以传入数据源数组，也可以传入一个方法作为回调返回数据，如果传入的是数组，将作为静态过滤筛选，如果是传入的方法，每次都会调用该方法进来过滤。
+</code></pre>
+<h2>
+<a id="autoshowbool" class="anchor" href="#autoshowbool" aria-hidden="true"><span class="octicon octicon-link"></span></a>autoShow:[bool]</h2>
+<pre><code>是否在获得焦点时就显示数据,默认为false
+</code></pre>
+<h2>
+<a id="valueobjdom" class="anchor" href="#valueobjdom" aria-hidden="true"><span class="octicon octicon-link"></span></a>valueObj:[DOM]</h2>
+<pre><code>赋值框，jquery DOM对象
+</code></pre>
+<h2>
+<a id="filtercolumnarray-string" class="anchor" href="#filtercolumnarray-string" aria-hidden="true"><span class="octicon octicon-link"></span></a>filterColumn:[array string]</h2>
+<pre><code>过滤的字段列，默认为['name'],可以同时对多个数据列过滤
+</code></pre>
+<h2>
+<a id="columnarray-string" class="anchor" href="#columnarray-string" aria-hidden="true"><span class="octicon octicon-link"></span></a>column:[array string]</h2>
+<pre><code>显示的列，默认为['name']，如果想定义显示项，可以配置回调方法format:function(item)来返回显示内容
+</code></pre>
+<h2>
+<a id="mutilbool" class="anchor" href="#mutilbool" aria-hidden="true"><span class="octicon octicon-link"></span></a>mutil:[bool]</h2>
+<pre><code>选多个，默认为false
+</code></pre>
+<h1>
+<a id="回调方法" class="anchor" href="#%E5%9B%9E%E8%B0%83%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>回调方法</h1>
+<h2>
+<a id="callback-functiondata" class="anchor" href="#callback-functiondata" aria-hidden="true"><span class="octicon octicon-link"></span></a>callback :function(data)</h2>
+<pre><code>选中的回调，data为当前选中的数据项.可以用于扩展选中后的显示效果
+</code></pre>
+<h2>
+<a id="focuscallbackfunctioninput" class="anchor" href="#focuscallbackfunctioninput" aria-hidden="true"><span class="octicon octicon-link"></span></a>focusCallback:function(input)</h2>
+<pre><code>获取焦点
+</code></pre>
+<h2>
+<a id="blurcallbackfunctioninput" class="anchor" href="#blurcallbackfunctioninput" aria-hidden="true"><span class="octicon octicon-link"></span></a>blurCallback:function(input)</h2>
+<pre><code>离开焦点
+</code></pre>
+<h2>
+<a id="showcallbackfunctioninputcontent" class="anchor" href="#showcallbackfunctioninputcontent" aria-hidden="true"><span class="octicon octicon-link"></span></a>showCallback:function(input,content)</h2>
+<pre><code>显示后的回调
+</code></pre>
 <h1>其它组件推荐</h1>
 <ul class="uilist" id="modulelist">
 	<li>

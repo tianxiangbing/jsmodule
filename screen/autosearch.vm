@@ -1,0 +1,135 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,autosearch)
+$set(title,自动搜索框)
+<h1>
+<a id="autosearch" class="anchor" href="#autosearch" aria-hidden="true"><span class="octicon octicon-link"></span></a>autosearch</h1>
+<p>自动搜索</p>
+    <link rel="stylesheet" href="example/autosearch/autosearch.css">
+    <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="example/autosearch/autosearch.js"></script>
+<h1>
+<a id="例1" class="anchor" href="#%E4%BE%8B1" aria-hidden="true"><span class="octicon octicon-link"></span></a>例1：</h1>
+    <input type="text"  class="autosearch"><input type="hidden" name="hd_id" id="hd_id">
+    <script>
+    $.get('json/autosearch.txt',function(result){
+         var input = $('.autosearch');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input,autoShow:true,data:result,valueObj:'#hd_id',valueName:"id"});
+    },'json')
+    </script>
+<pre><code>&lt;input type="text"  class="autosearch"&gt;&lt;input type="hidden" name="hd_id" id="hd_id"&gt;
+    &lt;script src="../src/jquery-1.11.2.js"&gt;&lt;/script&gt;
+    &lt;script src="../src/autosearch.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+    $.get('json/autosearch.txt',function(result){
+         var input = $('.autosearch');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input,autoShow:true,data:result,valueObj:'#hd_id',valueName:"id"});
+    },'json')
+    &lt;/script&gt;
+</code></pre>
+<p><code>直接的调用,使用静态固定的数据源</code></p>
+<h1>
+<a id="例2" class="anchor" href="#%E4%BE%8B2" aria-hidden="true"><span class="octicon octicon-link"></span></a>例2：</h1>
+
+    <!-- ajax请求 -->
+    <input type="text"  class="autosearch2">
+    <script>
+         var input = $('.autosearch2');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input ,autoShow:false,data:function(callback){
+                $.get('json/autosearch.txt',{key:input.val()},function(result){
+                callback(result);
+                },'json');
+            }
+        });
+    </script>
+<pre><code>&lt;!-- ajax请求 --&gt;
+    &lt;input type="text"  class="autosearch2"&gt;
+    &lt;script&gt;
+         var input = $('.autosearch2');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input ,autoShow:false,data:function(callback){
+                $.get('json/autosearch.txt',{key:input.val()},function(result){
+                callback(result);
+                },'json');
+            }
+        });
+    &lt;/script&gt;
+</code></pre>
+<p><code>数据源会变化</code></p>
+<h1>
+<a id="例3" class="anchor" href="#%E4%BE%8B3" aria-hidden="true"><span class="octicon octicon-link"></span></a>例3：</h1>
+    <!-- 多个 -->
+    <input type="text"  class="autosearch3">
+    <script>
+    $.get('json/autosearch.txt',function(result){
+         var input = $('.autosearch3');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input,autoShow:false,data:result,mutil:true
+            });
+    },'json')
+    </script>
+<pre><code>&lt;!-- 多个 --&gt;
+    &lt;input type="text"  class="autosearch3"&gt;
+    &lt;script&gt;
+    $.get('json/autosearch.txt',function(result){
+         var input = $('.autosearch3');
+         var autosearch = new AutoSearch();
+         autosearch.init({input:input,autoShow:false,data:result,mutil:true
+            });
+    },'json')
+    &lt;/script&gt;
+</code></pre>
+<h1>
+<a id="属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h1>
+<h2>
+<a id="input-dom" class="anchor" href="#input-dom" aria-hidden="true"><span class="octicon octicon-link"></span></a>input: [DOM]</h2>
+<pre><code>输入框,jquery DOM对象
+</code></pre>
+<h2>
+<a id="dataobjfunction" class="anchor" href="#dataobjfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>data:[obj|function]</h2>
+<pre><code>数据源，这里可以传入数据源数组，也可以传入一个方法作为回调返回数据，如果传入的是数组，将作为静态过滤筛选，如果是传入的方法，每次都会调用该方法进来过滤。
+</code></pre>
+<h2>
+<a id="autoshowbool" class="anchor" href="#autoshowbool" aria-hidden="true"><span class="octicon octicon-link"></span></a>autoShow:[bool]</h2>
+<pre><code>是否在获得焦点时就显示数据,默认为false
+</code></pre>
+<h2>
+<a id="valueobjdom" class="anchor" href="#valueobjdom" aria-hidden="true"><span class="octicon octicon-link"></span></a>valueObj:[DOM]</h2>
+<pre><code>赋值框，jquery DOM对象
+</code></pre>
+<h2>
+<a id="filtercolumnarray-string" class="anchor" href="#filtercolumnarray-string" aria-hidden="true"><span class="octicon octicon-link"></span></a>filterColumn:[array string]</h2>
+<pre><code>过滤的字段列，默认为['name'],可以同时对多个数据列过滤
+</code></pre>
+<h2>
+<a id="columnarray-string" class="anchor" href="#columnarray-string" aria-hidden="true"><span class="octicon octicon-link"></span></a>column:[array string]</h2>
+<pre><code>显示的列，默认为['name']，如果想定义显示项，可以配置回调方法format:function(item)来返回显示内容
+</code></pre>
+<h2>
+<a id="mutilbool" class="anchor" href="#mutilbool" aria-hidden="true"><span class="octicon octicon-link"></span></a>mutil:[bool]</h2>
+<pre><code>选多个，默认为false
+</code></pre>
+<h1>
+<a id="回调方法" class="anchor" href="#%E5%9B%9E%E8%B0%83%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>回调方法</h1>
+<h2>
+<a id="callback-functiondata" class="anchor" href="#callback-functiondata" aria-hidden="true"><span class="octicon octicon-link"></span></a>callback :function(data)</h2>
+<pre><code>选中的回调，data为当前选中的数据项.可以用于扩展选中后的显示效果
+</code></pre>
+<h2>
+<a id="focuscallbackfunctioninput" class="anchor" href="#focuscallbackfunctioninput" aria-hidden="true"><span class="octicon octicon-link"></span></a>focusCallback:function(input)</h2>
+<pre><code>获取焦点
+</code></pre>
+<h2>
+<a id="blurcallbackfunctioninput" class="anchor" href="#blurcallbackfunctioninput" aria-hidden="true"><span class="octicon octicon-link"></span></a>blurCallback:function(input)</h2>
+<pre><code>离开焦点
+</code></pre>
+<h2>
+<a id="showcallbackfunctioninputcontent" class="anchor" href="#showcallbackfunctioninputcontent" aria-hidden="true"><span class="octicon octicon-link"></span></a>showCallback:function(input,content)</h2>
+<pre><code>显示后的回调
+</code></pre>
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

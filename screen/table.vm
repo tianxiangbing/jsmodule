@@ -42,7 +42,7 @@ $set(title,表格渲染组件)
 							<td>{{goods_bn}}</td>
 							<td>{{goods_name}}</td>
 							<td>上架</td>
-							<td><a class="js-ajax" js-ajax-param="id={{goods_id}}" href="action.json">下架</a> <a class="js-delete" href="action.json">删除</a></td>
+							<td><a class="js-ajax" js-ajax-param="id={{goods_id}}" href="json/data.asp">下架</a> <a class="js-delete" href="json/data.asp">删除</a></td>
 					</tr>
 					{{/each}}
 			</tbody>

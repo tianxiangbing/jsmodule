@@ -1,1 +1,16 @@
-console.log('This would be the main JS file.');
+//console.log('This would be the main JS file.');
+(function($) {
+	$('#search').on('keyup', function() {
+		var val = this.value;
+		var modulelist = $('#modulelist').children();
+		for (var i = 0, l = modulelist.length; i < l; i++) {
+			var item = $(modulelist[i]);
+			var text = $('.m-title', item).html();
+			if (text.toString().indexOf(val) != -1) {
+				item.show();
+			} else {
+				item.hide();
+			}
+		}
+	});
+})(jQuery);

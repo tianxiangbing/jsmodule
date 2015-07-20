@@ -5,4 +5,8 @@ $set(title,js组件)
 <h1>
 js组件
 </h1>
+<input type="text" id="search" placeholder="请输入组件的关键字">
 $control.setTemplate("modulelist.vm")
+
+<script src="example/jquery-1.11.2.js"></script>
+<script src="javascripts/main.js"></script>
