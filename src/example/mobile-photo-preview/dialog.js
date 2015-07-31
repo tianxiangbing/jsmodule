@@ -1,5 +1,6 @@
 /*
  * Created with Sublime Text 2.
+ * license: http://www.lovewebgames.com/jsmodule/index.html
  * User: 田想兵
  * Date: 2015-03-16
  * Time: 20:27:54
@@ -60,6 +61,10 @@
 					settings.callback && settings.callback();
 				}, settings.timer);
 			}
+			alert.touch(alert.mask, function() {
+				alert.hide();
+				settings.callback && settings.callback();
+			});
 		}
 		if (settings.type === "confirm") {
 			var dialog = new Dialog();
@@ -112,27 +117,43 @@
 		}
 	};
 	/*alert*/
-	$.alert = function(content, button, callback, timer) {
-		$.Dialog({
-			content: content,
-			button: button,
-			timer: timer,
-			callback: callback,
-			zIndex: 100,
-			type: 'alert'
-		});
-	}
-	/*
-	buttons :[{yes:"确定"},{no:'取消'},{close:'关闭'}]
-	*/
-	$.confirm = function(content, buttons, callback) {
-		$.Dialog({
-			content: content,
-			buttons: buttons,
-			callback: callback,
+	$.alert = function(content, button, callback, timer, settings) {
+			var options = {};
+			var defaults = {
+				zIndex: 100,
+				type: 'alert'
+			};
+			if (typeof content == 'object') {
+				options = $.extend(defaults, content);
+			} else {
+				options = $.extend(defaults, {
+					content: content,
+					button: button,
+					timer: timer,
+					callback: callback
+				});
+			}
+			$.Dialog($.extend(options, settings));
+		}
+		/*
+		buttons :[{yes:"确定"},{no:'取消'},{close:'关闭'}]
+		*/
+	$.confirm = function(content, buttons, callback, settings) {
+		var options = {};
+		var defaults = {
 			zIndex: 100,
 			type: 'confirm'
-		});
+		};
+		if (typeof content == 'object') {
+			options = $.extend(defaults, content);
+		} else {
+			options = $.extend(defaults, {
+				content: content,
+				buttons: buttons,
+				callback: callback
+			});
+		}
+		$.Dialog($.extend(options, settings));
 	}
 	var Dialog = function() {
 		var rnd = Math.random().toString().replace('.', '');
@@ -207,17 +228,18 @@
 					_this.show()
 				});
 			};
-			$(this.dialogContainer).delegate('.js-dialog-close', 'click', function() {
-				_this.hide();
-				return false;
-			})
-			$(window).resize(function() {
-				_this.setPosition();
-			});
-			$(window).scroll(function() {
-				_this.setPosition();
-			})
-			$(window).keydown(function(e) {
+			$(this.dialogContainer).on('click', '.js-dialog-close', function() {
+					_this.hide();
+					return false;
+				})
+				// $(window).resize(function() {
+				// 	_this.setPosition();
+				// });
+				// $(window).scroll(function() {
+				// 	_this.setPosition();
+				// })
+			$(document).keydown(function(e) {
+			console.log(e.keyCode )
 				if (e.keyCode === 27 && _this.showed) {
 					_this.hide();
 				}
@@ -226,6 +248,7 @@
 		dispose: function() {
 			this.dialogContainer.remove();
 			this.mask.remove();
+			this.timer && clearInterval(this.timer);
 		},
 		hide: function() {
 			var _this = this;
@@ -234,6 +257,7 @@
 			}
 			this.showed = false;
 			this.mask.hide();
+			this.timer && clearInterval(this.timer);
 			if (this.settings.animate) {
 				this.dialogContainer.removeClass('zoomIn').addClass("zoomOut");
 				setTimeout(function() {
@@ -277,7 +301,15 @@
 				this.settings.beforeShow.call(this, this.dialogContainer);
 			}
 			this.showed = true;
+			$(this.settings.trigger).blur();
+
 			this.setPosition();
+			var _this = this;
+			// $.alert(this.settings.clientWidth)
+			this.timer && clearInterval(this.timer);
+			this.timer = setInterval(function() {
+				_this.setPosition();
+			}, 1000);
 			if (this.settings.animate) {
 				this.dialogContainer.addClass('zoomIn').removeClass('zoomOut').addClass('animated');
 			}
@@ -294,14 +326,14 @@
 				if (isNaN(this.width)) {
 					this.width = (this.dialogContainer.outerWidth && this.dialogContainer.outerWidth()) || this.dialogContainer.width();
 				}
-				var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
-				var clientWidth = document.documentElement.clientWidth || document.body.clientWidth;
+				var clientHeight = this.settings.clientHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				var clientWidth = this.settings.clientWidth || document.documentElement.clientWidth || document.body.clientWidth;
 				var ml = this.width / 2;
 				var mt = this.height / 2;
 				var left = clientWidth / 2 - ml;
 				var top = clientHeight / 2 - mt;
-				left = Math.max(0, left);
-				top = Math.max(0, top);
+				left = Math.floor(Math.max(0, left));
+				top = Math.floor(Math.max(0, top));
 				_this.dialogContainer.css({
 					position: "fixed",
 					top: top,

@@ -20,15 +20,18 @@
 	function Upload() {}
 	$.extend(Upload.prototype, {
 		init: function(settings) {
-			window.uploadCount =window.uploadCount||0;
+			window.uploadCount = window.uploadCount || 0;
 			window.uploadCount++;
 			var rnd = Math.random().toString().replace('.', '');
-			this.id = 'upload_' + rnd+window.uploadCount.toString();
+			this.id = 'upload_' + rnd + window.uploadCount.toString();
 			this.settings = settings;
 			this.settings.iframe = true;
+			this.settings.zIndex = this.settings.zIndex || 9999;
 			this.url = this.settings.url;
 			this.name = this.settings.name || "files";
 			this.target = this.settings.target;
+			this.postTarget = this.settings.postTarget;
+			typeof this.settings.autoPost === "undefined" ? this.autoPost = true : this.autoPost = this.settings.autoPost;
 			this.createIframe();
 			this.createFile();
 			this.bindEvent();
@@ -45,16 +48,21 @@
 		createFile: function() {
 			var _this = this;
 			_this.form && _this.form.remove();
-			_this.form = $('<form method="post" ENCTYPE="multipart/form-data"><input type="file" style="position:absolute;top:0;left:0;width:1px;height:1px;opacity:0;" id="' + _this.id + '" name="' + _this.name + '"/></form>');
+			_this.form = $('<form method="post" ENCTYPE="multipart/form-data"><input type="file"  id="' + _this.id + '" name="' + _this.name + '"/></form>');
 			_this.form.attr("target", _this.frameId);
 			_this.form.css({
 				height: 0,
-				widht: 0,
-				padding: 0
+				width: 0
 			});
 			_this.form.attr("action", _this.url);
 			$('body').append(_this.form);
 			_this.fileInput = $('#' + _this.id);
+			_this.fileInput.css({
+				width: 60,
+				height: 20,
+				opacity: 0,
+				zIndex: _this.settings.zIndex
+			})
 			this.bindFileChange();
 		},
 		postFrame: function(input, e, key) {
@@ -78,7 +86,8 @@
 				}
 				return false;
 			}
-			this.form.submit();
+			_this.form.submit();
+			_this.createFile();
 			this.frame.off('load');
 			this.frame.on('load', function() {
 				var body = $($(this.contentWindow.document).find('body'));
@@ -87,9 +96,11 @@
 				if (child && child.nodeType == 1) {
 					result = child.innerHTML;
 				}
-				_this.settings.callback && _this.settings.callback(result, _this.fileInput, _this.name, _this.target, key);
+				if (typeof result == "string" && _this.settings.type === "json") {
+					result = (new Function("return " + result))();
+				}
+				_this.settings.callback && _this.settings.callback.call(_this, result, _this.fileInput, _this.name, _this.target, key);
 			});
-			_this.createFile();
 			return true;
 		},
 		touch: function(obj, fn) {
@@ -115,6 +126,7 @@
 		},
 		bindEvent: function(e) {
 			var _this = this;
+			/*
 			this.touch($(this.target), function(e, t) {
 				if ($(this).parent().siblings().size() >= _this.settings.max) {
 					_this.settings.maxCallback && _this.settings.maxCallback(this);
@@ -123,7 +135,26 @@
 				}
 				return false;
 			});
+			 */
+			$(this.target).mousemove(function(e) {
+				var x = e.pageX - 30;
+				var y = e.pageY - 10;
+				$(_this.fileInput).css({
+					left: x,
+					top: y,
+					position: 'absolute'
+				});
+			});
 			_this.bindFileEvent();
+			if (this.postTarget) {
+				this.touch($(this.postTarget), function(e, t) {
+					if (_this.args.length) {
+						if (_this.postFrame.apply(_this, _this.args)) {
+							_this.settings.startUpload && _this.settings.startUpload.apply(_this, _this.args);
+						}
+					}
+				});
+			}
 		},
 		bindFileEvent: function() {
 			var _this = this;
@@ -135,14 +166,17 @@
 			var _this = this;
 			$(_this.fileInput).off('change');
 			$(_this.fileInput).on('change', function(e) {
-				console.log(_this)
 				var reg_type = /^image\//i;
 				var files = e.target.files;
+				var key = "up_" + Math.random().toString().replace('.', '');
+				_this.args = [this, e, key];
+				_this.settings.selected && _this.settings.selected.call(this, this, e, key);
 				if (_this.settings.iframe) {
 					//ifrmae post
-					var key = "up_" + Math.random().toString().replace('.', '');
-					if (_this.postFrame(this, e, key)) {
-						_this.settings.startUpload && _this.settings.startUpload(_this.fileInput, _this.target, key);
+					if (_this.autoPost) {
+						if (_this.postFrame(this, e, key)) {
+							_this.settings.startUpload && _this.settings.startUpload(_this.fileInput, _this.target, key);
+						}
 					}
 				}
 			});

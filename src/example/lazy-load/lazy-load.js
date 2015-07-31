@@ -30,7 +30,7 @@
 		this.settings = {
 			container: window,
 			effect: 'show',
-			effectArgs: 1000,
+			effectArgs: null,
 			elements: null,
 			load: null,
 			offset: 0,

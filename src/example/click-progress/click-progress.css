@@ -2,4 +2,3 @@
 .progress .progress-finished{width:100%;background: red;position: absolute;bottom: 0;}
 .transverse{width:300px;height: 30px;border:1px solid #ccc;position: relative;}
 .transverse .progress-finished{height:100%;background: red;position: absolute;left: 0;}
-input{outline: none;}

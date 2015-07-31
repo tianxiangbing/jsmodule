@@ -22,7 +22,7 @@
 			win = win || window;
 			var Url = win.location.href;
 			var u, g, StrBack = '';
-			if (type== "#") {
+			if (type == "#") {
 				u = Url.split("#");
 			} else {
 				u = Url.split("?");
@@ -46,17 +46,21 @@
 			return decodeURI(StrBack);
 		},
 		getForm: function(form) {
-			var result = {};
+			var result = {},
+				tempObj = {};
 			$(form).find('*[name]').each(function(i, v) {
 				var nameSpace,
 					name = $(v).attr('name'),
 					val = $.trim($(v).val()),
-					tempArr = [],
-					tempObj = {};
-				if (name == '') {
+					tempArr = [];
+				if (name == '' || $(v).hasClass('getvalued')) {
 					return;
 				}
-				val = val == $(v).attr('placeholder') ? "" : val;
+
+				if ($(v).data('type') == "money") {
+					val = val.replace(/\,/gi, '');
+				}
+
 				//处理radio add by yhx  2014-06-18
 				if ($(v).attr("type") == "radio") {
 					var tempradioVal = null;
@@ -71,6 +75,7 @@
 					}
 				}
 
+
 				if ($(v).attr("type") == "checkbox") {
 					var tempradioVal = [];
 					$("input[name='" + name + "']:checkbox").each(function() {
@@ -83,17 +88,76 @@
 						val = "";
 					}
 				}
+
+				if ($(v).attr('listvalue')) {
+					if (!result[$(v).attr('listvalue')]) {
+						result[$(v).attr('listvalue')] = [];
+						$("input[listvalue='" + $(v).attr('listvalue') + "']").each(function() {
+							if ($(this).val() != "") {
+								var name = $(this).attr('name');
+								var obj = {};
+								if ($(this).data('type') == "json") {
+									obj[name] = JSON.parse($(this).val());
+								} else {
+									obj[name] = $.trim($(this).val());
+								}
+								if ($(this).attr("paramquest")) {
+									var o = JSON.parse($(this).attr("paramquest"));
+									obj = $.extend(obj, o);
+								}
+								result[$(v).attr('listvalue')].push(obj);
+								$(this).addClass('getvalued');
+							}
+						});
+					}
+				}
+
+				if ($(v).attr('arrayvalue')) {
+					if (!result[$(v).attr('arrayvalue')]) {
+						result[$(v).attr('arrayvalue')] = [];
+						$("input[arrayvalue='" + $(v).attr('arrayvalue') + "']").each(function() {
+							if ($(this).val() != "") {
+								var obj = {};
+								if ($(this).data('type') == "json") {
+									obj = JSON.parse($(this).val());
+								} else {
+									obj = $.trim($(this).val());
+								}
+								if ($(this).attr("paramquest")) {
+									var o = JSON.parse($(this).attr("paramquest"));
+									obj = $.extend(obj, o);
+								}
+								result[$(v).attr('arrayvalue')].push(obj);
+							}
+						});
+					}
+				}
+				if (name == '' || $(v).hasClass('getvalued')) {
+					return;
+				}
 				//构建参数
 				if (name.match(/\./)) {
 					tempArr = name.split('.');
 					nameSpace = tempArr[0];
-					tempObj[tempArr[1]] = val;
+					if (tempArr.length == 3) {
+						tempObj[tempArr[1]] = tempObj[tempArr[1]] || {};
+						tempObj[tempArr[1]][tempArr[2]] = val;
+					} else {
+						if ($(v).data('type') == "json") {
+							tempObj[tempArr[1]] = JSON.parse(val);
+							if ($(v).attr("paramquest")) {
+								var o = JSON.parse($(v).attr("paramquest"));
+								tempObj[tempArr[1]] = $.extend(tempObj[tempArr[1]], o);
+							}
+						} else {
+							tempObj[tempArr[1]] = val;
+						}
+					}
 					if (!result[nameSpace]) {
 						result[nameSpace] = tempObj;
 					} else {
 						result[nameSpace] = $.extend({}, result[nameSpace], tempObj);
 					}
-
 				} else {
 					result[name] = val;
 				}
@@ -108,6 +172,7 @@
 					obj[o] = result[o]
 				}
 			}
+			$('.getvalued').removeClass('getvalued');
 			return obj;
 		}
 	};

@@ -36,14 +36,16 @@
 		this.arr = [];
 		this.objArr = {};
 		this.dialog;
-		this.bloom;
+		this.bloom = true;
 	};
 	MobilePhotoPreview.prototype = {
 		init: function(settings) {
-			this.settings = $.extend({}, settings);
+			this.settings = $.extend({
+				animate: true
+			}, settings);
 			this.target = $(this.settings.target);
 			this.trigger = this.settings.trigger || "a";
-			this.bloom = this.settings.bloom || false;
+			this.bloom = this.settings.bloom;
 			this.bindEvent();
 		},
 		touch: function(obj, parent, fn) {
@@ -85,6 +87,7 @@
 				istartleft = 0,
 				end = {},
 				move = false;
+			var curPos = {};
 			_this.imgPreview.on('touchstart', function(e) {
 				start = {
 					x: e.changedTouches[0].pageX,
@@ -93,7 +96,8 @@
 				if (e.targetTouches.length == 2) {
 					move = false;
 					return false;
-				}
+				};
+				curPos = $(this).position();
 				istartleft = e.changedTouches[0].pageX;
 			});
 			_this.imgPreview.on('touchmove', function(e) {
@@ -105,17 +109,19 @@
 					x: e.changedTouches[0].pageX,
 					y: e.changedTouches[0].pageY
 				};
-				var curPos = $(this).position();
+				// var curPos = $(this).position();
 				if (!_this.bloom) {
 					//只移动x轴
+					curPos.left = curPos.left + (end.x - start.x);
 					$(this).css({
-						left: curPos.left + (end.x - start.x)
+						left: curPos.left
 					});
 				} else {
-					$(this).css({
+					curPos = {
 						left: curPos.left + (end.x - start.x),
 						top: curPos.top + (end.y - start.y)
-					});
+					}
+					$(this).css(curPos);
 				}
 				start = end;
 				return false;
@@ -155,15 +161,15 @@
 				if (_this.currentIndex >= _this.arr.length) {
 					_this.currentIndex = _this.arr.length - 1;
 				}
-				_this.go();
+				_this.go(_this.settings.animate);
 				move = false;
 			});
 		},
-		go: function(noanimate) {
+		go: function(animate) {
 			var _this = this;
 			var left = _this.currentIndex * _this.maxWidth;
-			noanimate = noanimate ? "css" : "animate";
-			$(_this.imgPreview)[noanimate]({
+			animate = animate ? "animate" : "css";
+			$(_this.imgPreview)[animate]({
 				left: -left,
 				top: 0
 			}, 200);
@@ -179,12 +185,14 @@
 			_this.arr = _this.target.find(_this.trigger);
 			_this.sum = _this.arr.length;
 			_this.currentIndex = $(target).index();
+			var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+			var clientWidth = document.documentElement.clientWidth || document.body.clientWidth;
 			var options = $.extend({
 				target: '<div class="imgViewTop"><em>' + (_this.currentIndex + 1) + '/' + _this.sum + '</em></div><div class="pos-relative"><div id="imgPreview"></div></div><div id="imgTitle"></div>',
 				animate: true,
 				show: true,
-				width: '100%',
-				height: '100%',
+				width: clientWidth,
+				height: clientHeight,
 				mask: true,
 				className: "ui-preview",
 				afterHide: function(c) {
@@ -196,11 +204,15 @@
 					$(cur).siblings().hide();
 				},
 				beforeShow: function(c) {
+					var _self = this;
 					_this.imgPreview = $('#imgPreview', c);
 					_this.format(c);
 					_this.bindSlide();
-					_this.go(true);
+					_this.go(false);
 					_this.settings.show && _this.settings.show.call(_this, _this.dialog.dialogContainer);
+					_this.imgPreview.on('click', function() {
+						_self.dispose();
+					});
 				}
 			}, {});
 			_this.dialog.init(options);
@@ -218,8 +230,8 @@
 				if (i == _this.currentIndex) {
 					isdisplay = 'style="display:block;"';
 				}
-				var src = item.attr('href') || item.children('input').val() || item.children('img').attr('src');
-				html += '<div ' + isdisplay + '><img src="' + src + '"/></div>';
+				var src = item.attr('href') || item.find('input').val() || item.find('img').attr('src')||item.attr('src');
+				html += '<div ' + isdisplay + '></div>';
 				(function(item, i, src) {
 					setTimeout(function() {
 						var img = new Image();
@@ -236,7 +248,7 @@
 								setObj.call(this, i);
 							}
 						}
-					});
+					}, 100);
 				})(item, i, src);
 			}
 			_this.imgPreview.html(html);
@@ -246,11 +258,15 @@
 
 			function setObj(i) {
 				length++;
+				var obj = $(_this.imgPreview.children().get(i));
+				var img = $(this);
+				obj.html(img);
+				obj.css('background', 'transparent');
 				_this.objArr[i] = {
 					src: this.src,
 					height: this.height,
 					width: this.width,
-					elem: $(_this.imgPreview.children().get(i)).children('img'),
+					elem: img,
 					index: i
 				};
 				_this.objArr.length = length;
@@ -301,4 +317,4 @@
 		}
 	};
 	return MobilePhotoPreview;
-})
+});

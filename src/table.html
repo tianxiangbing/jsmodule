@@ -41,21 +41,20 @@
 </aside>
 
 
-<link rel="stylesheet" type="text/css" href="example/table/table.css">
-
 <h1>
 <a id="table" class="anchor" href="#table" aria-hidden="true"><span class="octicon octicon-link"></span></a>table</h1>
-
+	<div>
 <p>表格的渲染组件</p>
 <div style="width:600px;">
 	<div class="form">
-		名称: <input type="text" name="gname"> <a href="#" id="search">search</a>
+		名称: <input type="text" name="gname"> <a href="#" id="btn-search">search</a>
 	</div>
-	<div id="tab-list" ajaxurl="json/list.html">
+	<div id="tab-list1" ajaxurl="json/list.html">
 		loading...
 	</div>
 	<div id="pager"></div>
 </div>
+<link rel="stylesheet" type="text/css" href="example/table/paging.css">
 <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="example/handlebars-v3.0.0.js"></script>
 <script type="text/javascript" src="example/paging/paging.js"></script>
@@ -88,10 +87,11 @@
 </script>
 
 <script>
-var table = new Table($('#tab-list'), $('#tpl-list'), $('#pager'), {}, $('#search'));
+var table = new Table($('#tab-list1'), $('#tpl-list'), $('#pager'), {}, $('#btn-search'));
 table.init({type:'get'});
 </script>
-<p><em>如上图所示，功能基本包括常用表格中遇到的分页、搜索、删除、AJAX操作。由于是用的HANDLEBARS渲染的，所以样式可能很好的控制，要加新的功能也较容易。</em></p>
+</div>
+<p><em>如上所示，功能基本包括常用表格中遇到的分页、搜索、删除、AJAX操作。由于是用的HANDLEBARS渲染的，所以样式可能很好的控制，要加新的功能也较容易。</em></p>
 
 <h1>
 <a id="调用例子" class="anchor" href="#%E8%B0%83%E7%94%A8%E4%BE%8B%E5%AD%90" aria-hidden="true"><span class="octicon octicon-link"></span></a>调用例子</h1>

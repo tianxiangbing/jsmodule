@@ -1,100 +1,4 @@
-/*
- * Created with Sublime Text 2.
- * license: http://www.lovewebgames.com/jsmodule/index.html
- * User: 田想兵
- * Date: 2015-04-27
- * Time: 10:27:55
- * Contact: 55342775@qq.com
- */
-(function(root, factory) {
-	//amd
-	if (typeof define === 'function' && define.amd) {
-		define(['$'], factory);
-	} else if (typeof exports === 'object') { //umd
-		module.exports = factory();
-	} else {
-		root.CarouselImage = factory(window.Zepto || window.jQuery || $);
-	}
-})(this, function($) {
-	$.fn.CarouselImage = function(settings) {
-		var list = [];
-		$(this).each(function() {
-			var car = new CarouselImage();
-			var options = $.extend({
-				target: $(this)
-			}, settings);
-			car.init(options);
-			list.push(car);
-		});
-		return list;
-	};
-
-	function CarouselImage() {}
-	CarouselImage.prototype = {
-		init: function(settings) {
-			var _this = this;
-			this.settings = settings;
-			this.index = 0;
-			this.container = settings.target;
-			this.content = this.container.children().first();
-			this.timer = settings.timer || 3000;
-			this.animate = settings.animate || 500;
-			this.num = settings.num || null;
-			this.list = this.content.children();
-			this.size = this.list.length;
-			this.repeat = settings.repeat || false;
-			if (settings.width) {
-				this.container.width(settings.width);
-			}
-			if (settings.height) {
-				this.container.height(settings.height);
-			}
-			this.step = this.container.width();
-			for (var i = 0, l = this.list.length; i < l; i++) {
-				var item = $(this.list[i]);
-				item.find('img').addClass('carousel-' + i).attr("data-index", i);
-			}
-			if (this.repeat) {
-				var firstc = this.list.first().clone();
-				var lastc = this.list.last().clone();
-				this.content.append(firstc);
-				this.content.prepend(lastc);
-				this.content.css({
-					left: -this.container.width(),
-					position: "absolute"
-				});
-				this.content.width((this.list.length + 2) * this.step);
-			} else {
-				this.content.css({
-					left: 0,
-					position: "absolute"
-				});
-				this.content.width(this.list.length * this.step);
-			}
-			this.setHeightWidth();
-			// alert(this.content.width())
-			this.bindEvent();
-			this.auto();
-			this.formatNum();
-		},
-		setHeightWidth: function() {
-			var settings = this.settings;
-			var _this = this;
-			//_this.container.find('img').width(this.container.width());
-			this.container.find('a').css({
-				width: this.step,
-				height: this.container.height(),
-				position: 'relative'
-			});
-			this.container.find('img').each(function() {
-				var img = new Image();
-				img.src = $(this).attr('src');
-				var i = $(this).data('index');
-				;(function(img,i){
-					if (img.complete) {
-						setObj.call(img, i);
-					} else {
-						img.onreadystatechange = function() {
+nction() {
 							if (this.readystate == "complete" || this.readyState == "loaded") {
 								setObj.call(this, i);
 							}
@@ -103,7 +7,7 @@
 							setObj.call(this, i);
 						}
 					}
-				})(img,i);
+				})(img, i);
 			});
 
 			function setObj(i) {
@@ -115,8 +19,8 @@
 				//未设置高度时，以第一个加完的图片的高度为准，其他图片都等比自缩放，小于容器时，原样显示
 				if (!_this.settings.height) {
 					var ch = (_this.container.width() / w) * h;
-					_this.settings.height = (_this.container.width() / w) * h;
-					_this.container.height(_this.settings.height);
+					//_this.settings.height = (_this.container.width() / w) * h;
+					_this.container.height((_this.container.width() / w) * h);
 					_this.container.find('a').height(ch);
 					_this.content.css({
 						position: "absolute"
@@ -125,22 +29,20 @@
 				//set img width height
 				var imgw = _this.container.width();
 				var imgh = imgw / w * h;
-				if ($('.carousel-' + i,c).height() > _this.container.height()) {
-					//if(_this.container.height() == 200)debugger;
-					$('.carousel-' + i,c).height(_this.container.height());
-					$('.carousel-' + i,c).width(_this.container.height() / h * w);
+				if ($('.carousel-' + i, c).height() > _this.container.height()) {
+					$('.carousel-' + i, c).height(_this.container.height());
+					$('.carousel-' + i, c).width(_this.container.height() / h * w);
 				}
-				if ($('.carousel-' + i,c).width() > _this.container.width()) {
-				if(imgh == 200)debugger;
-					$('.carousel-' + i,c).width(imgw);
-					$('.carousel-' + i,c).height(imgh);
+				if ($('.carousel-' + i, c).width() > _this.container.width()) {
+					$('.carousel-' + i, c).width(imgw);
+					$('.carousel-' + i, c).height(imgh);
 				}
 				//setposition
-				var iw = $('.carousel-' + i,c).width();
-				var ih = $('.carousel-' + i,c).height();
+				var iw = $('.carousel-' + i, c).width();
+				var ih = $('.carousel-' + i, c).height();
 				var top = (_this.container.height() - ih) / 2;
 				var left = (_this.container.width() - iw) / 2;
-				$('.carousel-' + i,c).css({
+				$('.carousel-' + i, c).css({
 					left: left,
 					top: top,
 					position: "absolute"
@@ -189,7 +91,7 @@
 				};
 				curPos = $(this).position();
 				istartleft = start.x;
-				clearInterval(_this.interval);
+				_this.stop();
 			}).on('touchmove', function(e) {
 				if (e.targetTouches.length == 2) {
 					return false;
@@ -222,12 +124,13 @@
 					left: curPos.left + (end.x - start.x)
 				};
 				$(this).css(stopPos);
-				if (end.x > istartleft) {
+				if (end.x > istartleft+10) {
 					_this.index--;
-				} else {
+					_this.go();
+				} else if (end.x < istartleft-10) {
 					_this.index++;
+					_this.go();
 				}
-				_this.go();
 				move = false;
 				_this.auto();
 				//return false;
@@ -239,7 +142,14 @@
 				_this.auto();
 			});
 			$(window).resize(function() {
-				_this.setHeightWidth();
+				if (!_this.settings.width) {
+					_this.content.find('img').css({
+						width: "auto",
+						height: "auto"
+					});
+					_this.go();
+					_this.setHeightWidth();
+				}
 			});
 		},
 		formatNum: function() {
@@ -297,6 +207,9 @@
 		},
 		auto: function() {
 			var _this = this;
+			if (this.interval) {
+				_this.stop();
+			}
 			this.interval = setInterval(function() {
 				_this.index++;
 				if (!_this.repeat) {
@@ -306,6 +219,10 @@
 				}
 				_this.go();
 			}, this.timer);
+		},
+		stop: function() {
+			clearInterval(this.interval);
+			this.interval = null;
 		}
 	}
 	return CarouselImage;
