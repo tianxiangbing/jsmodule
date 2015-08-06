@@ -43,7 +43,16 @@ var List = {
 	"word-count": {
 		files: ["word-count.js", "word-count.css"]
 	}
-
+	,
+	"format-number": {
+		files: ["format-number.js"]
+	}
+	,"network":{
+		files:['network.js','network.css']
+	}
+	,'loading':{
+		files:['loading.css','loading.js']
+	}
 };
 var http = require('http');
 /*
@@ -73,11 +82,9 @@ List.forEach(function(a,b) {
 		}
 	})
  */
-
 for (var module in List) {
 	loadModule(module)
 }
-
 function loadModule(module, p) {
 	var dirname = module;
 	var arr = List[dirname];

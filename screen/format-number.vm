@@ -1,0 +1,97 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,format-number)
+$set(title,数字或金额格式化)
+<h1>
+<a id="format-number" class="anchor" href="#format-number" aria-hidden="true"><span class="octicon octicon-link"></span></a>format-number</h1>
+<p>文本框数字或金额格式化
+效果如下:</p>
+    <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+    <script src="example/format-number/format-number.js"></script>
+    <div>整数：<input type="text" data-type="int" data-name="int"/></div>
+    <script>
+        var n1 = new FormatNumber();
+        n1.init({trigger:$('[data-type="int"]'),decimal:0});
+    </script>
+    <div>整数可为负：<input type="text" data-type="int2" data-name="int"/></div>
+    <script>
+        var n2 = new FormatNumber();
+        n2.init({trigger:$('[data-type="int2"]'),decimal:0,minus:true});
+    </script>
+    <div>两位小数(默认)：<input type="text" class="has-minus" value="1112212.221" data-type="number" data-name="as"/></div>
+    <script>
+        var n3 = new FormatNumber();
+        n3.init({trigger:$('[data-type="number"]')});
+    </script>
+    <div>3位小数并且可为负数：<input type="text" data-name="pc" data-type="pecent"/></div>
+    <script>
+        var n4 = new FormatNumber();
+        n4.init({trigger:$('[data-type="pecent"]'),decimal:3,minus:true});
+    </script>
+    <div>4位小数并且不可为负数：<input type="text" data-name="pc" data-type="pecent2"/></div>
+    <script>
+        var n5 = new FormatNumber();
+        n5.init({trigger:$('[data-type="pecent2"]'),decimal:4});
+    </script>
+    <div>标签：123123123.13211=<span id="sp_number">123123123.11</span></div>
+    <script>
+    $('#sp_number').FormatNumber({decimal:4})
+    </script>
+<h1>
+<a id="演示代码" class="anchor" href="#%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81" aria-hidden="true"><span class="octicon octicon-link"></span></a>演示代码</h1>
+<pre><code>&lt;script src="../src/jquery-1.11.2.js"&gt;&lt;/script&gt;
+    &lt;script src="../src/format-number.js"&gt;&lt;/script&gt;
+    &lt;div&gt;整数：&lt;input type="text" data-type="int" data-name="int"/&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var n1 = new FormatNumber();
+        n1.init({trigger:$('[data-type="int"]'),decimal:0});
+    &lt;/script&gt;
+    &lt;div&gt;整数可为负：&lt;input type="text" data-type="int2" data-name="int"/&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var n2 = new FormatNumber();
+        n2.init({trigger:$('[data-type="int2"]'),decimal:0,minus:true});
+    &lt;/script&gt;
+    &lt;div&gt;两位小数(默认)：&lt;input type="text" class="has-minus" value="1112212.221" data-type="number" data-name="as"/&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var n3 = new FormatNumber();
+        n3.init({trigger:$('[data-type="number"]')});
+    &lt;/script&gt;
+    &lt;div&gt;3位小数并且可为负数：&lt;input type="text" data-name="pc" data-type="pecent"/&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var n4 = new FormatNumber();
+        n4.init({trigger:$('[data-type="pecent"]'),decimal:3,minus:true});
+    &lt;/script&gt;
+    &lt;div&gt;4位小数并且不可为负数：&lt;input type="text" data-name="pc" data-type="pecent2"/&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var n5 = new FormatNumber();
+        n5.init({trigger:$('[data-type="pecent2"]'),decimal:4});
+    &lt;/script&gt;
+    &lt;div&gt;标签：123123123.13211=&lt;span id="sp_number"&gt;123123123.13211&lt;/span&gt;&lt;/div&gt;
+    &lt;script&gt;
+    $('#sp_number').FormatNumber({decimal:4})
+    &lt;/script&gt;
+</code></pre>
+<h1>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h1>
+<h2>
+<a id="属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h2>
+<h3>
+<a id="triggerdomstring" class="anchor" href="#triggerdomstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>trigger:dom|string</h3>
+<pre><code>触发器元素，可为input或标签元素(span/div)
+</code></pre>
+<h3>
+<a id="parent---domstring" class="anchor" href="#parent---domstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>parent   :dom|string</h3>
+<pre><code>委托对象，由于本插件对事件的绑定都以委托为主，如不传，默认代理到body上
+</code></pre>
+<h3>
+<a id="decimal-int" class="anchor" href="#decimal-int" aria-hidden="true"><span class="octicon octicon-link"></span></a>decimal: int</h3>
+<pre><code>小数位数，默认2位
+</code></pre>
+<h3>
+<a id="minus-bool" class="anchor" href="#minus-bool" aria-hidden="true"><span class="octicon octicon-link"></span></a>minus: bool</h3>
+<pre><code>是否支持负数，默认为false不支持
+</code></pre>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

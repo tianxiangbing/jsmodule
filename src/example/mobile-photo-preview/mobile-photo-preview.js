@@ -257,19 +257,21 @@
 			}, 500);
 
 			function setObj(i) {
-				length++;
+				_this.length++;
 				var obj = $(_this.imgPreview.children().get(i));
 				var img = $(this);
+				var height = img[0].height;
+				var width = img[0].width;
 				obj.html(img);
 				obj.css('background', 'transparent');
 				_this.objArr[i] = {
 					src: this.src,
-					height: this.height,
-					width: this.width,
+					height:height,
+					width: width,
 					elem: img,
 					index: i
 				};
-				_this.objArr.length = length;
+				_this.objArr.length = _this.length;
 				// if (_this.arr.length == _this.objArr.length) {
 				// 	console.log(_this.objArr)
 				// }

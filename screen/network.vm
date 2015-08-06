@@ -1,0 +1,134 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,network)
+$set(title,ajax请求的重写防重复点击)
+          <h1>
+<a id="network" class="anchor" href="#network" aria-hidden="true"><span class="octicon octicon-link"></span></a>network</h1>
+
+<p>ajax请求的重写,防重复点击</p>
+
+<p><code>它的核心还是使用$.ajax，只是在这里加上了加载效果，然后去除了重复的提交</code></p>
+
+<p>它的使用方法和$.ajax和$.get和$.post一致，返回的也是deferred.</p>
+
+<p>demo实例如下</p>
+
+	<input type="button" id="btn-send" value='ajax'>
+	<input type="button" id="btn-send2" value='ajax2'>
+	<input type="button" id="btn-send3" value='ajax3'>
+	<input type="button" id="btn-send4" value='ajax4'>
+	<input type="button" id="btn-send5" value='只能成功提交一次'>
+	<link rel="stylesheet" href="example/network/network.css">
+	<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+	<script src="example/network/network.js"></script>
+	<script>
+	$(function() {
+		$('#btn-send').click(function() {
+			Network.ajax({
+				url: "json/data.asp",
+				data: "a=1",
+				beforeSend: function() {
+					alert('发起请求')
+				}
+			},this).done(function() {
+				alert('请求结束')
+			});
+		});
+		$('#btn-send2').click(function() {
+			Network.ajax({
+				url: "json/data.asp",
+				data: {a:2},
+				beforeSend: function() {
+					alert('发起请求')
+				}
+			}).done(function() {
+				console.log('请求结束')
+			});
+		});
+		$('#btn-send3').click(function() {
+			Network.get("json/data.asp", {
+					a: 2
+				},
+				function() {
+				}
+			).done(function() {
+				alert('get请求结束')
+			});
+			alert('发起get请求')
+		});
+		$('#btn-send4').click(function() {
+			Network.post("json/data.asp", {
+					a: 2
+				},
+				function() {
+				}
+			).done(function() {
+				alert('post请求结束')
+			});
+			alert('发起post请求')
+		});
+		$('#btn-send5').click(function() {
+			Network.ajax({
+				url: "json/data.asp",
+				data: "a=3",
+				beforeSend: function() {
+					console.log('发起请求')
+				},
+				oneRequest:function(result){
+					if(result.status){
+						return true;
+					}else{
+						return false;
+					}
+				}
+			},this).done(function() {
+				console.log('请求结束')
+			});
+		});
+	});
+	</script>
+<h1>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h1>
+
+<h2>
+<a id="ajaxtarget" class="anchor" href="#ajaxtarget" aria-hidden="true"><span class="octicon octicon-link"></span></a>ajax:({},target)</h2>
+
+<pre><code>
+	ajax调用,settings同jquery的ajax,但多了一个oneRequest参数,此参数有时，会标识该请求只能成功发送一次，判断成功的标准是oneRequest返回true.
+	target当传入此参数时loading将在target上loading,如果不传，加载效果就是全屏的。
+</code></pre>
+
+<hr>
+
+<pre><code>$('#btn-send').click(function() {
+    Network.ajax({
+        url: "/ajax.json",
+        data: "a=1",
+        beforeSend: function() {
+            console.log('发起请求')
+        },
+		oneRequest:function(result){
+			if(result.status){
+				return true;
+			}else{
+				return false;
+			}
+		}
+    },this).done(function() {
+        console.log('请求结束')
+    });
+});
+</code></pre>
+
+<h2>
+<a id="geturldatafundatatype" class="anchor" href="#geturldatafundatatype" aria-hidden="true"><span class="octicon octicon-link"></span></a>get:(url,data,fun,dataType)</h2>
+
+<pre><code>同jquery的get方法,以get方式的ajax请求，这里没有target，为全屏加载效果
+</code></pre>
+
+<h2>
+<a id="posturldatafundatatype" class="anchor" href="#posturldatafundatatype" aria-hidden="true"><span class="octicon octicon-link"></span></a>post:(url,data,fun,dataType)</h2>
+
+<pre><code>同$.post,以post方式的ajax请求，也是全屏的加载效果
+</code></pre>

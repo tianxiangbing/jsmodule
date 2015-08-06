@@ -8,17 +8,17 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <title>js组件-js插件-jquery插件-滚动加载</title> </head>
+    <title>js组件-js插件-jquery插件-数字或金额格式化</title> </head>
   <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
-  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。滚动加载" />
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。数字或金额格式化" />
   <body>
     <header>
       <div class="inner">
-        <h1>scroll-load</h1>
-        <h2>JS组件-滚动加载</h2>
-        <a href="https://github.com/tianxiangbing/scroll-load" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+        <h1>format-number</h1>
+        <h2>JS组件-数字或金额格式化</h2>
+        <a href="https://github.com/tianxiangbing/format-number" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
         <div style="position:absolute;right:180px;top:0px;">
-          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=scroll-load&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=format-number&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
         </div>
       </div>
     </header>
@@ -28,85 +28,108 @@
         <section id="main-content">
 <ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
 ﻿<aside id="sidebar">
-	<a href="https://github.com/tianxiangbing/scroll-load/archive/master.zip" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/format-number/archive/master.zip" target="_blank" class="button">
 		<small>Download</small>
 		.zip file
 	</a>
-	<a href="https://github.com/tianxiangbing/scroll-load" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/format-number" target="_blank" class="button">
 		<small>Code</small>
 		源码
 	</a>
-	<p class="repo-owner"><a href="https://github.com/tianxiangbing/scroll-load" target="_blank">scroll-load</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/format-number" target="_blank">format-number</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
 	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://www.github.com/tianxiangbing" target="_blank"> GitHub</a></p>
 </aside>
 
 
-<link rel="stylesheet" type="text/css" href="example/scroll-load/wap-material.css">
-<div class="bgeeeeee fl" id="loadList" style="width:600px; float:none;">
-    <ul class="material-list">
-    </ul>
-</div>
-<p>js 滚动加载内容
-  </p>
-    <h1>
-    <a id="用法" class="anchor" href="#%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>用法</h1>
-    <pre><code>    &lt;div id="content"&gt;
-    &lt;/div&gt;
-    &lt;script id="entry-template" type="text/x-handlebars-template"&gt;
-        {{#each data}}
-        &lt;div&gt;&lt;img src="{{url}}"/&gt;&lt;/div&gt;
-        &lt;div&gt;{{title}}&lt;/div&gt;
-        {{/each}}
-    &lt;/script&gt;
-    &lt;script src="../dist/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
-    &lt;script src="../dist/handlebars-v3.0.0.js"&gt;&lt;/script&gt;
-    &lt;script src="../dist/scroll-load-jquery.js"&gt;&lt;/script&gt;
+<h1>
+<a id="format-number" class="anchor" href="#format-number" aria-hidden="true"><span class="octicon octicon-link"></span></a>format-number</h1>
+<p>文本框数字或金额格式化
+效果如下:</p>
+    <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+    <script src="example/format-number/format-number.js"></script>
+    <div>整数：<input type="text" data-type="int" data-name="int"/></div>
+    <script>
+        var n1 = new FormatNumber();
+        n1.init({trigger:$('[data-type="int"]'),decimal:0});
+    </script>
+    <div>整数可为负：<input type="text" data-type="int2" data-name="int"/></div>
+    <script>
+        var n2 = new FormatNumber();
+        n2.init({trigger:$('[data-type="int2"]'),decimal:0,minus:true});
+    </script>
+    <div>两位小数(默认)：<input type="text" class="has-minus" value="1112212.221" data-type="number" data-name="as"/></div>
+    <script>
+        var n3 = new FormatNumber();
+        n3.init({trigger:$('[data-type="number"]')});
+    </script>
+    <div>3位小数并且可为负数：<input type="text" data-name="pc" data-type="pecent"/></div>
+    <script>
+        var n4 = new FormatNumber();
+        n4.init({trigger:$('[data-type="pecent"]'),decimal:3,minus:true});
+    </script>
+    <div>4位小数并且不可为负数：<input type="text" data-name="pc" data-type="pecent2"/></div>
+    <script>
+        var n5 = new FormatNumber();
+        n5.init({trigger:$('[data-type="pecent2"]'),decimal:4});
+    </script>
+    <div>标签：123123123.13211=<span id="sp_number">123123123.11</span></div>
+    <script>
+    $('#sp_number').FormatNumber({decimal:4})
+    </script>
+<h1>
+<a id="演示代码" class="anchor" href="#%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81" aria-hidden="true"><span class="octicon octicon-link"></span></a>演示代码</h1>
+<pre><code>&lt;script src="../src/jquery-1.11.2.js"&gt;&lt;/script&gt;
+    &lt;script src="../src/format-number.js"&gt;&lt;/script&gt;
+    &lt;div&gt;整数：&lt;input type="text" data-type="int" data-name="int"/&gt;&lt;/div&gt;
     &lt;script&gt;
-        $('#content').ScrollLoad({tpl:"#entry-template",url:"data.json",autoLoad:true});
+        var n1 = new FormatNumber();
+        n1.init({trigger:$('[data-type="int"]'),decimal:0});
+    &lt;/script&gt;
+    &lt;div&gt;整数可为负：&lt;input type="text" data-type="int2" data-name="int"/&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var n2 = new FormatNumber();
+        n2.init({trigger:$('[data-type="int2"]'),decimal:0,minus:true});
+    &lt;/script&gt;
+    &lt;div&gt;两位小数(默认)：&lt;input type="text" class="has-minus" value="1112212.221" data-type="number" data-name="as"/&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var n3 = new FormatNumber();
+        n3.init({trigger:$('[data-type="number"]')});
+    &lt;/script&gt;
+    &lt;div&gt;3位小数并且可为负数：&lt;input type="text" data-name="pc" data-type="pecent"/&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var n4 = new FormatNumber();
+        n4.init({trigger:$('[data-type="pecent"]'),decimal:3,minus:true});
+    &lt;/script&gt;
+    &lt;div&gt;4位小数并且不可为负数：&lt;input type="text" data-name="pc" data-type="pecent2"/&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var n5 = new FormatNumber();
+        n5.init({trigger:$('[data-type="pecent2"]'),decimal:4});
+    &lt;/script&gt;
+    &lt;div&gt;标签：123123123.13211=&lt;span id="sp_number"&gt;123123123.13211&lt;/span&gt;&lt;/div&gt;
+    &lt;script&gt;
+    $('#sp_number').FormatNumber({decimal:4})
     &lt;/script&gt;
 </code></pre>
-    <h1>
-    <a id="参数及回调" class="anchor" href="#%E5%B1%9E%E6%80%A7%E6%88%96%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数及回调</h1>
-<h2>url</h2>
-        <pre><code>请求加载的url</code></pre>
-<h2>pagename</h2>
-        <pre><code>分页参数名page</code></pre>
-<h2>param</h2>
-        <pre><code>object,其他的参数</code></pre>
-<h2>autoLoad  :bool</h2>
-        <pre><code>是否自动加滚动加载,默认false;</code></pre>
-<h2>format: function</h2>
-        <pre><code>格式化的回调方法，如果没传，就会以tpl参数进行handlebars的方式格式化 。</code></pre>
-<h2>tpl:</h2>
-        <pre><code>handlebars的模板节点(string or object),要单独引用handlebars</code></pre>
-
-<script id="entry-template" type="text/x-handlebars-template" data-url="json/index.html">
-{{#each data}}
-        <li>
-            <div>
-                <a href="detail">
-                    <img src="http://ott.wansecheng.com/weidian/wdgoods/1421661435860.jpg">
-                    <div class="pro-title">{{title}}</div>
-                    <div class="clearfix mgt5">
-                        <div class="colore05658 fr">素材量：213</div>
-                        <div class="color999999 fl">¥50</div>
-                    </div>
-                </a>
-            </div>
-        </li>
-{{/each}}
-</script>
-<script src="example/scroll-load/jquery-1.9.1.min.js"></script>
-<script src="example/scroll-load/handlebars-v3.0.0.js"></script>
-<script src="example/scroll-load/scroll-load-jquery.js"></script>
-<script>
-	//滚动加载
-	$('#loadList').ScrollLoad({
-		tpl: "#entry-template",
-		url: $("#entry-template").data('url'),
-		loadmore:$('<li class="ui-loading">点击加载更多</li>')
-	});
-</script>
+<h1>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h1>
+<h2>
+<a id="属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h2>
+<h3>
+<a id="triggerdomstring" class="anchor" href="#triggerdomstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>trigger:dom|string</h3>
+<pre><code>触发器元素，可为input或标签元素(span/div)
+</code></pre>
+<h3>
+<a id="parent---domstring" class="anchor" href="#parent---domstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>parent   :dom|string</h3>
+<pre><code>委托对象，由于本插件对事件的绑定都以委托为主，如不传，默认代理到body上
+</code></pre>
+<h3>
+<a id="decimal-int" class="anchor" href="#decimal-int" aria-hidden="true"><span class="octicon octicon-link"></span></a>decimal: int</h3>
+<pre><code>小数位数，默认2位
+</code></pre>
+<h3>
+<a id="minus-bool" class="anchor" href="#minus-bool" aria-hidden="true"><span class="octicon octicon-link"></span></a>minus: bool</h3>
+<pre><code>是否支持负数，默认为false不支持
+</code></pre>
 
 <h1>其它组件推荐</h1>
 <ul class="uilist" id="modulelist">

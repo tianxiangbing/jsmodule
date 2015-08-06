@@ -1,0 +1,140 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,network)
+$set(title,loading加载动画效果)
+          <h1>
+<a id="loading" class="anchor" href="#loading" aria-hidden="true"><span class="octicon octicon-link"></span></a>loading</h1>
+
+<p>loading...
+实例演示：</p>
+<p>
+				<input type="button" id="loading1" value="loading我自己">
+				<input type="button" id="loading2" value="loading下面这个div">
+				<input type="button" id="loading3" value="loading全屏">
+			</p>
+			<div id="loading-content" style="width:300px;height:200px;border:1px solid #ccc;background-color:#f2f2f2;">这是个内容的例子</div>
+	<link rel="stylesheet" href="example/loading/loading.css">
+	<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+	<script src="example/loading/loading.js"></script>
+		<script>
+		//loading我自己
+		$('#loading1').click(function(){
+			var load = new Loading();
+			load.init({
+				target: this
+			});
+			load.start();
+			setTimeout(function() {
+				load.stop();
+			}, 3000)
+		});
+		//loading下面这个div
+		$('#loading2').click(function(){
+			var load = new Loading();
+			load.init({
+				target: "#loading-content"
+			});
+			load.start();
+			setTimeout(function() {
+				load.stop();
+			}, 3000)
+		});
+		//loading全屏
+		$('#loading3').click(function(){
+			var load = new Loading();
+			load.init();
+			load.start();
+			setTimeout(function() {
+				load.stop();
+			}, 30000)
+		});
+		</script>
+<p><strong><a href="http://www.lovewebgames.com/jsmodule/loading.html" title="loading demo">DEMO请点击这里查看.</a></strong></p>
+
+<h1>
+<a id="调用示例" class="anchor" href="#%E8%B0%83%E7%94%A8%E7%A4%BA%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>调用示例</h1>
+
+<p>html:</p>
+
+<pre><code>&lt;p&gt;
+    &lt;input type="button" id="loading1" value="loading我自己"&gt;
+    &lt;input type="button" id="loading2" value="loading下面这个div"&gt;
+    &lt;input type="button" id="loading3" value="loading全屏"&gt;
+&lt;/p&gt;
+&lt;div id="loading-content" style="width:300px;height:200px;border:1px solid #ccc;background-color:#f2f2f2;"&gt;这是个内容的例子&lt;/div&gt;
+&lt;script src="../src/jquery-1.11.2.js"&gt;&lt;/script&gt;
+&lt;script src="../src/loading.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>js:</p>
+
+<pre><code>//loading我自己
+$('#loading1').click(function(){
+    var load = new Loading();
+    load.init({
+        target: this
+    });
+    load.start();
+    setTimeout(function() {
+        load.stop();
+    }, 3000)
+});
+//loading下面这个div
+$('#loading2').click(function(){
+    var load = new Loading();
+    load.init({
+        target: "#loading-content"
+    });
+    load.start();
+    setTimeout(function() {
+        load.stop();
+    }, 3000)
+});
+//loading全屏
+$('#loading3').click(function(){
+    var load = new Loading();
+    load.init();
+    load.start();
+    setTimeout(function() {
+        load.stop();
+    }, 30000)
+});
+</code></pre>
+
+<h1>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h1>
+
+<h2>
+<a id="属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h2>
+
+<h3>
+<a id="targetstringdom" class="anchor" href="#targetstringdom" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:string||dom</h3>
+
+<pre><code>需要显示loading的节点，不传值时显示全屏的loading
+</code></pre>
+
+<h2>
+<a id="方法" class="anchor" href="#%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>方法</h2>
+
+<h3>
+<a id="startfunction" class="anchor" href="#startfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>start:function()</h3>
+
+<pre><code>开始loading
+</code></pre>
+
+<h3>
+<a id="stopfunction" class="anchor" href="#stopfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>stop:function()</h3>
+
+<pre><code>结束loading
+</code></pre>
+
+<h2>
+<a id="事件" class="anchor" href="#%E4%BA%8B%E4%BB%B6" aria-hidden="true"><span class="octicon octicon-link"></span></a>事件</h2>
+
+<h3>
+<a id="stop" class="anchor" href="#stop" aria-hidden="true"><span class="octicon octicon-link"></span></a>stop</h3>
+
+<pre><code>target的stop事件触发时，结束loading. 如
+$('html').trigger('stop')会结束全屏的loading动画.
+</code></pre>

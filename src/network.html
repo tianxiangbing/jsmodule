@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <link href='stylesheets/css.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <title>js组件-js插件-jquery插件-ajax请求的重写防重复点击</title> </head>
+  <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。ajax请求的重写防重复点击" />
+  <body>
+    <header>
+      <div class="inner">
+        <h1>network</h1>
+        <h2>JS组件-ajax请求的重写防重复点击</h2>
+        <a href="https://github.com/tianxiangbing/network" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+        <div style="position:absolute;right:180px;top:0px;">
+          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=network&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
+        </div>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+<ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
+﻿<aside id="sidebar">
+	<a href="https://github.com/tianxiangbing/network/archive/master.zip" target="_blank" class="button">
+		<small>Download</small>
+		.zip file
+	</a>
+	<a href="https://github.com/tianxiangbing/network" target="_blank" class="button">
+		<small>Code</small>
+		源码
+	</a>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/network" target="_blank">network</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://www.github.com/tianxiangbing" target="_blank"> GitHub</a></p>
+</aside>
+
+
+          <h1>
+<a id="network" class="anchor" href="#network" aria-hidden="true"><span class="octicon octicon-link"></span></a>network</h1>
+
+<p>ajax请求的重写,防重复点击</p>
+
+<p><code>它的核心还是使用$.ajax，只是在这里加上了加载效果，然后去除了重复的提交</code></p>
+
+<p>它的使用方法和$.ajax和$.get和$.post一致，返回的也是deferred.</p>
+
+<p>demo实例如下</p>
+
+	<input type="button" id="btn-send" value='ajax'>
+	<input type="button" id="btn-send2" value='ajax2'>
+	<input type="button" id="btn-send3" value='ajax3'>
+	<input type="button" id="btn-send4" value='ajax4'>
+	<input type="button" id="btn-send5" value='只能成功提交一次'>
+	<link rel="stylesheet" href="example/network/network.css">
+	<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+	<script src="example/network/network.js"></script>
+	<script>
+	$(function() {
+		$('#btn-send').click(function() {
+			Network.ajax({
+				url: "json/data.asp",
+				data: "a=1",
+				beforeSend: function() {
+					alert('发起请求')
+				}
+			},this).done(function() {
+				alert('请求结束')
+			});
+		});
+		$('#btn-send2').click(function() {
+			Network.ajax({
+				url: "json/data.asp",
+				data: {a:2},
+				beforeSend: function() {
+					alert('发起请求')
+				}
+			}).done(function() {
+				console.log('请求结束')
+			});
+		});
+		$('#btn-send3').click(function() {
+			Network.get("json/data.asp", {
+					a: 2
+				},
+				function() {
+				}
+			).done(function() {
+				alert('get请求结束')
+			});
+			alert('发起get请求')
+		});
+		$('#btn-send4').click(function() {
+			Network.post("json/data.asp", {
+					a: 2
+				},
+				function() {
+				}
+			).done(function() {
+				alert('post请求结束')
+			});
+			alert('发起post请求')
+		});
+		$('#btn-send5').click(function() {
+			Network.ajax({
+				url: "json/data.asp",
+				data: "a=3",
+				beforeSend: function() {
+					console.log('发起请求')
+				},
+				oneRequest:function(result){
+					if(result.status){
+						return true;
+					}else{
+						return false;
+					}
+				}
+			},this).done(function() {
+				console.log('请求结束')
+			});
+		});
+	});
+	</script>
+<h1>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h1>
+
+<h2>
+<a id="ajaxtarget" class="anchor" href="#ajaxtarget" aria-hidden="true"><span class="octicon octicon-link"></span></a>ajax:({},target)</h2>
+
+<pre><code>
+	ajax调用,settings同jquery的ajax,但多了一个oneRequest参数,此参数有时，会标识该请求只能成功发送一次，判断成功的标准是oneRequest返回true.
+	target当传入此参数时loading将在target上loading,如果不传，加载效果就是全屏的。
+</code></pre>
+
+<hr>
+
+<pre><code>$('#btn-send').click(function() {
+    Network.ajax({
+        url: "/ajax.json",
+        data: "a=1",
+        beforeSend: function() {
+            console.log('发起请求')
+        },
+		oneRequest:function(result){
+			if(result.status){
+				return true;
+			}else{
+				return false;
+			}
+		}
+    },this).done(function() {
+        console.log('请求结束')
+    });
+});
+</code></pre>
+
+<h2>
+<a id="geturldatafundatatype" class="anchor" href="#geturldatafundatatype" aria-hidden="true"><span class="octicon octicon-link"></span></a>get:(url,data,fun,dataType)</h2>
+
+<pre><code>同jquery的get方法,以get方式的ajax请求，这里没有target，为全屏加载效果
+</code></pre>
+
+<h2>
+<a id="posturldatafundatatype" class="anchor" href="#posturldatafundatatype" aria-hidden="true"><span class="octicon octicon-link"></span></a>post:(url,data,fun,dataType)</h2>
+
+<pre><code>同$.post,以post方式的ajax请求，也是全屏的加载效果
+</code></pre>
+
+        </section>
+      </div>
+    </div>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255182337'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/stat.php%3Fid%3D1255182337' type='text/javascript'%3E%3C/script%3E"));</script>
+    <div style="height:24px;line-height:24px;border:1px solid #ccc;background-color:#f2f2f2;position:fixed;top:0;width:100%;z-index:1;font-size:12px;">源码在github上托管，请尽量到github上下载最新代码！也可以提交Issues. <strong>如果您发现demo无法使用时，请多刷新几次页面就好了,非代码问题，便宜空间问题多。</strong></div>
+  </body>
+</html>
