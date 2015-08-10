@@ -1,0 +1,23 @@
+.ui-tip{
+	padding:5px 15px;  border: 1px solid #ffbb76;position: absolute;border-radius: 2px;zoom:1;display: none;min-height: 16px;background-color: #FFFCEF;
+}
+.ui-tip-content{line-height: 1.6;}
+.ui-tip-arrow{position:absolute;}
+.ui-tip-arrow i,.ui-tip-arrow em{height:0;font-size: 0;width:0;display: block;border-style: solid;border-color:transparent;position: absolute;}
+/*right*/
+.arrow-right .ui-tip-arrow{left:-6px;top:8px;}
+.arrow-right .ui-tip-arrow i{border-width: 6px 6px 6px 0;border-right-color: #ffbb76;}
+.arrow-right .ui-tip-arrow em{left:1px;top:1px;border-width: 5px 5px 5px 0;border-right-color: #FFFCEF;}
+/*left*/
+.arrow-left .ui-tip-arrow{right:0;top:8px;}
+.arrow-left .ui-tip-arrow i{border-width: 6px 0 6px 6px ;border-left-color: #ffbb76;}
+.arrow-left .ui-tip-arrow em{left:0px;top:1px;border-width: 5px 0 5px 5px ;border-left-color: #FFFCEF;}
+/*top*/
+.arrow-top .ui-tip-arrow{bottom:0px;left:45%;}
+.arrow-top .ui-tip-arrow i{border-width: 6px  6px 0 6px ;border-top-color: #ffbb76;}
+.arrow-top .ui-tip-arrow em{left:1px;top:0px;border-width: 5px 5px 0 5px ;border-top-color: #FFFCEF;}
+/*bottom*/
+.arrow-bottom .ui-tip-arrow{top:-6px;left:45%;}
+.arrow-bottom .ui-tip-arrow i{border-width: 0 6px  6px 6px ;border-bottom-color: #ffbb76;}
+.arrow-bottom .ui-tip-arrow em{left:1px;top:1px;border-width: 0 5px 5px 5px ;border-bottom-color: #FFFCEF;}
+

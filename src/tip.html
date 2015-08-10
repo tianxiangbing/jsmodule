@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <link href='stylesheets/css.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <title>js组件-js插件-jquery插件-js提示组件</title> </head>
+  <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。js提示组件" />
+  <body>
+    <header>
+      <div class="inner">
+        <h1>tip</h1>
+        <h2>JS组件-js提示组件</h2>
+        <a href="https://github.com/tianxiangbing/tip" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+        <div style="position:absolute;right:180px;top:0px;">
+          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=tip&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
+        </div>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+<ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
+﻿<aside id="sidebar">
+	<a href="https://github.com/tianxiangbing/tip/archive/master.zip" target="_blank" class="button">
+		<small>Download</small>
+		.zip file
+	</a>
+	<a href="https://github.com/tianxiangbing/tip" target="_blank" class="button">
+		<small>Code</small>
+		源码
+	</a>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/tip" target="_blank">tip</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://www.github.com/tianxiangbing" target="_blank"> GitHub</a></p>
+</aside>
+
+
+<h1>
+<a id="tip" class="anchor" href="#tip" aria-hidden="true"><span class="octicon octicon-link"></span></a>tip</h1>
+<p>提示组件</p>
+	<hr>
+	<h1>
+	<a id="调用示例" class="anchor" href="#%E8%B0%83%E7%94%A8%E7%A4%BA%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>调用示例</h1>
+		<table style="width:700px;border:none;"><tr>
+			<td>
+				<input type="button" value="右边hover" id="btn-tip-right">
+			</td>
+			<td>
+				<input type="button" value="左边click" id="btn-tip-left">
+			</td>
+			<td>
+				<input type="button" value="上边click" id="btn-tip-top">
+			</td>
+			<td>
+				<input type="button" value="下边click" id="btn-tip-bottom">
+			</td>
+			<td align="right">
+				<input type="button" value="按边界click自动" id="btn-tip-auto">
+			</td>
+		</tr></table>
+		<br>
+			文本提示：<input type="text" id="txt-tip" msg="请输入内容">
+	<link rel="stylesheet" href="example/tip/tip.css">
+	<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+	<script src="example/tip/tip.js"></script>
+		<script>
+		var tip = new Tip();
+		tip.init({
+			trigger: '#btn-tip-right',
+			width:100,
+			triggerEvent:'hover',
+			content: 'loading...',
+			ajax: function() {
+				var dtd = $.Deferred(); // 新建一个deferred对象
+				var wait = function(dtd) {
+					var tasks = function() {
+						console.log("执行完毕！");
+						dtd.resolve("这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊"); // 改变deferred对象的执行状态
+					};
+					setTimeout(tasks, 1000);
+					return dtd;
+				};
+				wait(dtd);
+				return dtd;
+			}
+		});
+		var tip_left= new Tip();
+		tip_left.init({
+			trigger:'#btn-tip-left',
+			triggerEvent:'click',
+			content: '这是提示信息啊',
+			position:'left'
+			});
+		var tip_top= new Tip();
+		tip_top.init({
+			trigger:'#btn-tip-top',
+			triggerEvent:'click',
+			content: '这是提示信息啊',
+			position:'top'
+			});
+		var tip_bottom= new Tip();
+		tip_bottom.init({
+			trigger:'#btn-tip-bottom',
+			triggerEvent:'click',
+			content: '这是提示信息啊',
+			position:'bottom'
+			});
+		var tip_auto= new Tip();
+		tip_auto.init({
+			trigger:'#btn-tip-auto',
+			triggerEvent:'click',
+			width:100,
+			content: '这是提示信息啊这是提示信息啊这是提示信息啊',
+			inViewport:true
+			});
+		var t = $('#txt-tip').Tip({
+			content:$('#txt-tip').attr('msg'),
+			triggerEvent:'focus'
+		})[0];
+		</script>
+	<pre><code>&lt;table style="width:100%;"&gt;&lt;tr&gt;
+		    &lt;td&gt;
+		        &lt;input type="button" value="右边hover" id="btn-tip-right"&gt;
+		    &lt;/td&gt;
+		    &lt;td&gt;
+		        &lt;input type="button" value="左边click" id="btn-tip-left"&gt;
+		    &lt;/td&gt;
+		    &lt;td&gt;
+		        &lt;input type="button" value="上边click" id="btn-tip-top"&gt;
+		    &lt;/td&gt;
+		    &lt;td&gt;
+		        &lt;input type="button" value="下边click" id="btn-tip-bottom"&gt;
+		    &lt;/td&gt;
+		    &lt;td align="right"&gt;
+		        &lt;input type="button" value="按边界click自动" id="btn-tip-auto"&gt;
+		    &lt;/td&gt;
+		&lt;/tr&gt;&lt;/table&gt;
+		文本提示：&lt;input type="text" id="txt-tip" msg="请输入内容"&gt;
+		&lt;script type="text/javascript" src="../src/jquery-1.11.2.js"&gt;&lt;/script&gt;
+		&lt;script type="text/javascript" src="../src/tip.js"&gt;&lt;/script&gt;
+		&lt;script&gt;
+		var tip = new Tip();
+		tip.init({
+		    trigger: '#btn-tip-right',
+		    width:100,
+		    triggerEvent:'hover',
+		    content: 'loading...',
+		    ajax: function() {
+		        var dtd = $.Deferred(); // 新建一个deferred对象
+		        var wait = function(dtd) {
+		            var tasks = function() {
+		                console.log("执行完毕！");
+		                dtd.resolve("这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊"); // 改变deferred对象的执行状态
+		            };
+		            setTimeout(tasks, 1000);
+		            return dtd;
+		        };
+		        wait(dtd);
+		        return dtd;
+		    }
+		});
+		var tip_left= new Tip();
+		tip_left.init({
+		    trigger:'#btn-tip-left',
+		    triggerEvent:'click',
+		    content: '这是提示信息啊',
+		    position:'left'
+		    });
+		var tip_top= new Tip();
+		tip_top.init({
+		    trigger:'#btn-tip-top',
+		    triggerEvent:'click',
+		    content: '这是提示信息啊',
+		    position:'top'
+		    });
+		var tip_bottom= new Tip();
+		tip_bottom.init({
+		    trigger:'#btn-tip-bottom',
+		    triggerEvent:'click',
+		    content: '这是提示信息啊',
+		    position:'bottom'
+		    });
+		var tip_auto= new Tip();
+		tip_auto.init({
+		    trigger:'#btn-tip-auto',
+		    triggerEvent:'click',
+		    width:100,
+		    content: '这是提示信息啊这是提示信息啊这是提示信息啊',
+		    inViewport:true
+		    });
+		var t = $('#txt-tip').Tip({
+		    content:$('#txt-tip').attr('msg'),
+		    triggerEvent:'focus'
+		})[0];
+		&lt;/script&gt;
+	</code></pre>
+	<h1>
+	<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h1>
+	<h2>
+	<a id="属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h2>
+	<h3>
+	<a id="triggerdomstring" class="anchor" href="#triggerdomstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>trigger:<code>[$|dom|string]</code>
+	</h3>
+	<pre><code>触发元素,jquery对象或dom或string
+	</code></pre>
+	<h3>
+	<a id="triggerevent-clickhoverfocus" class="anchor" href="#triggerevent-clickhoverfocus" aria-hidden="true"><span class="octicon octicon-link"></span></a>triggerEvent: <code>[click|hover|focus]</code>
+	</h3>
+	<pre><code>触发事件，默认为hover,事件都委托在delegate参数上，focus不委托
+	</code></pre>
+	<h3>
+	<a id="delegatedomstring" class="anchor" href="#delegatedomstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>delegate:<code>[dom|string]</code>
+	</h3>
+	<pre><code>事件的委托节点,默认委托到body,focus无效.
+	</code></pre>
+	<h3>
+	<a id="tplstring" class="anchor" href="#tplstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>tpl:<code>[string]</code>
+	</h3>
+	<pre><code>html模板，默认&lt;div class="ui-tip"&gt;&lt;div class="ui-tip-content"&gt;&lt;/div&gt;&lt;div class="ui-tip-arrow"&gt;&lt;i&gt;&lt;/i&gt;&lt;em&gt;&lt;/em&gt;&lt;/div&gt;&lt;/div&gt;
+	</code></pre>
+	<h3>
+	<a id="offsetx0y0" class="anchor" href="#offsetx0y0" aria-hidden="true"><span class="octicon octicon-link"></span></a>offset:<code>{x:0,y:0}</code>
+	</h3>
+	<pre><code>偏移量,默认x:0,y:0
+	</code></pre>
+	<h3>
+	<a id="widthnumber" class="anchor" href="#widthnumber" aria-hidden="true"><span class="octicon octicon-link"></span></a>width:<code>[number]</code>
+	</h3>
+	<pre><code>宽
+	</code></pre>
+	<h3>
+	<a id="heightnumber" class="anchor" href="#heightnumber" aria-hidden="true"><span class="octicon octicon-link"></span></a>height:<code>[number]</code>
+	</h3>
+	<pre><code>高
+	</code></pre>
+	<h3>
+	<a id="zindex999" class="anchor" href="#zindex999" aria-hidden="true"><span class="octicon octicon-link"></span></a>zIndex:<code>999</code>
+	</h3>
+	<pre><code>z-index
+	</code></pre>
+	<h3>
+	<a id="contentstring" class="anchor" href="#contentstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>content:[string|$]</h3>
+	<pre><code>提示内容，这里可以是string或节点，因为内部是调用的$().html方法,动态设置请调setContent方法
+	</code></pre>
+	<h3>
+	<a id="inviewportbool" class="anchor" href="#inviewportbool" aria-hidden="true"><span class="octicon octicon-link"></span></a>inViewport:<code>bool</code>
+	</h3>
+	<pre><code>是否自适合窗口位置,默认false
+	</code></pre>
+	<h3>
+	<a id="positionrightlefttopbottom" class="anchor" href="#positionrightlefttopbottom" aria-hidden="true"><span class="octicon octicon-link"></span></a>position:<code>['right'|'left'|'top'|'bottom']</code>
+	</h3>
+	<pre><code>显示位置，默认'right
+	</code></pre>
+	<h3>
+	<a id="ajaxfunction" class="anchor" href="#ajaxfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>ajax:<code>function</code>
+	</h3>
+	<pre><code>返回一个promise,参数为promise之后的内容如下：
+		ajax: function() {
+		    var dtd = $.Deferred(); // 新建一个deferred对象
+		    var wait = function(dtd) {
+		        var tasks = function() {
+		            console.log("执行完毕！");
+		            dtd.resolve("这是提示信息啊"); // 改变deferred对象的执行状态
+		        };
+		        setTimeout(tasks, 1000);
+		        return dtd;
+		    };
+		    wait(dtd);
+		    return dtd;
+		}
+	</code></pre>
+	<h2>
+	<a id="方法" class="anchor" href="#%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>方法</h2>
+	<h3>
+	<a id="setcontentfunctioncontent" class="anchor" href="#setcontentfunctioncontent" aria-hidden="true"><span class="octicon octicon-link"></span></a>setContent:<code>function(content)</code>
+	</h3>
+	<pre><code>设置提示内容
+	</code></pre>
+	<h3>
+	<a id="stopfunction" class="anchor" href="#stopfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>stop:<code>function()</code>
+	</h3>
+	<pre><code>停止显示
+	</code></pre>
+	<h3>
+	<a id="startfunction" class="anchor" href="#startfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>start:<code>function</code>
+	</h3>
+	<pre><code>开始显示
+	</code></pre>
+	<h2>
+	<a id="事件或回调" class="anchor" href="#%E4%BA%8B%E4%BB%B6%E6%88%96%E5%9B%9E%E8%B0%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>事件或回调</h2>
+	<h3>
+	<a id="callbackfunction" class="anchor" href="#callbackfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>callback:<code>function</code>
+	</h3>
+	<pre><code>显示时的回调
+	</code></pre>
+<h1>其它组件推荐</h1>
+<ul class="uilist" id="modulelist">
+	<li>
+		<a href="calendar.html"><img  src="images/ui/calendar.jpg"/></a>
+		<a href="calendar.html" class="m-title">日历、日期、calendar</a>
+		<a href="https://github.com/tianxiangbing/calendar" target="_blank" class="a_code">Code</a>
+		<a href="calendar.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="dialog.html"><img  src="images/ui/dialog.jpg"/></a>
+		<a href="dialog.html" class="m-title">浮层、弹窗、dialog</a>
+		<a href="https://github.com/tianxiangbing/dialog" target="_blank" class="a_code">Code</a>
+		<a href="dialog.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="mobile-upload.html"><img  src="images/ui/mobile-upload.jpg"/></a>
+		<a href="mobile-upload.html" class="m-title">h5上传图片、upload</a>
+		<a href="https://github.com/tianxiangbing/mobile-upload" target="_blank" class="a_code">Code</a>
+		<a href="mobile-upload.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="scroll-load.html"><img  src="images/ui/scroll-load.jpg"/></a>
+		<a href="scroll-load.html" class="m-title">js的滚动加载内容</a>
+		<a href="https://github.com/tianxiangbing/scroll-load" target="_blank" class="a_code">Code</a>
+		<a href="scroll-load.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="mobile-select-area.html"><img  src="images/ui/mobile-select-area.jpg" alt="js手机选择地区联动仿ios" title="js手机选择地区联动仿ios"/></a>
+		<a href="mobile-select-area.html" class="m-title">js手机选择地区联动仿ios</a>
+		<a href="https://github.com/tianxiangbing/mobile-select-area" title="js手机选择地区联动仿ios"/ target="_blank" class="a_code">Code</a>
+		<a href="mobile-select-area.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="mobile-photo-preview.html"><img  src="images/ui/mobile-photo-preview.jpg"/></a>
+		<a href="mobile-photo-preview.html" class="m-title">js实现手机端图片预览</a>
+		<a href="https://github.com/tianxiangbing/mobile-photo-preview" target="_blank" class="a_code">Code</a>
+		<a href="mobile-photo-preview.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="mobile-select-date.html"><img  src="images/ui/mobile-select-date.jpg"/></a>
+		<a href="mobile-select-date.html" class="m-title">js实现手机端选择日期</a>
+		<a href="https://github.com/tianxiangbing/mobile-select-date" target="_blank" class="a_code">Code</a>
+		<a href="mobile-select-date.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="carousel-image.html"><img  src="images/ui/carousel-image.jpg"/></a>
+		<a href="carousel-image.html" class="m-title">轮播图片、支持手机滑动</a>
+		<a href="https://github.com/tianxiangbing/carousel-image" target="_blank" class="a_code">Code</a>
+		<a href="carousel-image.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="upload.html"><img  src="images/ui/upload.jpg"/></a>
+		<a href="upload.html" class="m-title">仿ajax上传文件iframe</a>
+		<a href="https://github.com/tianxiangbing/upload" target="_blank" class="a_code">Code</a>
+		<a href="upload.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="click-progress.html"><img  src="images/ui/click-progress.jpg"/></a>
+		<a href="click-progress.html" class="m-title">点击的进度条</a>
+		<a href="https://github.com/tianxiangbing/click-progress" target="_blank" class="a_code">Code</a>
+		<a href="click-progress.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="word-count.html"><img  src="images/ui/word-count.jpg"/></a>
+		<a href="word-count.html" class="m-title">文本框计数统计</a>
+		<a href="https://github.com/tianxiangbing/word-count" target="_blank" class="a_code">Code</a>
+		<a href="word-count.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="lazy-load.html"><img  src="images/ui/lazy-load.gif"/></a>
+		<a href="lazy-load.html" class="m-title">图片的懒加载</a>
+		<a href="https://github.com/tianxiangbing/lazy-load" target="_blank" class="a_code">Code</a>
+		<a href="lazy-load.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="image-zooming.html"><img  src="images/ui/image-zooming.jpg"/></a>
+		<a href="image-zooming.html" class="m-title">图片放大镜</a>
+		<a href="https://github.com/tianxiangbing/image-zooming" target="_blank" class="a_code">Code</a>
+		<a href="image-zooming.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="paging.html"><img  src="images/ui/paging.jpg"/></a>
+		<a href="paging.html" class="m-title">ajax分页插件paging</a>
+		<a href="https://github.com/tianxiangbing/paging" target="_blank" class="a_code">Code</a>
+		<a href="paging.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="query.html"><img  src="images/ui/query.jpg"/></a>
+		<a href="query.html" class="m-title">url参数和表单json参数</a>
+		<a href="https://github.com/tianxiangbing/query" target="_blank" class="a_code">Code</a>
+		<a href="query.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="table.html"><img  src="images/ui/table.jpg"/></a>
+		<a href="table.html" class="m-title">table表格组件</a>
+		<a href="https://github.com/tianxiangbing/table" target="_blank" class="a_code">Code</a>
+		<a href="table.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="autosearch.html"><img  src="images/ui/autosearch.jpg"/></a>
+		<a href="autosearch.html" class="m-title">自动搜索提示autosearch</a>
+		<a href="https://github.com/tianxiangbing/autosearch" target="_blank" class="a_code">Code</a>
+		<a href="autosearch.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="format-number.html"><img  src="images/ui/format-number.jpg"/></a>
+		<a href="format-number.html" class="m-title">数字格式化千分位</a>
+		<a href="https://github.com/tianxiangbing/format-number" target="_blank" class="a_code">Code</a>
+		<a href="format-number.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="network.html"><img  src="images/ui/network.jpg"/></a>
+		<a href="network.html" class="m-title">ajax的扩展network</a>
+		<a href="https://github.com/tianxiangbing/network" target="_blank" class="a_code">Code</a>
+		<a href="network.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="loading.html"><img  src="images/ui/loading.jpg"/></a>
+		<a href="loading.html" class="m-title">loading加载效果</a>
+		<a href="https://github.com/tianxiangbing/loading" target="_blank" class="a_code">Code</a>
+		<a href="loading.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="tip.html"><img  src="images/ui/tip.jpg"/></a>
+		<a href="tip.html" class="m-title">js提示组件tip</a>
+		<a href="https://github.com/tianxiangbing/tip" target="_blank" class="a_code">Code</a>
+		<a href="tip.html"  class="a_code">Demo & API</a>
+	</li>
+</ul>
+        </section>
+      </div>
+    </div>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255182337'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/stat.php%3Fid%3D1255182337' type='text/javascript'%3E%3C/script%3E"));</script>
+    <div style="height:24px;line-height:24px;border:1px solid #ccc;background-color:#f2f2f2;position:fixed;top:0;width:100%;z-index:1;font-size:12px;">源码在github上托管，请尽量到github上下载最新代码！也可以提交Issues. <strong>如果您发现demo无法使用时，请多刷新几次页面就好了,非代码问题，便宜空间问题多。</strong></div>
+  </body>
+</html>

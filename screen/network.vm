@@ -132,3 +132,7 @@ $set(title,ajax请求的重写防重复点击)
 
 <pre><code>同$.post,以post方式的ajax请求，也是全屏的加载效果
 </code></pre>
+
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

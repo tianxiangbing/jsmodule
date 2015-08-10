@@ -1,7 +1,7 @@
 $control.setTemplate("head.vm")
 $control.setTemplate("menu.vm")
 $control.setTemplate("side.vm")
-$set(modulename,network)
+$set(modulename,loading)
 $set(title,loading加载动画效果)
           <h1>
 <a id="loading" class="anchor" href="#loading" aria-hidden="true"><span class="octicon octicon-link"></span></a>loading</h1>
@@ -138,3 +138,6 @@ $('#loading3').click(function(){
 <pre><code>target的stop事件触发时，结束loading. 如
 $('html').trigger('stop')会结束全屏的loading动画.
 </code></pre>
+
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")

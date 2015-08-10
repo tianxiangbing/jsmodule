@@ -53,6 +53,9 @@ var List = {
 	,'loading':{
 		files:['loading.css','loading.js']
 	}
+	,'tip':{
+		files:['tip.css','tip.js']
+	}
 };
 var http = require('http');
 /*

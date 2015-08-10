@@ -1,0 +1,2 @@
+@Echo Off
+grunt watch

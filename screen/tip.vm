@@ -1,0 +1,266 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,tip)
+$set(title,js提示组件)
+<h1>
+<a id="tip" class="anchor" href="#tip" aria-hidden="true"><span class="octicon octicon-link"></span></a>tip</h1>
+<p>提示组件</p>
+	<hr>
+	<h1>
+	<a id="调用示例" class="anchor" href="#%E8%B0%83%E7%94%A8%E7%A4%BA%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>调用示例</h1>
+		<table style="width:700px;border:none;"><tr>
+			<td>
+				<input type="button" value="右边hover" id="btn-tip-right">
+			</td>
+			<td>
+				<input type="button" value="左边click" id="btn-tip-left">
+			</td>
+			<td>
+				<input type="button" value="上边click" id="btn-tip-top">
+			</td>
+			<td>
+				<input type="button" value="下边click" id="btn-tip-bottom">
+			</td>
+			<td align="right">
+				<input type="button" value="按边界click自动" id="btn-tip-auto">
+			</td>
+		</tr></table>
+		<br>
+			文本提示：<input type="text" id="txt-tip" msg="请输入内容">
+	<link rel="stylesheet" href="example/tip/tip.css">
+	<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+	<script src="example/tip/tip.js"></script>
+		<script>
+		var tip = new Tip();
+		tip.init({
+			trigger: '#btn-tip-right',
+			width:100,
+			triggerEvent:'hover',
+			content: 'loading...',
+			ajax: function() {
+				var dtd = $.Deferred(); // 新建一个deferred对象
+				var wait = function(dtd) {
+					var tasks = function() {
+						console.log("执行完毕！");
+						dtd.resolve("这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊"); // 改变deferred对象的执行状态
+					};
+					setTimeout(tasks, 1000);
+					return dtd;
+				};
+				wait(dtd);
+				return dtd;
+			}
+		});
+		var tip_left= new Tip();
+		tip_left.init({
+			trigger:'#btn-tip-left',
+			triggerEvent:'click',
+			content: '这是提示信息啊',
+			position:'left'
+			});
+		var tip_top= new Tip();
+		tip_top.init({
+			trigger:'#btn-tip-top',
+			triggerEvent:'click',
+			content: '这是提示信息啊',
+			position:'top'
+			});
+		var tip_bottom= new Tip();
+		tip_bottom.init({
+			trigger:'#btn-tip-bottom',
+			triggerEvent:'click',
+			content: '这是提示信息啊',
+			position:'bottom'
+			});
+		var tip_auto= new Tip();
+		tip_auto.init({
+			trigger:'#btn-tip-auto',
+			triggerEvent:'click',
+			width:100,
+			content: '这是提示信息啊这是提示信息啊这是提示信息啊',
+			inViewport:true
+			});
+		var t = $('#txt-tip').Tip({
+			content:$('#txt-tip').attr('msg'),
+			triggerEvent:'focus'
+		})[0];
+		</script>
+	<pre><code>&lt;table style="width:100%;"&gt;&lt;tr&gt;
+		    &lt;td&gt;
+		        &lt;input type="button" value="右边hover" id="btn-tip-right"&gt;
+		    &lt;/td&gt;
+		    &lt;td&gt;
+		        &lt;input type="button" value="左边click" id="btn-tip-left"&gt;
+		    &lt;/td&gt;
+		    &lt;td&gt;
+		        &lt;input type="button" value="上边click" id="btn-tip-top"&gt;
+		    &lt;/td&gt;
+		    &lt;td&gt;
+		        &lt;input type="button" value="下边click" id="btn-tip-bottom"&gt;
+		    &lt;/td&gt;
+		    &lt;td align="right"&gt;
+		        &lt;input type="button" value="按边界click自动" id="btn-tip-auto"&gt;
+		    &lt;/td&gt;
+		&lt;/tr&gt;&lt;/table&gt;
+		文本提示：&lt;input type="text" id="txt-tip" msg="请输入内容"&gt;
+		&lt;script type="text/javascript" src="../src/jquery-1.11.2.js"&gt;&lt;/script&gt;
+		&lt;script type="text/javascript" src="../src/tip.js"&gt;&lt;/script&gt;
+		&lt;script&gt;
+		var tip = new Tip();
+		tip.init({
+		    trigger: '#btn-tip-right',
+		    width:100,
+		    triggerEvent:'hover',
+		    content: 'loading...',
+		    ajax: function() {
+		        var dtd = $.Deferred(); // 新建一个deferred对象
+		        var wait = function(dtd) {
+		            var tasks = function() {
+		                console.log("执行完毕！");
+		                dtd.resolve("这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊这是提示信息啊"); // 改变deferred对象的执行状态
+		            };
+		            setTimeout(tasks, 1000);
+		            return dtd;
+		        };
+		        wait(dtd);
+		        return dtd;
+		    }
+		});
+		var tip_left= new Tip();
+		tip_left.init({
+		    trigger:'#btn-tip-left',
+		    triggerEvent:'click',
+		    content: '这是提示信息啊',
+		    position:'left'
+		    });
+		var tip_top= new Tip();
+		tip_top.init({
+		    trigger:'#btn-tip-top',
+		    triggerEvent:'click',
+		    content: '这是提示信息啊',
+		    position:'top'
+		    });
+		var tip_bottom= new Tip();
+		tip_bottom.init({
+		    trigger:'#btn-tip-bottom',
+		    triggerEvent:'click',
+		    content: '这是提示信息啊',
+		    position:'bottom'
+		    });
+		var tip_auto= new Tip();
+		tip_auto.init({
+		    trigger:'#btn-tip-auto',
+		    triggerEvent:'click',
+		    width:100,
+		    content: '这是提示信息啊这是提示信息啊这是提示信息啊',
+		    inViewport:true
+		    });
+		var t = $('#txt-tip').Tip({
+		    content:$('#txt-tip').attr('msg'),
+		    triggerEvent:'focus'
+		})[0];
+		&lt;/script&gt;
+	</code></pre>
+	<h1>
+	<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h1>
+	<h2>
+	<a id="属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h2>
+	<h3>
+	<a id="triggerdomstring" class="anchor" href="#triggerdomstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>trigger:<code>[$|dom|string]</code>
+	</h3>
+	<pre><code>触发元素,jquery对象或dom或string
+	</code></pre>
+	<h3>
+	<a id="triggerevent-clickhoverfocus" class="anchor" href="#triggerevent-clickhoverfocus" aria-hidden="true"><span class="octicon octicon-link"></span></a>triggerEvent: <code>[click|hover|focus]</code>
+	</h3>
+	<pre><code>触发事件，默认为hover,事件都委托在delegate参数上，focus不委托
+	</code></pre>
+	<h3>
+	<a id="delegatedomstring" class="anchor" href="#delegatedomstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>delegate:<code>[dom|string]</code>
+	</h3>
+	<pre><code>事件的委托节点,默认委托到body,focus无效.
+	</code></pre>
+	<h3>
+	<a id="tplstring" class="anchor" href="#tplstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>tpl:<code>[string]</code>
+	</h3>
+	<pre><code>html模板，默认&lt;div class="ui-tip"&gt;&lt;div class="ui-tip-content"&gt;&lt;/div&gt;&lt;div class="ui-tip-arrow"&gt;&lt;i&gt;&lt;/i&gt;&lt;em&gt;&lt;/em&gt;&lt;/div&gt;&lt;/div&gt;
+	</code></pre>
+	<h3>
+	<a id="offsetx0y0" class="anchor" href="#offsetx0y0" aria-hidden="true"><span class="octicon octicon-link"></span></a>offset:<code>{x:0,y:0}</code>
+	</h3>
+	<pre><code>偏移量,默认x:0,y:0
+	</code></pre>
+	<h3>
+	<a id="widthnumber" class="anchor" href="#widthnumber" aria-hidden="true"><span class="octicon octicon-link"></span></a>width:<code>[number]</code>
+	</h3>
+	<pre><code>宽
+	</code></pre>
+	<h3>
+	<a id="heightnumber" class="anchor" href="#heightnumber" aria-hidden="true"><span class="octicon octicon-link"></span></a>height:<code>[number]</code>
+	</h3>
+	<pre><code>高
+	</code></pre>
+	<h3>
+	<a id="zindex999" class="anchor" href="#zindex999" aria-hidden="true"><span class="octicon octicon-link"></span></a>zIndex:<code>999</code>
+	</h3>
+	<pre><code>z-index
+	</code></pre>
+	<h3>
+	<a id="contentstring" class="anchor" href="#contentstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>content:[string|$]</h3>
+	<pre><code>提示内容，这里可以是string或节点，因为内部是调用的$().html方法,动态设置请调setContent方法
+	</code></pre>
+	<h3>
+	<a id="inviewportbool" class="anchor" href="#inviewportbool" aria-hidden="true"><span class="octicon octicon-link"></span></a>inViewport:<code>bool</code>
+	</h3>
+	<pre><code>是否自适合窗口位置,默认false
+	</code></pre>
+	<h3>
+	<a id="positionrightlefttopbottom" class="anchor" href="#positionrightlefttopbottom" aria-hidden="true"><span class="octicon octicon-link"></span></a>position:<code>['right'|'left'|'top'|'bottom']</code>
+	</h3>
+	<pre><code>显示位置，默认'right
+	</code></pre>
+	<h3>
+	<a id="ajaxfunction" class="anchor" href="#ajaxfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>ajax:<code>function</code>
+	</h3>
+	<pre><code>返回一个promise,参数为promise之后的内容如下：
+		ajax: function() {
+		    var dtd = $.Deferred(); // 新建一个deferred对象
+		    var wait = function(dtd) {
+		        var tasks = function() {
+		            console.log("执行完毕！");
+		            dtd.resolve("这是提示信息啊"); // 改变deferred对象的执行状态
+		        };
+		        setTimeout(tasks, 1000);
+		        return dtd;
+		    };
+		    wait(dtd);
+		    return dtd;
+		}
+	</code></pre>
+	<h2>
+	<a id="方法" class="anchor" href="#%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>方法</h2>
+	<h3>
+	<a id="setcontentfunctioncontent" class="anchor" href="#setcontentfunctioncontent" aria-hidden="true"><span class="octicon octicon-link"></span></a>setContent:<code>function(content)</code>
+	</h3>
+	<pre><code>设置提示内容
+	</code></pre>
+	<h3>
+	<a id="stopfunction" class="anchor" href="#stopfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>stop:<code>function()</code>
+	</h3>
+	<pre><code>停止显示
+	</code></pre>
+	<h3>
+	<a id="startfunction" class="anchor" href="#startfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>start:<code>function</code>
+	</h3>
+	<pre><code>开始显示
+	</code></pre>
+	<h2>
+	<a id="事件或回调" class="anchor" href="#%E4%BA%8B%E4%BB%B6%E6%88%96%E5%9B%9E%E8%B0%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>事件或回调</h2>
+	<h3>
+	<a id="callbackfunction" class="anchor" href="#callbackfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>callback:<code>function</code>
+	</h3>
+	<pre><code>显示时的回调
+	</code></pre>
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")
