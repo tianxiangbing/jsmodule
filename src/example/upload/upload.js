@@ -40,7 +40,7 @@
 		createIframe: function() {
 			this.frameId = 'iframe_upload';
 			if ($('#' + this.frameId).length == 0) {
-				var ifm = '<iframe src="about:blank" id="' + this.frameId + '" name="' + this.frameId + '" width="0" height="0" frameborder="0"></iframe>';
+				var ifm = '<iframe style="display:none;" src="about:blank" id="' + this.frameId + '" name="' + this.frameId + '" width="0" height="0" frameborder="0"></iframe>';
 				$('body').append(ifm);
 			}
 			this.frame = $('#' + this.frameId);
@@ -52,7 +52,8 @@
 			_this.form.attr("target", _this.frameId);
 			_this.form.css({
 				height: 0,
-				width: 0
+				width: 0,
+				overflow:'hidden'
 			});
 			_this.form.attr("action", _this.url);
 			$('body').append(_this.form);

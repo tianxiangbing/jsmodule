@@ -86,10 +86,11 @@
             $(settings.trigger, parent).on('keyup', function(e) {
                 checkNumber.call(this, e)
             });
+            /*
             $(settings.trigger, parent).on('blur', function(e) {
                 checkNumber.call(this, e)
             });
-
+*/
             function checkNumber(e) {
                 var name = $(this).attr('data-name'),
                     id = name.split('.')[1] || name.split('.')[0];

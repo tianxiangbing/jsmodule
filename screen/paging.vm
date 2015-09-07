@@ -11,6 +11,7 @@ $set(title,ajax分页插件paging)
 <div id="pageToolbar"></div>
 <link rel="stylesheet" type="text/css" href="example/paging/paging.css">
 <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="example/query/query.js"></script>
 <script type="text/javascript" src="example/paging/paging.js"></script>
 <script>
 $('#pageTool').Paging({pagesize:10,count:100});

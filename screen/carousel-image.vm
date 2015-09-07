@@ -54,14 +54,14 @@ $set(title,轮播图片-支持手机滑动)
 	</span>
 </div>
 
-<script type="text/javascript" src="example/zepto.js"></script>
+<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="example/require.js"></script>
 <script type="text/javascript">
 requirejs.config({
 	//By default load any module IDs from js/lib
 	baseUrl: 'example/carousel-image/',
 	paths: {
-		"$": '../zepto'
+		"$": '../jquery-1.11.2'
 	}
 });
 require(['carousel-image',"$"], function(CarouselImage,$) {

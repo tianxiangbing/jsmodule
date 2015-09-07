@@ -1,4 +1,106 @@
-nction() {
+/*
+ * Created with Sublime Text 2.
+ * license: http://www.lovewebgames.com/jsmodule/index.html
+ * User: 田想兵
+ * Date: 2015-04-27
+ * Time: 10:27:55
+ * Contact: 55342775@qq.com
+ */
+(function(root, factory) {
+	//amd
+	if (typeof define === 'function' && define.amd) {
+		define(['$'], factory);
+	} else if (typeof exports === 'object') { //umd
+		module.exports = factory();
+	} else {
+		root.CarouselImage = factory(window.Zepto || window.jQuery || $);
+	}
+})(this, function($) {
+	$.fn.CarouselImage = function(settings) {
+		var list = [];
+		$(this).each(function() {
+			var car = new CarouselImage();
+			var options = $.extend({
+				target: $(this)
+			}, settings);
+			car.init(options);
+			list.push(car);
+		});
+		return list;
+	};
+
+	function CarouselImage() {}
+	CarouselImage.prototype = {
+		init: function(settings) {
+			var _this = this;
+			this.settings = settings;
+			this.index = 0;
+			this.container = settings.target;
+			this.content = this.container.children().first();
+			this.timer = settings.timer || 3000;
+			this.animate = settings.animate || 300;
+			this.num = settings.num || null;
+			this.list = this.content.children();
+			this.size = this.list.length;
+			this.repeat = settings.repeat || false;
+			this.step = this.container.width();
+			if (this.repeat) {
+				var firstc = this.list.first().clone();
+				var lastc = this.list.last().clone();
+				this.content.append(firstc);
+				this.content.prepend(lastc);
+				this.content.css({
+					left: -this.container.width(),
+					position: "absolute"
+				});
+				this.content.width((this.list.length + 2) * this.step);
+			} else {
+				this.content.css({
+					left: 0,
+					position: "absolute"
+				});
+				this.content.width(this.list.length * this.step);
+			}
+			this.setHeightWidth();
+			// alert(this.content.width())
+			this.bindEvent();
+			this.auto();
+			this.formatNum();
+		},
+		setHeightWidth: function() {
+			var settings = this.settings;
+			if (settings.width) {
+				this.container.width(settings.width);
+			}
+			if (settings.height) {
+				this.container.height(settings.height);
+			}
+			this.step = this.container.width();
+			if (settings.repeat) {
+				this.content.width((this.list.length + 2) * this.step);
+			} else {
+				this.content.width(this.list.length * this.step);
+			}
+			for (var i = 0, l = this.content.children().length; i < l; i++) {
+				var item = $(this.content.children()[i]);
+				item.find('img').addClass('carousel-' + i).attr("data-index", i);
+			}
+			var _this = this;
+			//_this.container.find('img').width(this.container.width());
+			this.container.find('a').css({
+				width: this.step,
+				height: this.container.height(),
+				position: 'relative'
+			});
+			this.container.find('img').each(function() {
+				var img = new Image();
+				img.src = $(this).attr('src');
+				var i = $(this).data('index');;
+				(function(img, i) {
+					if (img.complete) {
+						setObj.call(img, i);
+					} else {
+						img.onreadystatechange = function() {
 							if (this.readystate == "complete" || this.readyState == "loaded") {
 								setObj.call(this, i);
 							}

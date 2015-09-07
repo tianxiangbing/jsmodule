@@ -17,10 +17,11 @@ $set(title,表格渲染组件)
 	<div id="pager"></div>
 </div>
 <link rel="stylesheet" type="text/css" href="example/table/paging.css">
+<link rel="stylesheet" type="text/css" href="example/dialog/dialog.css">
 <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="example/handlebars-v3.0.0.js"></script>
-<script type="text/javascript" src="example/paging/paging.js"></script>
 <script type="text/javascript" src="example/query/query.js"></script>
+<script type="text/javascript" src="example/paging/paging.js"></script>
 <script type="text/javascript" src="example/dialog/dialog.js"></script>
 <script type="text/javascript" src="example/table/table.js"></script>
 <script type="text/x-handlebars-template" id="tpl-list">
@@ -41,7 +42,7 @@ $set(title,表格渲染组件)
 							<td>{{goods_bn}}</td>
 							<td>{{goods_name}}</td>
 							<td>上架</td>
-							<td><a class="js-ajax" js-ajax-param="id={{goods_id}}" href="json/data.asp">下架</a> <a class="js-delete" href="json/data.asp">删除</a></td>
+							<td><a class="js-ajax" confirm-msg="是否确认下架?" js-ajax-param="id={{goods_id}}" href="json/data.asp">下架</a> <a class="js-delegate-delete" href="json/data.asp">删除</a></td>
 					</tr>
 					{{/each}}
 			</tbody>

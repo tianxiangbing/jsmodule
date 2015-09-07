@@ -174,6 +174,38 @@
 			}
 			$('.getvalued').removeClass('getvalued');
 			return obj;
+		},
+		setHash: function(obj) {
+			var str = '';
+			obj = $.extend(this.getHash(), obj)
+			var arr = [];
+			for (var v in obj) {
+				if(obj[v]!=''){
+					arr.push(v + '=' + encodeURIComponent(obj[v]));
+				}
+			}
+			str+=arr.join('&');
+			location.hash = str;
+			return this;
+		},
+		getHash: function(name) {
+			if (typeof name === "string") {
+				return this.getQuery(name, "#");
+			} else {
+				var obj = {};
+				var hash = location.hash;
+				if(hash.length>0){
+					hash = hash.substr(1);
+					var hashArr = hash.split('&');
+					for (var i = 0, l = hashArr.length; i < l; i++) {
+						var a = hashArr[i].split('=');
+						if (a.length > 0) {
+							obj[a[0]] = decodeURI(a[1]) || '';
+						}
+					}
+				}
+				return obj;
+			}
 		}
 	};
 	return Query;

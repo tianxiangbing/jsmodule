@@ -8,11 +8,11 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <title>js组件-js插件-jquery插件-$!title</title> </head>
+  <title>js组件-js插件-jquery插件-$!title</title> </head>
   <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
   <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。$!title" />
   <body>
-    <header>
+    <div id="header">
       <div class="inner">
         <h1>$!modulename</h1>
         <h2>JS组件-$!title</h2>
@@ -21,8 +21,7 @@
           <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=$!modulename&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
         </div>
       </div>
-    </header>
-
+    </div>
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">

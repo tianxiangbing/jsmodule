@@ -168,7 +168,9 @@
 	Dialog.prototype = {
 		init: function(settings) {
 			var _this = this;
-			this.settings = $.extend({}, this.settings, settings);
+			this.settings = $.extend({
+				fixed: false//是否固定位置，
+			}, this.settings, settings);
 			if (this.settings.mask) {
 				this.mask = $('<div class="ui-dialog-mask"/>');
 				$('body').append(this.mask);
@@ -239,11 +241,13 @@
 				// 	_this.setPosition();
 				// })
 			$(document).keydown(function(e) {
-			console.log(e.keyCode )
 				if (e.keyCode === 27 && _this.showed) {
 					_this.hide();
 				}
 			});
+			$(this.dialogContainer).on('hide', function() {
+				_this.hide();
+			})
 		},
 		dispose: function() {
 			this.dialogContainer.remove();
@@ -307,9 +311,11 @@
 			var _this = this;
 			// $.alert(this.settings.clientWidth)
 			this.timer && clearInterval(this.timer);
-			this.timer = setInterval(function() {
-				_this.setPosition();
-			}, 1000);
+			if (this.settings.fixed) {
+				this.timer = setInterval(function() {
+					_this.setPosition();
+				}, 1000);
+			}
 			if (this.settings.animate) {
 				this.dialogContainer.addClass('zoomIn').removeClass('zoomOut').addClass('animated');
 			}
@@ -334,8 +340,12 @@
 				var top = clientHeight / 2 - mt;
 				left = Math.floor(Math.max(0, left));
 				top = Math.floor(Math.max(0, top));
+				var position = 'absolute';
+				if(_this.settings.fixed){
+					position='fixed';
+				}
 				_this.dialogContainer.css({
-					position: "fixed",
+					position: position,
 					top: top,
 					left: left
 				});

@@ -49,7 +49,7 @@
 	</li>
 	<li>
 		<a href="upload.html"><img  src="images/ui/upload.jpg"/></a>
-		<a href="upload.html" class="m-title">仿ajax上传文件iframe</a>
+		<a href="upload.html" class="m-title">iframe上传文件upload</a>
 		<a href="https://github.com/tianxiangbing/upload" target="_blank" class="a_code">Code</a>
 		<a href="upload.html"  class="a_code">Demo & API</a>
 	</li>
@@ -124,5 +124,11 @@
 		<a href="tip.html" class="m-title">js提示组件tip</a>
 		<a href="https://github.com/tianxiangbing/tip" target="_blank" class="a_code">Code</a>
 		<a href="tip.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="select.html"><img  src="images/ui/select.jpg"/></a>
+		<a href="select.html" class="m-title">模拟select下拉选择框</a>
+		<a href="https://github.com/tianxiangbing/select" target="_blank" class="a_code">Code</a>
+		<a href="select.html"  class="a_code">Demo & API</a>
 	</li>
 </ul>

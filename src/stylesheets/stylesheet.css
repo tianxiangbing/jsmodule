@@ -447,7 +447,7 @@ a:hover {
   color: #2268b2;
 }
 
-header {
+#header {
   padding-top: 40px;
   padding-bottom: 40px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
@@ -455,7 +455,7 @@ header {
   border-bottom: solid 1px #275da1;
 }
 
-header h1 {
+#header h1 {
   width: 700px;
   margin-top: 0;
   margin-bottom: 0.2em;
@@ -466,7 +466,7 @@ header h1 {
   letter-spacing: -1px;
 }
 
-header h2 {
+#header h2 {
   width: 540px;
   margin-top: 0;
   margin-bottom: 0;
@@ -530,7 +530,7 @@ a.button small {
   display: block;
   font-size: 11px;
 }
-header a.button {
+#header a.button {
   position: absolute;
   top: 0;
   right: 0;

@@ -25,7 +25,7 @@ var List = {
 		files: ["mobile-upload.js"]
 	},
 	"paging": {
-		files: ["paging.js", "paging.css"]
+		files: ["query.js","paging.js", "paging.css"]
 	},
 	"query": {
 		files: ['query.js']
@@ -34,7 +34,7 @@ var List = {
 		files: ['scroll-load']
 	},
 	table: {
-		files: ["table.js"],
+		files: ["query.js","paging.js","table.js"],
 		module: ["dialog", "paging"]
 	},
 	upload: {
@@ -55,6 +55,21 @@ var List = {
 	}
 	,'tip':{
 		files:['tip.css','tip.js']
+	},
+	"carousel-image":{
+		files:['carousel-image.js','carousel-image.css']
+	},
+	"calendar":{
+		files:['calendar.js','calendar.css']
+	},
+	"click-progress":{
+		files:['click-progress.js','click-progress.css']
+	},
+	"autosearch":{
+		files:['autosearch.js','autosearch.css']
+	},
+	"select":{
+		files:['select.js','select.css']
 	}
 };
 var http = require('http');

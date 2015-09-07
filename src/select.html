@@ -8,17 +8,17 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-  <title>js组件-js插件-jquery插件-轮播图片-支持手机滑动</title> </head>
+  <title>js组件-js插件-jquery插件-模拟下拉选项框select</title> </head>
   <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
-  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。轮播图片-支持手机滑动" />
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。模拟下拉选项框select" />
   <body>
     <div id="header">
       <div class="inner">
-        <h1>carousel-image</h1>
-        <h2>JS组件-轮播图片-支持手机滑动</h2>
-        <a href="https://github.com/tianxiangbing/carousel-image" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+        <h1>select</h1>
+        <h2>JS组件-模拟下拉选项框select</h2>
+        <a href="https://github.com/tianxiangbing/select" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
         <div style="position:absolute;right:180px;top:0px;">
-          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=carousel-image&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=select&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
         </div>
       </div>
     </div>
@@ -27,179 +27,210 @@
         <section id="main-content">
 <ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
 ﻿<aside id="sidebar">
-	<a href="https://github.com/tianxiangbing/carousel-image/archive/master.zip" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/select/archive/master.zip" target="_blank" class="button">
 		<small>Download</small>
 		.zip file
 	</a>
-	<a href="https://github.com/tianxiangbing/carousel-image" target="_blank" class="button">
+	<a href="https://github.com/tianxiangbing/select" target="_blank" class="button">
 		<small>Code</small>
 		源码
 	</a>
-	<p class="repo-owner"><a href="https://github.com/tianxiangbing/carousel-image" target="_blank">carousel-image</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/select" target="_blank">select</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
 	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://www.github.com/tianxiangbing" target="_blank"> GitHub</a></p>
 </aside>
 
 
-<link rel="stylesheet" type="text/css" href="example/carousel-image/carousel-image.css">
-          <h1>
-<a id="carousel-image" class="anchor" href="#carousel-image" aria-hidden="true"><span class="octicon octicon-link"></span></a>carousel-image</h1>
-<h2>自定义宽高</h2>
-<div class="carousel-image carousel-image1" style="width:320px;">
-	<div>
-		<a href="mobile-upload.html"><img  src="images/ui/mobile-upload.png"/></a>
-		<a href="mobile-select-area.html"><img  src="images/ui/mobile-select-area.png" alt="js手机选择地区联动仿ios" title="js手机选择地区联动仿ios"/></a>
-		<a href="mobile-photo-preview.html"><img  src="images/ui/mobile-photo-preview.png"/></a>
-	</div>
-	<span class="carousel-num">
-	</span>
-</div>
-<h2>不定宽高自适应，循环</h2>
-      <!--scroll-->
-<div class="carousel-image carousel-image2" style="width:340px">
-	<div>
-		<a>
-			<img src="images/example/a4.png"/>
-		</a>
-		<a>
-			<img src="images/example/a1.png"/>
-		</a>
-		<a>
-			<img src="images/example/a2.png"/>
-		</a>
-		<a>
-			<img src="images/example/a3.png"/>
-		</a>
-		<a>
-			<img src="images/example/a5.png"/>
-		</a>
-	</div>
-	<span class="carousel-num">
-	</span>
-</div>
-
-<h2>不定宽高自适应，不循环</h2>
-<div class="carousel-image carousel-image3">
-	<div>
-		<a target="_blank" href="http://tt.ewanse.com/search/index?more=0&keywords=Apple%20Watch">
-			<img src="http://ott.wansecheng.com/weidian/advertise/1429860297667.jpg" />
-		</a>
-		<a target="_blank" href="javascript:;">
-			<img src="http://ott.wansecheng.com/weidian/advertise/1430102654706.jpg"/>
-		</a>
-	</div>
-	<span class="carousel-num">
-	</span>
-</div>
-
-<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
-<script type="text/javascript" src="example/require.js"></script>
-<script type="text/javascript">
-requirejs.config({
-	//By default load any module IDs from js/lib
-	baseUrl: 'example/carousel-image/',
-	paths: {
-		"$": '../jquery-1.11.2'
-	}
+<h1>
+<a id="select" class="anchor" href="#select" aria-hidden="true"><span class="octicon octicon-link"></span></a>select</h1>
+<p>模拟select下拉框</p>
+<select name="select" id="select1">
+	<option value="-1">请选择</option>
+	<option value="1">男</option>
+	<option value="0" selected="true">女</option>
+	<option value="10" disabled="true">"'人妖</option>
+</select>
+<select id="select2" disabled="true"></select>
+<input type="text" id="select3" style="height:30px;" value="2">
+<a id="select4" data-value="1"></a>
+<link rel="stylesheet" type="text/css" href="example/select/select.css">
+<script src="example/jquery-1.11.2.js"></script>
+<script src="example/select/select.js"></script>
+<script>
+var select = new Select();
+select.init({
+	target: '#select1'
 });
-require(['carousel-image',"$"], function(CarouselImage,$) {
-	$('.carousel-image1').CarouselImage({
-		num :$('.carousel-image1 .carousel-num'),
-		width:320,
-		height:240
-	});
-	$('.carousel-image2').CarouselImage({
-		num :$('.carousel-image2 .carousel-num'),
-		repeat:true
-	});
-	$('.carousel-image3').CarouselImage({
-		num :$('.carousel-image3 .carousel-num'),
-		timer:5000
-	});
+$('#select2').Select({
+	width:100,
+	model: [{
+		text: "请选择",
+		value: "1"
+	}]
 });
+var model=[{
+		text: "浙江浙江浙江浙江浙江",
+		value: "1"
+	},{
+		text: "杭州",
+		value: "2"
+	},{
+		text: "宁波",
+		value: "3"
+	},{
+		text: "湖北",
+		value: "4"
+	},{
+		text: "上海",
+		value: "5"
+	},{
+		text: "万达",
+		value: "6"
+	},{
+		text: "物美",
+		value: "7",
+		disabled:true
+	},{
+		text: "中国",
+		value: "8"
+	},{
+		text: "外国",
+		value: "9"
+	}];
+$('#select3').change(function(){
+	console.log('选中个：'+$(this).val())
+}).Select({
+	width:100,
+	maxHeight:300,
+	maxWidth:'auto',
+	model: model
+});
+var sel=$('#select4').Select({
+	width:100,
+	height:24
+	})[0];
+setTimeout(function(){
+	sel.setData(model);
+},2000);
 </script>
-<p>轮播图片，支持触摸滑动。</p>
 <h1>
-<a id="使用方法案例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%A1%88%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法案例:</h1>
-<pre><code>&lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
-	&lt;script type="text/javascript" src="../src/carousel-image.js"&gt;&lt;/script&gt;
-	&lt;script&gt;
-	$('.carousel-image1').CarouselImage({
-		num :$('.carousel-image1 .carousel-num'),
-		width:320,
-		height:240
-	});
-	$('.carousel-image2').CarouselImage({
-		num :$('.carousel-image2 .carousel-num'),
-		repeat:true
-	});
-	$('.carousel-image3').CarouselImage({
-		num :$('.carousel-image3 .carousel-num')
-	});
-	&lt;/script&gt;
-</code></pre>
-<h2>
-<a id="或者requirejs" class="anchor" href="#%E6%88%96%E8%80%85requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>或者requirejs：</h2>
-<pre><code>&lt;div class="carousel-image"&gt;
-	    &lt;div&gt;
-	        &lt;a&gt;
-	            &lt;img src="http://ott.wansecheng.com/weidian/wdgoods/1430073193462.jpg"/&gt;
-	        &lt;/a&gt;
-	        &lt;a&gt;
-	            &lt;img src="http://ott.wansecheng.com/weidian/wdgoods/1430073252953.png"/&gt;
-	        &lt;/a&gt;
-	        &lt;a&gt;
-	            &lt;img src="http://ott.wansecheng.com/weidian/wdgoods/1430073111420.jpg"/&gt;
-	        &lt;/a&gt;
-	    &lt;/div&gt;
-	    &lt;div class="carousel-num"&gt;
-	    &lt;/div&gt;
-	&lt;/div&gt;
-	&lt;script type="text/javascript" src="../src/zepto.js"&gt;&lt;/script&gt;
-	&lt;script type="text/javascript" src="../src/require.js"&gt;&lt;/script&gt;
-	&lt;script&gt;
-	requirejs.config({
-	    //By default load any module IDs from js/lib
-	    baseUrl: '../src',
-	    paths: {
-	        $: 'zepto'
-	    }
-	});
-	require(['carousel-image',"$"], function(CarouselImage,$) {
-	    var cs = new CarouselImage();
-	    cs.init({
-	        target:$('.carousel-image'),
-	        num:$('.carousel-num')
-	    });
-	});
-	&lt;/script&gt;
+<a id="调用示例" class="anchor" href="#%E8%B0%83%E7%94%A8%E7%A4%BA%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>调用示例</h1>
+<pre><code>&lt;select name="select" id="select"&gt;
+    &lt;option value="-1"&gt;请选择&lt;/option&gt;
+    &lt;option value="1"&gt;男&lt;/option&gt;
+    &lt;option value="0" selected="true"&gt;女&lt;/option&gt;
+    &lt;option value="10" disabled="true"&gt;"'人妖&lt;/option&gt;
+&lt;/select&gt;
+&lt;select id="select2"&gt;&lt;/select&gt;
+&lt;input type="text" id="select3" style="height:30px;" value="2"&gt;
+&lt;a id="select4" data-value="1"&gt;&lt;/a&gt;
+&lt;script type="text/javascript" src="../src/jquery-1.11.2.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="../src/select.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+var select = new Select();
+select.init({
+    target: '#select'
+});
+$('#select2').Select({
+    width:100,
+    model: [{
+        text: "请选择",
+        value: "1"
+    }]
+});
+var model=[{
+        text: "浙江浙江浙江浙江浙江",
+        value: "1"
+    },{
+        text: "杭州",
+        value: "2"
+    },{
+        text: "宁波",
+        value: "3"
+    },{
+        text: "湖北",
+        value: "4"
+    },{
+        text: "上海",
+        value: "5"
+    },{
+        text: "万达",
+        value: "6"
+    },{
+        text: "物美",
+        value: "7",
+        disabled:true
+    },{
+        text: "中国",
+        value: "8"
+    },{
+        text: "外国",
+        value: "9"
+    }];
+$('#select3').change(function(){
+    console.log('选中个：'+$(this).val())//或者selected
+}).Select({
+    width:100,
+    maxHeight:300,
+    maxWidth:'auto',
+    model: model
+});
+var sel=$('#select4').Select({
+    width:100,
+    height:24
+    })[0];
+setTimeout(function(){
+    sel.setData(model);//动态更改数据源
+},2000);
+&lt;/script&gt;
 </code></pre>
 <h1>
-<a id="api-属性方法及回调" class="anchor" href="#api-%E5%B1%9E%E6%80%A7%E6%96%B9%E6%B3%95%E5%8F%8A%E5%9B%9E%E8%B0%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>API 属性、方法及回调：</h1>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h1>
 <h2>
-<a id="target" class="anchor" href="#target" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:</h2>
-<pre><code>    表示是在这个容器内的元素会触发事件,它应该有个子级的容器，方便动画的优化
+<a id="属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h2>
+<h3>
+<a id="targetdomstring" class="anchor" href="#targetdomstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>target：<code>[DOM|String|$]</code>
+</h3>
+<pre><code>要改变成select的节点，可以原来就是select，也可以是其他元素，如果是其他元素时，优先取value取为选中项，否则取data-value值；
+</code></pre>
+<h3>
+<a id="modelarray" class="anchor" href="#modelarray" aria-hidden="true"><span class="octicon octicon-link"></span></a>model:<code>Array</code>
+</h3>
+<pre><code>数据源数组[value:'1',text:'文本',disabled:false]，如果无的时候，会去option,disabled可以控制是否可选，option上同
+</code></pre>
+<h3>
+<a id="multibool" class="anchor" href="#multibool" aria-hidden="true"><span class="octicon octicon-link"></span></a>multi:<code>bool</code>
+</h3>
+<pre><code>是否多选，暂缺
+</code></pre>
+<h3>
+<a id="disabledbool" class="anchor" href="#disabledbool" aria-hidden="true"><span class="octicon octicon-link"></span></a>disabled:<code>bool</code>
+</h3>
+<pre><code>是否可用,默认可用false,
+如果没有这个值会去取target的disabled或target.hasClass('disabled')来判断是否可用
 </code></pre>
 <h2>
-<a id="num" class="anchor" href="#num" aria-hidden="true"><span class="octicon octicon-link"></span></a>num:</h2>
-<pre><code>    本意是以显示当前索引的数字表示，但现在用样式把数字隐藏了，如果要显示数字样式，可自行更改样式文件
+<a id="方法" class="anchor" href="#%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>方法</h2>
+<h3>
+<a id="setdatafunctiondata" class="anchor" href="#setdatafunctiondata" aria-hidden="true"><span class="octicon octicon-link"></span></a>setData:<code>function(data)</code>
+</h3>
+<pre><code>更改数据源data为数组[value:'1',text:'文本',disabled:false]
+</code></pre>
+<h3>
+<a id="selectedfunctionvaltxt" class="anchor" href="#selectedfunctionvaltxt" aria-hidden="true"><span class="octicon octicon-link"></span></a>selected:<code>function(val,txt)</code>
+</h3>
+<pre><code>选中后的回调
 </code></pre>
 <h2>
-<a id="width" class="anchor" href="#width" aria-hidden="true"><span class="octicon octicon-link"></span></a>width:</h2>
-<pre><code>    宽度  (如果不设置将按第一张<b>加载完成</b>图片的大小来等比压缩显示)
+<a id="事件" class="anchor" href="#%E4%BA%8B%E4%BB%B6" aria-hidden="true"><span class="octicon octicon-link"></span></a>事件</h2>
+<h3>
+<a id="changevalue" class="anchor" href="#changevalue" aria-hidden="true"><span class="octicon octicon-link"></span></a>change:<code>[value]</code>
+</h3>
+<pre><code>选中项改变时触发
 </code></pre>
-<h2>
-<a id="height" class="anchor" href="#height" aria-hidden="true"><span class="octicon octicon-link"></span></a>height:</h2>
-<pre><code>    高度 (如果不设置将按第一张<b>加载完成</b>图片的大小来等比压缩显示)
+<h3>
+<a id="blur" class="anchor" href="#blur" aria-hidden="true"><span class="octicon octicon-link"></span></a>blur:</h3>
+<pre><code>隐藏时触发
 </code></pre>
-<h2>
-<a id="timer" class="anchor" href="#timer" aria-hidden="true"><span class="octicon octicon-link"></span></a>timer:</h2>
-<pre><code>   动画延时
-</code></pre>
-<h2>
-<a id="animate" class="anchor" href="#animate" aria-hidden="true"><span class="octicon octicon-link"></span></a>animate:</h2>
-<pre><code>  动画时间
-</code></pre>
-
 <h1>其它组件推荐</h1>
 <ul class="uilist" id="modulelist">
 	<li>

@@ -53,17 +53,16 @@
 		return parseInt(v1) + 1 || 0 + 1;
 	});
 
-	function Table(table, temp, page, param, search, callback, filterCon) {
+	function Table(table, temp, page, param, search, callback) {
 		this.search = search;
 		this.table = table;
 		this.page = page;
-		this.filterCon = filterCon;
+		//this.filterCon = filterCon;
 		this.temp = temp;
 		this.template = null;
 		this.pageData = null;
 		this.ajaxurl = table.attr('ajaxurl');
 		this.ajaxDeleteItemUrl = table.attr('data-ajax-deleteitem-url')
-		this.currentPage = 1;
 		this._total = 0;
 		this.pageSize = page.attr('pagesize') || 10;
 		this.callback = callback;
@@ -73,20 +72,30 @@
 		init: function(settings) {
 			var source = this.temp.html();
 			this.template = Handlebars.compile(source);
-			this.settings = settings || {
-				type: 'get'
-			};
+			this.settings = $.extend({
+				type: 'post',
+				hash: true
+			}, settings);
+			this.currentPage = this.settings.hash ? parseInt((Query.getQuery('page', "#")) || 1) : 1;
 			if (this.search) {
-				this.param = this.getParam(this.search.closest('.form'));
+				this.param = $.extend(this.param, this.getParam(this.search.closest('.form')));
 				this.bindSearch();
 			}
+			if (this.settings.hash) {
+				this.bindHash();
+				//this.gosearch(this.currentPage);
+			}
 			this.bind();
-			this.event();
+			var _this = this;
+			//setTimeout(function() {
+				_this.event();
+			//}, 100)
 		},
 		event: function() {
 			var _this = this;
 			$(this.table).bind('reload', function() {
-				_this.gosearch();
+				//_this.gosearch();
+				_this.bind();
 			})
 			this.table.delegate("tr", "click", function() {
 				if ($(this).attr('href') && !$(this).hasClass('dialog')) {
@@ -114,7 +123,8 @@
 								$.ajax(objAux).done(function(result) {
 									if (result.status) {
 										d.hide();
-										_this.gosearch(_this.currentPage);
+										//_this.gosearch(_this.currentPage);
+										_this.bind();
 									} else {
 										$.alert(result.msg);
 									}
@@ -123,7 +133,7 @@
 								d.hide();
 							}
 						});
-					}else{
+					} else {
 						var objAux = {
 							url: ajaxurl,
 							type: 'POST',
@@ -132,7 +142,8 @@
 						}
 						$.ajax(objAux).done(function(result) {
 							if (result.status) {
-								_this.gosearch(_this.currentPage);
+								//_this.gosearch(_this.currentPage);
+								_this.bind();
 							} else {
 								$.alert(result.msg);
 							}
@@ -144,6 +155,7 @@
 			$(this.table).on('click', '.js-delegate-delete', function(e) {
 				var ajaxurl = $(this).attr('href');
 				var param = $(this).attr('js-ajax-param') || {};
+				var link = $(this);
 				$.confirm('是否确认删除该记录？', [{
 					yes: "确定"
 				}, {
@@ -159,10 +171,16 @@
 						}
 						$.ajax(objAux).done(function(result) {
 							if (result.status) {
-								$(e.target).closest('tr').remove()
 								d.hide();
 								setTimeout(function() {
-									_this.gosearch(_this.currentPage);
+									if (link.closest('tr').siblings('tr').size() == 0 && _this.currentPage > 1) {
+										_this.currentPage--;
+										_this.gosearch(_this.currentPage)
+									} else {
+										_this.gosearch(_this.currentPage);
+										_this.bind();
+									}
+									$(e.target).closest('tr').remove();
 								}, 500)
 							} else {
 								$.alert(result.msg);
@@ -173,25 +191,57 @@
 					}
 				});
 				return false;
-			})
+			});
+			this.table.delegate("a:not(.js-ajax,.js-delegate-delete)", "click", function(e) {
+				var link = $(this).attr('href');
+				if (link != '' && link != 'javascript:void(0)' && link != 'javascript:;' && typeof link != 'undefined') {
+					link += location.hash;
+					location.href = link;
+					e.preventDefault();
+				}
+			});
+			if (_this.settings.hash == true) {
+				$(window).on('hashchange', function() {
+					_this.bindHash();
+					_this.bind();
+				});
+			}
 		},
 		bindSearch: function() {
 			var _this = this;
 			this.search.click(function() {
 				_this.gosearch();
+				return false;
+			});
+		},
+		//锚点改变时绑定表单值
+		bindHash: function() {
+			var hash = Query.getHash();
+			this.param = $.extend(this.param, hash);
+			this.currentPage = parseInt(Query.getHash('page') || 1);
+			this.page_size = Query.getHash('page_size');
+			$('[name]', this.search.closest('.form')).each(function() {
+				$(this).val(hash[$(this).attr('name')]).trigger('userChange'); //这里赋值后调用了user change事件,方面隐藏域的回调
 			});
 		},
 		gosearch: function(p) {
 			var _this = this;
 			_this.currentPage = p || 1;
 			if (_this.search) {
-				_this.param = $.extend(_this.param, _this.getParam(_this.search.closest('.form')));
+				var searchParam = _this.getParam(_this.search.closest('.form'));
+				_this.param = $.extend(_this.param, searchParam);
 			}
-			_this.param = $.extend(_this.param, _this.getParam($(_this.filterCon)));
-			_this.bind();
+			if (this.settings.hash) {
+				Query.setHash($.extend(_this.param, {
+					'page': this.currentPage
+				}));
+			} else {
+				_this.bind();
+			}
 		},
 		getParam: function(form) {
-			return Query.getForm(form);
+			var searchParam = Query.getForm(form);
+			return searchParam;
 		},
 		bind: function() {
 			var _this = this;
@@ -199,6 +249,12 @@
 			//  nPageNo: this.currentPage,
 			//  nPageSize: this.pageSize
 			//});
+			/*
+			if (_this.search) {
+				var searchParam = _this.getParam(_this.search.closest('.form'));
+				_this.param = $.extend(_this.param, searchParam);
+			}
+			*/
 			this.param = $.extend(this.param, {
 				//'begin': (this.currentPage - 1) * this.pageSize + 1,
 				//'end': this.currentPage * this.pageSize + 1,
@@ -216,7 +272,6 @@
 				_this.page.hide();
 				_this.table.append('<div class="loadingdata" style="position:absolute;left:' + l + 'px;top:' + t + 'px;"/>');
 			};
-
 			_this.ajaxData(_this.ajaxurl, _this.param).done(function(result) {
 				_this.page.show();
 				//loading.remove();
@@ -231,7 +286,7 @@
 					}
 					_this.initPager();
 					// _this.event();
-					_this.callback ? _this.callback.call(_this,result.data,_this.table) : null;
+					_this.callback ? _this.callback.call(_this, result.data, _this.table) : null;
 				} else {
 					$.alert(result.msg);
 					_this.table.html(result.msg);
@@ -262,10 +317,14 @@
 					target: this.page,
 					pagesize: _this.pageSize,
 					count: _this._total,
+					hash: _this.settings.hash,
 					callback: function(p) {
 						_this.currentPage = p;
-						_this.bind();
-					}
+						if (!_this.settings.hash) {
+							_this.bind();
+						}
+					},
+					current: this.currentPage
 				});
 			} else {
 				this.pageData.render({

@@ -48,18 +48,13 @@
 		setRange: function(range) {
 			this.range = $.extend([null, null], range);
 		},
-		init: function(settings) {
-			$('body').append('<div class="ui-calendar clearfix" id="' + this.id + '"><div class="ui-calendar-pannel clearfix" data-role="pannel"><span class="ui-calendar-control" data-role="prev-year">&lt;&lt;</span><span class="ui-calendar-control" data-role="prev-month">&lt;</span><span class="ui-calendar-control month" data-role="current-month"></span><span class="ui-calendar-control year" data-role="current-year"></span><span class="ui-calendar-control" data-role="next-month">&gt;</span><span class="ui-calendar-control" data-role="next-year">&gt;&gt;</span></div><div class="calendar-header clearfix"></div><div class="c_days clearfix"></div></div>');
-			this.calendarContainer = $('#' + this.id);
+		getDefaultDate: function() {
 			var _this = this;
-			this.settings = $.extend({}, this.settings, settings);
-			this.maxDays = this.settings.maxdays || this.maxDays;
-			this.mutilSeparator = this.settings.mutilSeparator || ","
 			if (this.settings.target && $(this.settings.target).size()) {
 				if ($(this.settings.target)[0].nodeType === 1) {
-					this.settings.focusDate = this.settings.focusDate || $(this.settings.target).val();
+					this.settings.focusDate = $(this.settings.target).val() || this.settings.focusDate || '';
 				} else {
-					this.settings.focusDate = this.settings.focusDate || $(this.settings.target).prev().val() || '';
+					this.settings.focusDate = $(this.settings.target).prev().val() || this.settings.focusDate || '';
 				}
 			}
 			if (this.settings.focusDate && !this.settings.multiple) {
@@ -79,11 +74,17 @@
 					_this.dateArr.push(_this.date);
 				}
 			}
+		},
+		init: function(settings) {
+			$('body').append('<div class="ui-calendar clearfix" id="' + this.id + '"><div class="ui-calendar-pannel clearfix" data-role="pannel"><span class="ui-calendar-control" data-role="prev-year">&lt;&lt;</span><span class="ui-calendar-control" data-role="prev-month">&lt;</span><span class="ui-calendar-control month" data-role="current-month"></span><span class="ui-calendar-control year" data-role="current-year"></span><span class="ui-calendar-control" data-role="next-month">&gt;</span><span class="ui-calendar-control" data-role="next-year">&gt;&gt;</span></div><div class="calendar-header clearfix"></div><div class="c_days clearfix"></div></div>');
+			this.calendarContainer = $('#' + this.id);
+			var _this = this;
+			this.settings = $.extend({}, this.settings, settings);
+			this.maxDays = this.settings.maxdays || this.maxDays;
+			this.mutilSeparator = this.settings.mutilSeparator || ","
+			this.getDefaultDate();
 			if (this.settings.multiple) {
 				this.settings.toolbar = true;
-			}
-			if (this.settings.toolbar) {
-				this.autohide = false;
 			}
 			var zIndex = this.settings.zIndex || 1;
 			this.calendarContainer.css('zIndex', zIndex);
@@ -93,8 +94,12 @@
 				this.settings.toolbar = true;
 				this.autohide = false;
 				this.showTime();
+				this.showToolbar();
 			}
-			this.showToolbar();
+			if (this.settings.toolbar) {
+				this.autohide = false;
+				this.showToolbar();
+			}
 			// this.formatDate();
 			// this.renderHeader();
 			this.bindEvent();
@@ -106,12 +111,14 @@
 			}
 		},
 		showToolbar: function() {
-			if (this.settings.toolbar) {
+			if (this.settings.toolbar && $('.ui-calendar-toolbar',this.calendarContainer).size()==0 )  {
 				this.calendarContainer.append(this.toolbarTpl);
 			}
 		},
 		showTime: function() {
-			this.calendarContainer.append(this.timeTpl);
+			if (this.calendarContainer.find('.ui-calendar-time').size() == 0) {
+				this.calendarContainer.append(this.timeTpl);
+			}
 			var _this = this;
 			for (var i = 0, l = 60; i < l; i++) {
 				if (i < 24) {
@@ -127,6 +134,7 @@
 			$('.js-calendar-second', this.calendarContainer).val(_this._getTowNum(value.getSeconds()));
 		},
 		show: function() {
+			this.getDefaultDate();
 			this.calendarContainer.show();
 			this.date = this.defaultDate;
 			this.formatDate();
@@ -138,6 +146,11 @@
 			this.timer = setInterval(function() {
 				_this.setPosition.call(_this);
 			}, 500);
+			if (this.settings.time) {
+				this.settings.toolbar = true;
+				this.autohide = false;
+				this.showTime();
+			}
 		},
 		hide: function() {
 			this.calendarContainer.hide();
@@ -159,8 +172,8 @@
 				var st = $(window).scrollTop();
 				var winY = $(window).height();
 				if (y + this.calendarContainer.outerHeight() > st + winY) {
-					var	tmp =y - this.calendarContainer.outerHeight() - $(this.settings.target).outerHeight();
-					if(tmp>0){
+					var tmp = y - this.calendarContainer.outerHeight() - $(this.settings.target).outerHeight();
+					if (tmp > 0) {
 						y = tmp;
 					}
 				}
@@ -256,6 +269,7 @@
 				}
 				if ($(this).hasClass('js-clear')) {
 					_this.dateArr = [];
+					_this.date=null;
 					$(_this.settings.target).val('');
 					_this.formatDate();
 				}
@@ -263,6 +277,9 @@
 			});
 			if (_this.settings.target) {
 				$(_this.settings.target).bind('click', function() {
+					if ($(this).hasClass('disabled') || $(this).filter('[disabled="true"]').size() > 0) {
+						return;
+					}
 					$(document).trigger('click');
 					_this.show();
 					return false;
@@ -271,6 +288,11 @@
 					_this.isShow && _this.hide()
 				})
 			}
+			$(document).keydown(function(e) {
+				if (e.keyCode === 27) {
+					_this.hide();
+				}
+			});
 		},
 		actionFlow: function(obj, action) {
 			if (obj.siblings('.ui-calendar-flow').length) {
@@ -378,7 +400,7 @@
 			this.date = new Date(this.year, this.month, this.day);
 		},
 		formatDate: function() {
-			var date = this.date;
+			var date = this.date||this.defaultDate;
 			this.year = date.getFullYear();
 			this.month = date.getMonth();
 			this.day = date.getDate();
@@ -392,7 +414,7 @@
 			if (firstDay > 0) {
 				list += this._getDay(preDateNum - firstDay + 1, preDateNum, "preday", preDate);
 			}
-			list += this._getDay(1, dayNum, '', this.date);
+			list += this._getDay(1, dayNum, '', date);
 			var lastDay = (new Date(this.year, this.month, dayNum)).getDay();
 			list += this._getDay(1, 6 - lastDay, "nextday", nextDate);
 			list += '</ul>';

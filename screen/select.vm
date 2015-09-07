@@ -1,0 +1,198 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,select)
+$set(title,模拟下拉选项框select)
+<h1>
+<a id="select" class="anchor" href="#select" aria-hidden="true"><span class="octicon octicon-link"></span></a>select</h1>
+<p>模拟select下拉框</p>
+<select name="select" id="select1">
+	<option value="-1">请选择</option>
+	<option value="1">男</option>
+	<option value="0" selected="true">女</option>
+	<option value="10" disabled="true">"'人妖</option>
+</select>
+<select id="select2" disabled="true"></select>
+<input type="text" id="select3" style="height:30px;" value="2">
+<a id="select4" data-value="1"></a>
+<link rel="stylesheet" type="text/css" href="example/select/select.css">
+<script src="example/jquery-1.11.2.js"></script>
+<script src="example/select/select.js"></script>
+<script>
+var select = new Select();
+select.init({
+	target: '#select1'
+});
+$('#select2').Select({
+	width:100,
+	model: [{
+		text: "请选择",
+		value: "1"
+	}]
+});
+var model=[{
+		text: "浙江浙江浙江浙江浙江",
+		value: "1"
+	},{
+		text: "杭州",
+		value: "2"
+	},{
+		text: "宁波",
+		value: "3"
+	},{
+		text: "湖北",
+		value: "4"
+	},{
+		text: "上海",
+		value: "5"
+	},{
+		text: "万达",
+		value: "6"
+	},{
+		text: "物美",
+		value: "7",
+		disabled:true
+	},{
+		text: "中国",
+		value: "8"
+	},{
+		text: "外国",
+		value: "9"
+	}];
+$('#select3').change(function(){
+	console.log('选中个：'+$(this).val())
+}).Select({
+	width:100,
+	maxHeight:300,
+	maxWidth:'auto',
+	model: model
+});
+var sel=$('#select4').Select({
+	width:100,
+	height:24
+	})[0];
+setTimeout(function(){
+	sel.setData(model);
+},2000);
+</script>
+<h1>
+<a id="调用示例" class="anchor" href="#%E8%B0%83%E7%94%A8%E7%A4%BA%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>调用示例</h1>
+<pre><code>&lt;select name="select" id="select"&gt;
+    &lt;option value="-1"&gt;请选择&lt;/option&gt;
+    &lt;option value="1"&gt;男&lt;/option&gt;
+    &lt;option value="0" selected="true"&gt;女&lt;/option&gt;
+    &lt;option value="10" disabled="true"&gt;"'人妖&lt;/option&gt;
+&lt;/select&gt;
+&lt;select id="select2"&gt;&lt;/select&gt;
+&lt;input type="text" id="select3" style="height:30px;" value="2"&gt;
+&lt;a id="select4" data-value="1"&gt;&lt;/a&gt;
+&lt;script type="text/javascript" src="../src/jquery-1.11.2.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="../src/select.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+var select = new Select();
+select.init({
+    target: '#select'
+});
+$('#select2').Select({
+    width:100,
+    model: [{
+        text: "请选择",
+        value: "1"
+    }]
+});
+var model=[{
+        text: "浙江浙江浙江浙江浙江",
+        value: "1"
+    },{
+        text: "杭州",
+        value: "2"
+    },{
+        text: "宁波",
+        value: "3"
+    },{
+        text: "湖北",
+        value: "4"
+    },{
+        text: "上海",
+        value: "5"
+    },{
+        text: "万达",
+        value: "6"
+    },{
+        text: "物美",
+        value: "7",
+        disabled:true
+    },{
+        text: "中国",
+        value: "8"
+    },{
+        text: "外国",
+        value: "9"
+    }];
+$('#select3').change(function(){
+    console.log('选中个：'+$(this).val())//或者selected
+}).Select({
+    width:100,
+    maxHeight:300,
+    maxWidth:'auto',
+    model: model
+});
+var sel=$('#select4').Select({
+    width:100,
+    height:24
+    })[0];
+setTimeout(function(){
+    sel.setData(model);//动态更改数据源
+},2000);
+&lt;/script&gt;
+</code></pre>
+<h1>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h1>
+<h2>
+<a id="属性" class="anchor" href="#%E5%B1%9E%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>属性</h2>
+<h3>
+<a id="targetdomstring" class="anchor" href="#targetdomstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>target：<code>[DOM|String|$]</code>
+</h3>
+<pre><code>要改变成select的节点，可以原来就是select，也可以是其他元素，如果是其他元素时，优先取value取为选中项，否则取data-value值；
+</code></pre>
+<h3>
+<a id="modelarray" class="anchor" href="#modelarray" aria-hidden="true"><span class="octicon octicon-link"></span></a>model:<code>Array</code>
+</h3>
+<pre><code>数据源数组[value:'1',text:'文本',disabled:false]，如果无的时候，会去option,disabled可以控制是否可选，option上同
+</code></pre>
+<h3>
+<a id="multibool" class="anchor" href="#multibool" aria-hidden="true"><span class="octicon octicon-link"></span></a>multi:<code>bool</code>
+</h3>
+<pre><code>是否多选，暂缺
+</code></pre>
+<h3>
+<a id="disabledbool" class="anchor" href="#disabledbool" aria-hidden="true"><span class="octicon octicon-link"></span></a>disabled:<code>bool</code>
+</h3>
+<pre><code>是否可用,默认可用false,
+如果没有这个值会去取target的disabled或target.hasClass('disabled')来判断是否可用
+</code></pre>
+<h2>
+<a id="方法" class="anchor" href="#%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>方法</h2>
+<h3>
+<a id="setdatafunctiondata" class="anchor" href="#setdatafunctiondata" aria-hidden="true"><span class="octicon octicon-link"></span></a>setData:<code>function(data)</code>
+</h3>
+<pre><code>更改数据源data为数组[value:'1',text:'文本',disabled:false]
+</code></pre>
+<h3>
+<a id="selectedfunctionvaltxt" class="anchor" href="#selectedfunctionvaltxt" aria-hidden="true"><span class="octicon octicon-link"></span></a>selected:<code>function(val,txt)</code>
+</h3>
+<pre><code>选中后的回调
+</code></pre>
+<h2>
+<a id="事件" class="anchor" href="#%E4%BA%8B%E4%BB%B6" aria-hidden="true"><span class="octicon octicon-link"></span></a>事件</h2>
+<h3>
+<a id="changevalue" class="anchor" href="#changevalue" aria-hidden="true"><span class="octicon octicon-link"></span></a>change:<code>[value]</code>
+</h3>
+<pre><code>选中项改变时触发
+</code></pre>
+<h3>
+<a id="blur" class="anchor" href="#blur" aria-hidden="true"><span class="octicon octicon-link"></span></a>blur:</h3>
+<pre><code>隐藏时触发
+</code></pre>
+<h1>其它组件推荐</h1>
+$control.setTemplate("modulelist.vm")
