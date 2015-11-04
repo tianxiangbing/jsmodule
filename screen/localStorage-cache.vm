@@ -1,0 +1,85 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,loading)
+$set(title,lacalStorage-cache)
+<h1 id="localstorage-cache">localStorage-cache</h1>
+<p>localStorage本地存储缓存管理。 </p>
+
+<div>过期时间：<input type="text" value="" id="txt_expri"/> 内容：<input type="text" value="test" id="txt_desc"/> </div>
+    <div><input type="button" value="add/overwrite" id="btn_add"/></div>
+    <div><input type="button" value="update" id="btn_update"/></div>
+    <div><input type="button" value="get" id="btn_get"/></div>
+    <div><input type="button" value="clear" id="btn_clear"/></div>
+    <div><input type="button" value="get&update" id="btn_getupdate"/></div>
+    <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+    <script src="example/localStorage-cache/localStorage-cache.js"></script>
+<script>
+    $("#btn_add").click(function(){
+        LocalStorageCache.add('key',$('#txt_desc').val(),$('#txt_expri').val());
+        $("#btn_get").click();
+    });
+    $("#btn_get").click(function(){
+        LocalStorageCache.get('key').done(function(v){
+                alert(v)
+        }).fail(function(){
+                alert('缓存已不存在或已过期了')
+        });
+    });
+    $("#btn_clear").click(function(){
+        LocalStorageCache.clear()
+    });
+    function ajax(){
+        var dtd = $.Deferred();
+        $.get('index.html').done(function(){
+            dtd.resolve("hello world.");
+            LocalStorageCache.setExpired($('#txt_expri').val())//重新设置过期时间
+        }).fail(function(){
+            dtd.reject();
+        });
+        return  dtd ;
+    }
+    $("#btn_getupdate").click(function(){
+        LocalStorageCache.get('key',ajax).done(function(result){
+            alert(result)
+        }).fail(function(result){
+            alert(result+'fail')
+        });
+    });
+    $("#btn_update").click(function(){
+        LocalStorageCache.update('key',$('#txt_desc').val(),$('#txt_expri').val());
+        $("#btn_get").click();
+    });
+    </script>
+<p>##使用方法</p>
+<pre><code>LocalStorageCache.add(&#39;key&#39;,&#39;value&#39;);
+</code></pre><p>一般情况下是这样的添加的</p>
+<p>##add :function(key,value,exp)</p>
+<pre><code>add有三个参数,key是键，value为值，exp是过期时间，可以是0（关闭时过期）,int 秒为单位，date类型为具体到期日期
+</code></pre><p>##get:function(key,promise)</p>
+<pre><code>返回promise, 如果cache已过期，当第二个参数promise存在时，promise的fail时会在返回过期时的值
+
+function ajax(){
+    var dtd = $.Deferred();
+    $.get(&#39;index.html&#39;).done(function(){
+        dtd.resolve(&quot;hello world.&quot;);
+        LocalStorageCache.setExpired($(&#39;#txt_expri&#39;).val())//重新设置过期时间
+    }).fail(function(){
+        dtd.reject();
+    });
+    return  dtd ;
+}
+$(&quot;#btn_getupdate&quot;).click(function(){
+    LocalStorageCache.get(&#39;key&#39;,ajax).done(function(result){
+        alert(result)
+    }).fail(function(result){
+        alert(result+&#39;fail&#39;)
+    });
+});
+</code></pre><p>##remove:function(key)</p>
+<pre><code>移除cache
+</code></pre><p>##clear:function()</p>
+<pre><code>清空所有cache
+</code></pre><p>##update:function(key,value,exp)</p>
+<pre><code>更新cache,如果不加exp参数，就只更新内容。
+</code></pre>

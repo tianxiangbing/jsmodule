@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <link href='stylesheets/css.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+  <title>js组件-js插件-jquery插件-lacalStorage-cache</title> </head>
+  <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。lacalStorage-cache" />
+  <body>
+    <div id="header">
+      <div class="inner">
+        <h1>loading</h1>
+        <h2>JS组件-lacalStorage-cache</h2>
+        <a href="https://github.com/tianxiangbing/loading" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+        <div style="position:absolute;right:180px;top:0px;">
+          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=loading&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
+        </div>
+      </div>
+    </div>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+<ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
+﻿<aside id="sidebar">
+	<a href="https://github.com/tianxiangbing/loading/archive/master.zip" target="_blank" class="button">
+		<small>Download</small>
+		.zip file
+	</a>
+	<a href="https://github.com/tianxiangbing/loading" target="_blank" class="button">
+		<small>Code</small>
+		源码
+	</a>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/loading" target="_blank">loading</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://www.github.com/tianxiangbing" target="_blank"> GitHub</a></p>
+</aside>
+
+
+<h1 id="localstorage-cache">localStorage-cache</h1>
+<p>localStorage本地存储缓存管理。 </p>
+
+<div>过期时间：<input type="text" value="" id="txt_expri"/> 内容：<input type="text" value="test" id="txt_desc"/> </div>
+    <div><input type="button" value="add/overwrite" id="btn_add"/></div>
+    <div><input type="button" value="update" id="btn_update"/></div>
+    <div><input type="button" value="get" id="btn_get"/></div>
+    <div><input type="button" value="clear" id="btn_clear"/></div>
+    <div><input type="button" value="get&update" id="btn_getupdate"/></div>
+    <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+    <script src="example/localStorage-cache/localStorage-cache.js"></script>
+<script>
+    $("#btn_add").click(function(){
+        LocalStorageCache.add('key',$('#txt_desc').val(),$('#txt_expri').val());
+        $("#btn_get").click();
+    });
+    $("#btn_get").click(function(){
+        LocalStorageCache.get('key').done(function(v){
+                alert(v)
+        }).fail(function(){
+                alert('缓存已不存在或已过期了')
+        });
+    });
+    $("#btn_clear").click(function(){
+        LocalStorageCache.clear()
+    });
+    function ajax(){
+        var dtd = $.Deferred();
+        $.get('index.html').done(function(){
+            dtd.resolve("hello world.");
+            LocalStorageCache.setExpired($('#txt_expri').val())//重新设置过期时间
+        }).fail(function(){
+            dtd.reject();
+        });
+        return  dtd ;
+    }
+    $("#btn_getupdate").click(function(){
+        LocalStorageCache.get('key',ajax).done(function(result){
+            alert(result)
+        }).fail(function(result){
+            alert(result+'fail')
+        });
+    });
+    $("#btn_update").click(function(){
+        LocalStorageCache.update('key',$('#txt_desc').val(),$('#txt_expri').val());
+        $("#btn_get").click();
+    });
+    </script>
+<p>##使用方法</p>
+<pre><code>LocalStorageCache.add(&#39;key&#39;,&#39;value&#39;);
+</code></pre><p>一般情况下是这样的添加的</p>
+<p>##add :function(key,value,exp)</p>
+<pre><code>add有三个参数,key是键，value为值，exp是过期时间，可以是0（关闭时过期）,int 秒为单位，date类型为具体到期日期
+</code></pre><p>##get:function(key,promise)</p>
+<pre><code>返回promise, 如果cache已过期，当第二个参数promise存在时，promise的fail时会在返回过期时的值
+
+function ajax(){
+    var dtd = $.Deferred();
+    $.get(&#39;index.html&#39;).done(function(){
+        dtd.resolve(&quot;hello world.&quot;);
+        LocalStorageCache.setExpired($(&#39;#txt_expri&#39;).val())//重新设置过期时间
+    }).fail(function(){
+        dtd.reject();
+    });
+    return  dtd ;
+}
+$(&quot;#btn_getupdate&quot;).click(function(){
+    LocalStorageCache.get(&#39;key&#39;,ajax).done(function(result){
+        alert(result)
+    }).fail(function(result){
+        alert(result+&#39;fail&#39;)
+    });
+});
+</code></pre><p>##remove:function(key)</p>
+<pre><code>移除cache
+</code></pre><p>##clear:function()</p>
+<pre><code>清空所有cache
+</code></pre><p>##update:function(key,value,exp)</p>
+<pre><code>更新cache,如果不加exp参数，就只更新内容。
+</code></pre>
+        </section>
+      </div>
+    </div>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255182337'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/stat.php%3Fid%3D1255182337' type='text/javascript'%3E%3C/script%3E"));</script>
+    <div style="height:24px;line-height:24px;border:1px solid #ccc;background-color:#f2f2f2;position:fixed;top:0;width:100%;z-index:1;font-size:12px;">源码在github上托管，请尽量到github上下载最新代码！也可以提交Issues. <strong>如果您发现demo无法使用时，请多刷新几次页面就好了,非代码问题，便宜空间问题多。</strong></div>
+  </body>
+</html>

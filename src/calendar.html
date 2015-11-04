@@ -47,14 +47,19 @@
 	<h1>
 	<a id="user-content-用法" class="anchor" href="#%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>用法</h1>
 	<p>
-	<input type="text" style="width:350px;" id="calendar" value="2015-03-15"/>
-            <input type="text" class="calendar4" value="2015-05-20 21:34:29"/>
-	<link rel="stylesheet" type="text/css" href="example/calendar/calendar.min.css">
+	   <input type="text" id="calendar" style="width:300px;" value="2015-03-15,2015-03-16"/><br>
+        <input type="text" class="calendar" value="2015-03-14"/><br>
+        <input type="text" class="calendar2" value="2015-03-18"/><br>
+        工作日：<input type="text" class="calendar3" value=""/><br>
+        时间：<input type="text" class="calendar4" /><input type="text" class="calendar5" /><br>
+        时间：<input type="text" class="calendar6" /><input type="text" class="calendar7" /><br>
+        选月份：<input type="text" class="calendar8" /><br>
+        只选时分不选秒:<input type="text" class="calendar9" />
+	<link rel="stylesheet" type="text/css" href="example/calendar/calendar.css">
 	<script src="example/calendar/jquery-1.9.1.min.js"></script>
-	<script src="example/calendar/calendar-jquery.min.js"></script>
+	<script src="example/calendar/calendar.js"></script>
 	<script>
-            $(".calendar4").Calendar({time:true});
-	 var calendar = new Calendar();
+            var calendar = new Calendar();
         calendar.init({
             target: $('#calendar'),
             range: ['2015-3-5', '2015-3-25'],
@@ -62,16 +67,39 @@
             maxdays: 5,
             overdays: function(a) {
                 alert('添加已达上限 ' + a + ' 天');
-            },
-            filter:function(time){
-                var date = new Date(time);
-                // console.log(date.getDay())
-                if(date.getDay()==0||date.getDay()==6){
-                    return false;
-                }
-                return true;
             }
         });
+        $(".calendar").Calendar({toolbar:true,zIndex:999});
+        $(".calendar2").Calendar();
+        $(".calendar3").Calendar({filter:function(time){
+            var date = new Date(time);
+            if(date.getDay()==0||date.getDay()==6){
+                return false;
+            }
+            return true;
+        }});
+        var c_start = $(".calendar4").Calendar({time:true,
+            afterSelected: function(obj, date) {
+                $(obj).blur();
+                c_end.setRange([date, null]);
+            }})[0];
+        var c_end = $(".calendar5").Calendar({time:true,
+            afterSelected: function(obj, date) {
+                $(obj).blur();
+                c_start.setRange([null, date]);
+            }})[0];
+        var c_start2 = $(".calendar6").Calendar({
+            afterSelected: function(obj, date) {
+                $(obj).blur();
+                c_end2.setRange([date, null]);
+            }})[0];
+        var c_end2 = $(".calendar7").Calendar({
+            afterSelected: function(obj, date) {
+                $(obj).blur();
+                c_start2.setRange([null, date]);
+            }})[0];
+        $(".calendar8").Calendar({onlyYM:true});
+        $(".calendar9").Calendar({onlyHm:true,time:true});
 	</script>
 	</p>
 	<pre><code>    &lt;input type="text" id="calendar" value="2015-04-15"/&gt;
@@ -378,6 +406,12 @@
 		<a href="select.html" class="m-title">模拟select下拉选择框</a>
 		<a href="https://github.com/tianxiangbing/select" target="_blank" class="a_code">Code</a>
 		<a href="select.html"  class="a_code">Demo & API</a>
+	</li>
+	<li>
+		<a href="localStorage-cache.html"><img src="images/ui/localStorage-cache.jpg" alt="localStorage-cache本地缓存管理"/></a>
+		<a href="localStorage-cache.html" class="m-title">localStorage-cache本地缓存管理</a>
+		<a href="https://github.com/tianxiangbing/localStorage-cache" target="_blank" class="a_code">Code</a>
+		<a href="localStorage-cache.html"  class="a_code">Demo & API</a>
 	</li>
 </ul>
         </section>

@@ -56,6 +56,7 @@
 				}, 25);
 				_this.settings.focusCallback && _this.settings.focusCallback.call(_this, _this.input);
 			}).on('keyup', function(e) {
+				var input = $(this);
 				if (input.data('old') != input.val()) {
 					_this.search();
 					input.data('old', input.val());
@@ -65,7 +66,63 @@
 				if (_this.timer) {
 					clearInterval(_this.timer);
 				}
+				setTimeout(function() {
+					_this.hide();
+				}, 500)
 				_this.settings.blurCallback && _this.settings.blurCallback.call(_this, _this.input);
+			}).on('keyup', function(e) {
+				switch (e.keyCode) {
+					case 40:
+						{
+							//down
+							var i = $('.item.current', _this.content).index();
+							i++;
+							i = Math.min($('.item', _this.content).size()-1,i);
+							var current = $('.item.current', _this.content);
+							$('.item', _this.content).removeClass('current').eq(i).addClass('current');
+							if(current.size()){
+								var pos = $('.item.current', _this.content).position();
+								var ch = current.outerHeight();
+								if (pos.top + ch > $(_this.content).height()) {
+									var st = $(_this.content).scrollTop();
+									st += ch;
+									$(_this.content).scrollTop(st);
+								}
+							}
+						}
+						break;
+					case 38:
+						{
+							//up
+							var i = $('.item.current', _this.content).index();
+							i--;
+							i = Math.max(0,i);
+							$('.item', _this.content).removeClass('current').eq(i).addClass('current');
+							var current = $('.item.current', _this.content);
+							if(current.size()){
+								var pos = $('.item.current', _this.content).position();
+								var ch = current.outerHeight();
+								var st = $(_this.content).scrollTop();
+								if (pos.top <=0) {
+									st -= ch;
+									$(_this.content).scrollTop(Math.max(st,0));
+								}
+							}
+						}
+						break;
+					case 13:
+						{
+							//enter
+							$('.item.current', _this.content).trigger('click');
+							setTimeout(function() {
+								_this.hide();
+							}, 50)
+						}
+				}
+			}).on('keydown',function(e){
+				if(e.keyCode==13){
+					e.preventDefault();
+				}
 			});
 			this.content.on('click', '.item', function() {
 				var data = $(this).data('data');
@@ -79,7 +136,9 @@
 				}
 				_this.settings.callback && _this.settings.callback.call(_this, data);
 				_this.hide();
-			});
+			}).on('mouseover', '.item', function() {
+				$(this).addClass('current').siblings().removeClass('current');
+			})
 			$(document).click(function() {
 				_this.hide();
 			});

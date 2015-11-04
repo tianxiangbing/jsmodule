@@ -31,11 +31,11 @@
 	};
 
 	function Mobile_upload() {
-		window.uploadCount =window.uploadCount||0;
+		window.uploadCount = window.uploadCount || 0;
 		window.uploadCount++;
 		var rnd = Math.random().toString().replace('.', '');
-		this.id = 'upload_' + rnd+window.uploadCount.toString();
-		this.fileInput=null;
+		this.id = 'upload_' + rnd + window.uploadCount.toString();
+		this.fileInput = null;
 	}
 	Mobile_upload.prototype = {
 		init: function(settings) {
@@ -70,7 +70,7 @@
 		createFile: function() {
 			var _this = this;
 			_this.fileInput && _this.fileInput.remove();
-			_this.fileInput = $('<input type="file" style="position:absolute;top:0;left:0;width:1px;height:1px;opacity:0;"  accept="image/*" id="' + _this.id + '"/>');
+			_this.fileInput = $('<input type="file" style="position:absolute;top:0;left:0;width:1px;height:1px;opacity:0;"  accept="image/*" id="' + _this.id + '"/>').hide();
 			$(_this.target).after(_this.fileInput);
 			if (this.settings.multiple) {
 				this.fileInput.attr('multiple', 'multiple');
@@ -105,7 +105,7 @@
 					//ifrmae post
 					var key = "up_" + Math.random().toString().replace('.', '');
 					if (_this.postFrame(this, e, key)) {
-						_this.settings.startUpload && _this.settings.startUpload(_this.fileInput,_this.target, key);
+						_this.settings.startUpload && _this.settings.startUpload(_this.fileInput, _this.target, key);
 					}
 				} else
 				if (files) {
@@ -115,21 +115,44 @@
 							var key = "key_" + Math.random().toString().replace('.', '');
 							var rnd = Math.random().toString().replace('.', '');
 							var i = 'up_' + rnd;
-							if (reg_type.test(file.type)) {
+							var hasext = false;
+							var arr = file.name.split('.');
+							var ext = arr[arr.length - 1];
+							if(/^(jpg|jpeg)$/i.test(ext)){
+								ext ='jpeg';
+							}
+							if (file.type == "") {
+							//有些浏览器得不到类型时用文件名来判断
+								var typelist = ['jpeg', 'png', 'bmp', 'gif'];
+								for (var i = typelist.length - 1; i >= 0; i--) {
+									var re = new RegExp(typelist[i], "i");
+									if (re.exec(ext)) {
+										hasext = true;
+									}
+								};
+							}
+							if (reg_type.test(file.type) || hasext) {
 								if ($('#' + _this.id).parent().siblings().size() + 1 >= _this.settings.max) {
 									_this.settings.maxCallback && _this.settings.maxCallback($('#' + _this.id));
 								}
 								if (window.FileReader) {
 									var reader = new FileReader();
-									_this.settings.startUpload && _this.settings.startUpload(_this.fileInput,_this.target, i);
+									_this.settings.startUpload && _this.settings.startUpload(_this.fileInput, _this.target, i);
 									reader.onload = function() {
 										//清除缓存
 										_this.createFile();
 										_this.bindFileEvent();
-										_this.settings.imageReady && _this.settings.imageReady(_this.fileInput,_this.target, this.result, i);
+										var result= this.result;
+										var splitimg= result.split('base64,')
+										var imgtype= splitimg[0];
+										//有些浏览器得不到类型时手动加入
+										if(imgtype.length==5 &&splitimg.length==2){
+											result= result.replace('data:base64,','data:image/'+ext+';base64,');
+										}
+										_this.settings.imageReady && _this.settings.imageReady(_this.fileInput, _this.target, result, i);
 										if (_this.settings.ajax) {
 											var data = {};
-											data[_this.settings.ajax.name || 'file'] = this.result;
+											data[_this.settings.ajax.name || 'file'] = result;
 											$.ajax({
 												type: 'post',
 												url: _this.settings.ajax.url,
@@ -137,19 +160,20 @@
 												dataType: 'json',
 												success: function(result) {
 													if (_this.settings.callback) {
-														_this.settings.callback(result, file, _this.name,_this.target, i);
+														_this.settings.callback(result, file, _this.name, _this.target, i);
 													}
 												},
 												complete: function() {
-													_this.settings.endUpload && _this.settings.endUpload(_this.fileInput,_this.target, i);
+													_this.settings.endUpload && _this.settings.endUpload(_this.fileInput, _this.target, i);
 												}
 											});
 											this.result = null;
+											result=null;
 											reader.onload = null;
 											reader = null;
 										} else
 										if (_this.settings.callback) {
-											_this.settings.callback(this.result, file, _this.name,_this.target, i);
+											_this.settings.callback(result, file, _this.name, _this.target, i);
 										}
 									};
 									reader.readAsDataURL(file);

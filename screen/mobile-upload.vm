@@ -5,14 +5,13 @@ $set(modulename,mobile-upload)
 $set(title,上传图片预览webkit)
           <h1>
 <a id="mobile-upload" class="anchor" href="#mobile-upload" aria-hidden="true"><span class="octicon octicon-link"></span></a>mobile-upload</h1>
-
 <p>手机上传图片
 </p>
 <p>
 <button id="btn_upload">upload</button>
 <span id="preview"></span>
 <script src="example/mobile-upload/jquery-1.9.1.min.js"></script>
-<script src="example/mobile-upload/mobile-upload-jquery.js"></script>
+<script src="example/mobile-upload/mobile-upload.js"></script>
 <script>
 var upload = new Mobile_upload();
 upload.init({target:$('#btn_upload'),multiple:true,callback:function(result,name,postName){
