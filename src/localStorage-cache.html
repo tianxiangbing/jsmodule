@@ -70,7 +70,7 @@
         var dtd = $.Deferred();
         $.get('index.html').done(function(){
             dtd.resolve("hello world.");
-            LocalStorageCache.setExpired($('#txt_expri').val())//重新设置过期时间
+            LocalStorageCache.setExpired('key',$('#txt_expri').val())//重新设置过期时间
         }).fail(function(){
             dtd.reject();
         });

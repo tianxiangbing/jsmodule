@@ -70,6 +70,9 @@ var List = {
 	},
 	"select":{
 		files:['select.js','select.css']
+	},
+	"localStorage-cache":{
+		files:['localStorage-cache.js']
 	}
 };
 var http = require('http');
