@@ -23,17 +23,22 @@
 		init: function(settings) {
 			var rnd = Math.random().toString().replace('.', '');
 			this.id = 'autosearch_' + rnd;
-			this.settings = settings || {};
+			this.settings = $.extend({
+				mutil: false
+			}, settings);
 			this.input = $(this.settings.input);
 			this.min = this.settings.min || 1;
 			this.data = this.settings.data;
 			this.valueObj = $(this.settings.valueObj || this.settings.input); //赋值项
 			this.valueName = this.settings.valueName || 'name';; //赋值项
-			this.target = $(this.settings.target || this.settings.input); //显示框
+			this.target = $(this.settings.target || this.settings.input); //显���框
 			this.filterColumn = this.settings.filterColumn || ['name'];
 			this.column = this.settings.column || ['name'];
 			this.timer = null;
 			this.content = null;
+			this.ischanged = false;
+			this.mutilValueArr = [];
+			this.mutilTextArr = [];
 			this.createContent();
 			this.bindEvent();
 		},
@@ -57,7 +62,7 @@
 				_this.settings.focusCallback && _this.settings.focusCallback.call(_this, _this.input);
 			}).on('keyup', function(e) {
 				var input = $(this);
-				if (input.data('old') != input.val()) {
+				if (input.data('old') != input.val() && e.keyCode != 13) {
 					_this.search();
 					input.data('old', input.val());
 				}
@@ -68,6 +73,10 @@
 				}
 				setTimeout(function() {
 					_this.hide();
+					if (_this.ischanged && !this.settings.mutil) {
+						_this.input.val('');
+						_this.settings.resetCallback && _this.settings.resetCallback.call(_this, _this.input);
+					}
 				}, 500)
 				_this.settings.blurCallback && _this.settings.blurCallback.call(_this, _this.input);
 			}).on('keyup', function(e) {
@@ -77,10 +86,10 @@
 							//down
 							var i = $('.item.current', _this.content).index();
 							i++;
-							i = Math.min($('.item', _this.content).size()-1,i);
+							i = Math.min($('.item', _this.content).size() - 1, i);
 							var current = $('.item.current', _this.content);
 							$('.item', _this.content).removeClass('current').eq(i).addClass('current');
-							if(current.size()){
+							if (current.size()) {
 								var pos = $('.item.current', _this.content).position();
 								var ch = current.outerHeight();
 								if (pos.top + ch > $(_this.content).height()) {
@@ -96,16 +105,16 @@
 							//up
 							var i = $('.item.current', _this.content).index();
 							i--;
-							i = Math.max(0,i);
+							i = Math.max(0, i);
 							$('.item', _this.content).removeClass('current').eq(i).addClass('current');
 							var current = $('.item.current', _this.content);
-							if(current.size()){
+							if (current.size()) {
 								var pos = $('.item.current', _this.content).position();
 								var ch = current.outerHeight();
 								var st = $(_this.content).scrollTop();
-								if (pos.top <=0) {
+								if (pos.top <= 0) {
 									st -= ch;
-									$(_this.content).scrollTop(Math.max(st,0));
+									$(_this.content).scrollTop(Math.max(st, 0));
 								}
 							}
 						}
@@ -119,8 +128,8 @@
 							}, 50)
 						}
 				}
-			}).on('keydown',function(e){
-				if(e.keyCode==13){
+			}).on('keydown', function(e) {
+				if (e.keyCode == 13) {
 					e.preventDefault();
 				}
 			});
@@ -128,12 +137,17 @@
 				var data = $(this).data('data');
 				var text = $(this).text();
 				if (_this.settings.mutil == true) {
-					_this.input.val(_this.input.val() + text + ',');
-					_this.valueObj.val(_this.valueObj.val() + data[_this.valueName] + ',');
+					_this.mutilTextArr.push(text);
+					_this.mutilValueArr.push(data[_this.valueName]);
+					_this.input.val(_this.mutilTextArr.join(',') + ',');
+					_this.valueObj.val(_this.mutilValueArr.join(',') + ',');
+					_this.input.attr('data-value', _this.input.attr('data-value'));
 				} else {
 					_this.input.val(text);
 					_this.valueObj.val(data[_this.valueName]);
+					_this.input.attr('data-value', data[_this.valueName]);
 				}
+				_this.ischanged = false;
 				_this.settings.callback && _this.settings.callback.call(_this, data);
 				_this.hide();
 			}).on('mouseover', '.item', function() {
@@ -193,21 +207,24 @@
 		},
 		format: function(data) {
 			this.content.html('');
-			for (var i = 0, l = data.length; i < l; i++) {
-				var item = data[i];
-				var row = $();
-				if (this.settings.format) {
-					row = $(this.settings.format.call(this, item));
-				} else {
-					var name = '';
-					for (var j = 0, len = this.column.length; j < len; j++) {
-						name += '<span class="' + this.column[j] + '">' + item[this.column[j]] + '</span>';
-					};
-					row = $('<div class="item">' + name + '</div>');
-				}
-				row.data('data', item)
-				this.content.append(row);
-			};
+			if (data) {
+				for (var i = 0, l = data.length; i < l; i++) {
+					var item = data[i];
+					var row = $();
+					if (this.settings.format) {
+						row = $(this.settings.format.call(this, item));
+					} else {
+						var name = '';
+						for (var j = 0, len = this.column.length; j < len; j++) {
+							name += '<span class="' + this.column[j] + '">' + item[this.column[j]] + '</span>';
+						};
+						row = $('<div class="item">' + name + '</div>');
+					}
+					row.data('data', item)
+					this.content.append(row);
+				};
+				this.ischanged = true;
+			}
 		},
 		filter: function(data) {
 			var _this = this;

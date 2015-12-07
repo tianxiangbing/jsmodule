@@ -73,6 +73,10 @@ var List = {
 	},
 	"localStorage-cache":{
 		files:['localStorage-cache.js']
+	},
+	"area":{
+		files:[
+		'area.js',"area.css","area-data.js"]
 	}
 };
 var http = require('http');

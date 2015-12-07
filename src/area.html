@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <link href='stylesheets/css.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+  <title>js组件-js插件-jquery插件-地区联动选择pc版</title> </head>
+  <meta name="keywords" content="js组件,js插件,jquery插件,前端组件,require插件,ui插件"/>
+  <meta name="description" content="这里是一些开源的js插件，其中支持jquery、zepto、requirejs的插件，有日历、弹窗、上传等。地区联动选择pc版" />
+  <body>
+    <div id="header">
+      <div class="inner">
+        <h1>area</h1>
+        <h2>JS组件-地区联动选择pc版</h2>
+        <a href="https://github.com/tianxiangbing/area" target="_blank" class="button"><small>代码在这里</small> GitHub</a>
+        <div style="position:absolute;right:180px;top:0px;">
+          <iframe src="http://ghbtns.com/github-btn.html?user=tianxiangbing&repo=area&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
+        </div>
+      </div>
+    </div>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+<ul class="menu"><li><a href="index.html">js组件首页</a></li><li><a href="/index.html" target="_blank">JY库</a></li><li><a href="/dev.htm" target="_blank" >分享区</a></li><li><a href="/demo.html" target="_blank">技术博文</a></li><li><a href="/games.html" target="_blank">JY游戏</a></li></ul>
+﻿<aside id="sidebar">
+	<a href="https://github.com/tianxiangbing/area/archive/master.zip" target="_blank" class="button">
+		<small>Download</small>
+		.zip file
+	</a>
+	<a href="https://github.com/tianxiangbing/area" target="_blank" class="button">
+		<small>Code</small>
+		源码
+	</a>
+	<p class="repo-owner"><a href="https://github.com/tianxiangbing/area" target="_blank">area</a> is maintained by <a href="https://github.com/tianxiangbing" target="_blank">tianxiangbing</a>.</p>
+	<p>本站点所有的资源均在github上可以查看源代码 <a href="https://www.github.com/tianxiangbing" target="_blank"> GitHub</a></p>
+</aside>
+
+
+<h1>area</h1>
+<p>省市区三级联动pc版</p>
+<p>手机版的地区三级联动请至 <a href="https://github.com/tianxiangbing/mobile-select-area">mobile-select-area</a></p>
+<link rel="stylesheet" type="text/css" href="example/area/area.css">
+		<div class="form-row clearfix area-row">
+			<div class="form-label">地区联动</div>
+			<div class="form-input">
+				<div class="area-input">
+					<div class="area province">
+						<input type="hidden" id="hd_province">
+						<span>-- 省份 --</span><i></i>
+						<div class="area-content"></div>
+					</div>
+					<div class="area city">
+						<input type="hidden" id="hd_city">
+						<span>-- 城市 --</span><i></i>
+						<div class="area-content"><ul></ul></div>
+					</div>
+					<div class="area downtown">
+						<input type="hidden" id="hd_downtown">
+						<span>-- 市区 --</span><i></i>
+						<div class="area-content"><ul></ul></div>
+					</div>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="example/area/area-data.js"></script>
+<script type="text/javascript" src="example/area/area.js"></script>
+	<script>
+		Area.init(AreaData);
+	</script>
+
+<h2>js:</h2>
+<pre><code>    &lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;area-data.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;area.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+    Area.init(AreaData);
+    &lt;/script&gt;
+</code></pre>
+
+<p><code>AreaData是取的area-data.js的静态数据，也可以通过ajax一次性全读出来</code></p>
+<h2>html:</h2>
+<pre><code>&lt;div class=&quot;area-input&quot;&gt;
+    &lt;div class=&quot;area province&quot;&gt;
+        &lt;input type=&quot;hidden&quot; id=&quot;hd_province&quot;&gt;
+        &lt;span&gt;-- 省份 --&lt;/span&gt;&lt;i&gt;&lt;/i&gt;
+        &lt;div class=&quot;area-content&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;area city&quot;&gt;
+        &lt;input type=&quot;hidden&quot; id=&quot;hd_city&quot;&gt;
+        &lt;span&gt;-- 城市 --&lt;/span&gt;&lt;i&gt;&lt;/i&gt;
+        &lt;div class=&quot;area-content&quot;&gt;&lt;ul&gt;&lt;/ul&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;area downtown&quot;&gt;
+        &lt;input type=&quot;hidden&quot; id=&quot;hd_downtown&quot;&gt;
+        &lt;span&gt;-- 市区 --&lt;/span&gt;&lt;i&gt;&lt;/i&gt;
+        &lt;div class=&quot;area-content&quot;&gt;&lt;ul&gt;&lt;/ul&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h2>area-data:</h2>
+<pre><code>&quot;data&quot;: [{
+        &quot;id&quot;: &quot;2&quot;,
+        &quot;name&quot;: &quot;\u5317\u4eac\u5e02&quot;,
+        &quot;child&quot;: [{
+            &quot;id&quot;: &quot;2288&quot;,
+            &quot;name&quot;: &quot;\u4e1c\u57ce\u533a&quot;
+        }]
+        ...
+        }]
+</code></pre>
+
+        </section>
+      </div>
+    </div>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255182337'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/stat.php%3Fid%3D1255182337' type='text/javascript'%3E%3C/script%3E"));</script>
+    <div style="height:24px;line-height:24px;border:1px solid #ccc;background-color:#f2f2f2;position:fixed;top:0;width:100%;z-index:1;font-size:12px;">源码在github上托管，请尽量到github上下载最新代码！也可以提交Issues. <strong>如果您发现demo无法使用时，请多刷新几次页面就好了,非代码问题，便宜空间问题多。</strong></div>
+  </body>
+</html>

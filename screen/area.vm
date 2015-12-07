@@ -1,0 +1,79 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,area)
+$set(title,地区联动选择pc版)
+<h1>area</h1>
+<p>省市区三级联动pc版</p>
+<p>手机版的地区三级联动请至 <a href="https://github.com/tianxiangbing/mobile-select-area">mobile-select-area</a></p>
+<link rel="stylesheet" type="text/css" href="example/area/area.css">
+		<div class="form-row clearfix area-row">
+			<div class="form-label">地区联动</div>
+			<div class="form-input">
+				<div class="area-input">
+					<div class="area province">
+						<input type="hidden" id="hd_province">
+						<span>-- 省份 --</span><i></i>
+						<div class="area-content"></div>
+					</div>
+					<div class="area city">
+						<input type="hidden" id="hd_city">
+						<span>-- 城市 --</span><i></i>
+						<div class="area-content"><ul></ul></div>
+					</div>
+					<div class="area downtown">
+						<input type="hidden" id="hd_downtown">
+						<span>-- 市区 --</span><i></i>
+						<div class="area-content"><ul></ul></div>
+					</div>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="example/area/area-data.js"></script>
+<script type="text/javascript" src="example/area/area.js"></script>
+	<script>
+		Area.init(AreaData);
+	</script>
+
+<h2>js:</h2>
+<pre><code>    &lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;area-data.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;area.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+    Area.init(AreaData);
+    &lt;/script&gt;
+</code></pre>
+
+<p><code>AreaData是取的area-data.js的静态数据，也可以通过ajax一次性全读出来</code></p>
+<h2>html:</h2>
+<pre><code>&lt;div class=&quot;area-input&quot;&gt;
+    &lt;div class=&quot;area province&quot;&gt;
+        &lt;input type=&quot;hidden&quot; id=&quot;hd_province&quot;&gt;
+        &lt;span&gt;-- 省份 --&lt;/span&gt;&lt;i&gt;&lt;/i&gt;
+        &lt;div class=&quot;area-content&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;area city&quot;&gt;
+        &lt;input type=&quot;hidden&quot; id=&quot;hd_city&quot;&gt;
+        &lt;span&gt;-- 城市 --&lt;/span&gt;&lt;i&gt;&lt;/i&gt;
+        &lt;div class=&quot;area-content&quot;&gt;&lt;ul&gt;&lt;/ul&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;area downtown&quot;&gt;
+        &lt;input type=&quot;hidden&quot; id=&quot;hd_downtown&quot;&gt;
+        &lt;span&gt;-- 市区 --&lt;/span&gt;&lt;i&gt;&lt;/i&gt;
+        &lt;div class=&quot;area-content&quot;&gt;&lt;ul&gt;&lt;/ul&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h2>area-data:</h2>
+<pre><code>&quot;data&quot;: [{
+        &quot;id&quot;: &quot;2&quot;,
+        &quot;name&quot;: &quot;\u5317\u4eac\u5e02&quot;,
+        &quot;child&quot;: [{
+            &quot;id&quot;: &quot;2288&quot;,
+            &quot;name&quot;: &quot;\u4e1c\u57ce\u533a&quot;
+        }]
+        ...
+        }]
+</code></pre>

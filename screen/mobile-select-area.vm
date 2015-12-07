@@ -11,7 +11,7 @@ $set(title,手机端选择地区联动)
 <p>请选择地区:<input type="text" id="txt_area" value="浙江省 杭州市 滨江区"/><input type="hidden" id="hd_area" value="1,1,1"/></p>
 <link rel="stylesheet" type="text/css" href="example/mobile-select-area/mobile-select-area.css">
 <link rel="stylesheet" type="text/css" href="example/dialog/dialog.min.css">
-<script type="text/javascript" src="example/zepto.min.js"></script>
+<script type="text/javascript" src="example/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="example/dialog/dialog.js"></script>
 <script type="text/javascript" src="example/mobile-select-area/mobile-select-area.js"></script>
 <script>

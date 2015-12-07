@@ -53,7 +53,7 @@
 			_this.form.css({
 				height: 0,
 				width: 0,
-				overflow:'hidden'
+				overflow: 'hidden'
 			});
 			_this.form.attr("action", _this.url);
 			$('body').append(_this.form);
@@ -137,14 +137,31 @@
 				return false;
 			});
 			 */
-			$(this.target).mousemove(function(e) {
-				var x = e.pageX - 30;
-				var y = e.pageY - 10;
+			var move;
+			$(this.target).on('mousemove touchstart', function(e) {
+				var event;
+				if (e.changedTouches) {
+					event = (e.changedTouches || e.originalEvent.changedTouches)[0];
+				} else {
+					event = e;
+				}
+				var x = event.pageX - 30;
+				var y = event.pageY - 10;
 				$(_this.fileInput).css({
 					left: x,
 					top: y,
 					position: 'absolute'
 				});
+				move = true;
+			}).on('touchend', function(e) {
+				if (move) {
+					move = false;
+					e.preventDefault();
+					if (!move) {
+						$(_this.fileInput).trigger('click');
+					}
+					move = false;
+				}
 			});
 			_this.bindFileEvent();
 			if (this.postTarget) {
