@@ -31,7 +31,7 @@
 			this.data = this.settings.data;
 			this.valueObj = $(this.settings.valueObj || this.settings.input); //赋值项
 			this.valueName = this.settings.valueName || 'name';; //赋值项
-			this.target = $(this.settings.target || this.settings.input); //显���框
+			this.target = $(this.settings.target || this.settings.input); //显示框
 			this.filterColumn = this.settings.filterColumn || ['name'];
 			this.column = this.settings.column || ['name'];
 			this.timer = null;
@@ -73,7 +73,7 @@
 				}
 				setTimeout(function() {
 					_this.hide();
-					if (_this.ischanged && !this.settings.mutil) {
+					if (_this.ischanged && !_this.settings.mutil) {
 						_this.input.val('');
 						_this.settings.resetCallback && _this.settings.resetCallback.call(_this, _this.input);
 					}
