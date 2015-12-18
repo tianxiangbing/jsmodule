@@ -19,3 +19,5 @@
 #main_content .JYapi_menu a:hover {color: #ccc;text-shadow: 0 0 2px yellow;}
 #search{height:40px;line-height:40px;border:1px solid #ddd;padding:0 20px;border-radius: 20px;width:500px;margin:0 auto;outline: none;font-size: 16px;color:#999;display: block;}
 .m-title{width:166px;text-overflow:ellipsis;white-space: nowrap;overflow: hidden;}
+.inner input[type=text]{height:30px;line-height: 30px;color:#666;border-radius: 4px;margin:10px;border:1px solid #ccc;}
+.inner input[type=button]{height:30px;line-height: 30px;color:#666;border-radius: 4px;margin:10px;border:1px solid #ccc;background-color: #fff;}
