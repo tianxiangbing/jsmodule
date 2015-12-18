@@ -9,4 +9,3 @@ js组件
 $control.setTemplate("modulelist.vm")
 
 <script src="example/jquery-1.11.2.js"></script>
-<script src="javascripts/main.js"></script>

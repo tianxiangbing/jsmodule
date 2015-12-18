@@ -36,7 +36,6 @@
 			this.column = this.settings.column || ['name'];
 			this.timer = null;
 			this.content = null;
-			this.ischanged = false;
 			this.mutilValueArr = [];
 			this.mutilTextArr = [];
 			this.createContent();
@@ -71,9 +70,10 @@
 				if (_this.timer) {
 					clearInterval(_this.timer);
 				}
+				var input = $(this);
 				setTimeout(function() {
 					_this.hide();
-					if (_this.ischanged && !_this.settings.mutil) {
+					if (input.attr('data-text') != input.val() && !_this.settings.mutil) {
 						_this.input.val('');
 						_this.settings.resetCallback && _this.settings.resetCallback.call(_this, _this.input);
 					}
@@ -142,12 +142,17 @@
 					_this.input.val(_this.mutilTextArr.join(',') + ',');
 					_this.valueObj.val(_this.mutilValueArr.join(',') + ',');
 					_this.input.attr('data-value', _this.input.attr('data-value'));
+					_this.input.attr('data-text', _this.mutilTextArr.join(',') + ',');
 				} else {
 					_this.input.val(text);
 					_this.valueObj.val(data[_this.valueName]);
 					_this.input.attr('data-value', data[_this.valueName]);
+					if (_this.settings.valueObj) {
+						_this.input.attr('data-text', text);
+					} else {
+						_this.input.attr('data-text', data[_this.valueName]);
+					}
 				}
-				_this.ischanged = false;
 				_this.settings.callback && _this.settings.callback.call(_this, data);
 				_this.hide();
 			}).on('mouseover', '.item', function() {
@@ -223,7 +228,6 @@
 					row.data('data', item)
 					this.content.append(row);
 				};
-				this.ischanged = true;
 			}
 		},
 		filter: function(data) {

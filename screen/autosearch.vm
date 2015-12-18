@@ -16,7 +16,7 @@ $set(title,自动搜索框)
     $.get('json/autosearch.txt',function(result){
          var input = $('.autosearch');
          var autosearch = new AutoSearch();
-         autosearch.init({input:input,autoShow:true,data:result,valueObj:'#hd_id',valueName:"id"});
+         autosearch.init({input:input,autoShow:true,data:result,valueObj:'#hd_id',valueName:"name"});
     },'json')
     </script>
 <pre><code>&lt;input type="text"  class="autosearch"&gt;&lt;input type="hidden" name="hd_id" id="hd_id"&gt;
