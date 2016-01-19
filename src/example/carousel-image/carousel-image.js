@@ -184,10 +184,11 @@
 				move = false;
 			var curPos = {};
 			this.content.on('touchstart', function(e) {
+				var events =  (e.changedTouches || e.originalEvent.changedTouches);
 				start = {
-					x: e.changedTouches[0].pageX
+					x: events[0].pageX
 				};
-				if (e.targetTouches.length == 2) {
+				if (events.length == 2) {
 					move = false;
 					return false;
 				};
@@ -195,12 +196,13 @@
 				istartleft = start.x;
 				_this.stop();
 			}).on('touchmove', function(e) {
-				if (e.targetTouches.length == 2) {
+				var events =  (e.changedTouches || e.originalEvent.changedTouches);
+				if (events.length == 2) {
 					return false;
 				}
 				move = true;
 				end = {
-					x: e.changedTouches[0].pageX
+					x: events[0].pageX
 				};
 				// var curPos = $(this).position();
 				if (!_this.bloom) {
@@ -218,8 +220,9 @@
 				start = end;
 				return false;
 			}).on('touchend', function(e) {
+				var events =  (e.changedTouches || e.originalEvent.changedTouches);
 				end = {
-					x: e.changedTouches[0].pageX
+					x: events[0].pageX
 				};
 				var curPos = $(this).position();
 				var stopPos = {
