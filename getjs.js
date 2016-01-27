@@ -77,6 +77,9 @@ var List = {
 	"area":{
 		files:[
 		'area.js',"area.css","area-data.js"]
+	},
+	"audio":{
+		files:["audio.js","audio.css","audio.jpg","audio.gif"]
 	}
 };
 var http = require('http');

@@ -1,0 +1,58 @@
+$control.setTemplate("head.vm")
+$control.setTemplate("menu.vm")
+$control.setTemplate("side.vm")
+$set(modulename,audio)
+$set(title,音频播放器样式)
+<h1>audio</h1>
+<p>audio style, 音频播放器样式</p>
+
+<audio src="images/example/horse.ogg" class="audio" duration="1" controls="controls">
+Your browser does not support the audio element.
+</audio>
+    <link rel="stylesheet" href="example/audio/audio.css">
+    <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="example/audio/audio.js"></script>
+<script>
+
+$('.audio').Audio();//or new Audio.init({target:$('.audio')})
+</script>
+<pre><code>&lt;audio src=&quot;horse.ogg&quot; class=&quot;audio&quot; controls=&quot;controls&quot;&gt;
+Your browser does not support the audio element.
+&lt;/audio&gt;
+&lt;audio src=&quot;horse.ogg&quot; class=&quot;audio&quot; controls=&quot;controls&quot;&gt;
+Your browser does not support the audio element.
+&lt;/audio&gt;
+&lt;script src=&quot;../dist/jquery-1.9.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;../dist/audio.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+$('.audio').Audio();//or new Audio.init({target:$('.audio')})
+&lt;/script&gt;
+</code></pre>
+
+<h1>属性和回调(options)</h1>
+<h2>target:</h2>
+<pre><code>要变化样式的audio
+</code></pre>
+
+<h2>play:</h2>
+<pre><code>开始
+</code></pre>
+
+<h2>stop:</h2>
+<pre><code>停止
+</code></pre>
+
+<h2>playCallback:</h2>
+<p><code>function(this.audio,this.audio.paused,this.durationContent)</code></p>
+<pre><code>播放或暂停时的回调
+</code></pre>
+
+<h2>stopCallback</h2>
+<p><code>function(this,this.audio,this.audio.paused,this.durationContent)</code></p>
+<pre><code>停止后的回调
+</code></pre>
+
+<h2>updateCallback</h2>
+<p><code>function(this,this.audio,this.audio.duration,this.durationContent))</code></p>
+<pre><code>更新进度时的回调
+</code></pre>
