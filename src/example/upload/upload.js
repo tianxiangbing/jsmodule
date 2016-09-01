@@ -29,6 +29,7 @@
 			this.settings.zIndex = this.settings.zIndex || 9999;
 			this.url = this.settings.url;
 			this.name = this.settings.name || "files";
+			this.postData = this.settings.postData || null;
 			this.target = this.settings.target;
 			this.postTarget = this.settings.postTarget;
 			typeof this.settings.autoPost === "undefined" ? this.autoPost = true : this.autoPost = this.settings.autoPost;
@@ -45,10 +46,22 @@
 			}
 			this.frame = $('#' + this.frameId);
 		},
+
+		createPostData: function(){
+			var res = '';
+			var pd = this.settings.postData;
+			if(pd) {
+				for(var key in pd){
+					res += '<input value="'+ pd[key] +'" name="'+ key +'"/>';
+				}
+			}
+			return res;
+		},
+
 		createFile: function() {
 			var _this = this;
 			_this.form && _this.form.remove();
-			_this.form = $('<form method="post" ENCTYPE="multipart/form-data"><input type="file"  id="' + _this.id + '" name="' + _this.name + '"/></form>');
+			_this.form = $('<form method="post" ENCTYPE="multipart/form-data"><input type="file"  id="' + _this.id + '" name="' + _this.name + '"/>'+ _this.createPostData() +'</form>');
 			_this.form.attr("target", _this.frameId);
 			_this.form.css({
 				height: 0,

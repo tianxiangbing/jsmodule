@@ -89,25 +89,27 @@
 				move = false;
 			var curPos = {};
 			_this.imgPreview.on('touchstart', function(e) {
+				var events =  (e.changedTouches || e.originalEvent.changedTouches);
 				start = {
-					x: e.changedTouches[0].pageX,
-					y: e.changedTouches[0].pageY
+					x: events[0].pageX,
+					y: events[0].pageY
 				};
-				if (e.targetTouches.length == 2) {
+				if (events.length == 2) {
 					move = false;
 					return false;
 				};
 				curPos = $(this).position();
-				istartleft = e.changedTouches[0].pageX;
+				istartleft = event.pageX;
 			});
 			_this.imgPreview.on('touchmove', function(e) {
-				if (e.targetTouches.length == 2) {
+				var events =  (e.changedTouches || e.originalEvent.changedTouches);
+				if (events.length == 2) {
 					return false;
 				}
 				move = true;
 				end = {
-					x: e.changedTouches[0].pageX,
-					y: e.changedTouches[0].pageY
+					x: events[0].pageX,
+					y: events[0].pageY
 				};
 				// var curPos = $(this).position();
 				if (!_this.bloom) {
@@ -127,11 +129,12 @@
 				return false;
 			});
 			_this.imgPreview.on('touchend', function(e) {
+				var events =  (e.changedTouches || e.originalEvent.changedTouches);
 				end = {
-					x: e.changedTouches[0].pageX,
-					y: e.changedTouches[0].pageY
+					x: events[0].pageX,
+					y: events[0].pageY
 				};
-				if (e.targetTouches.length == 1) {
+				if (events.length == 2) {
 					start = end;
 					return false;
 				}

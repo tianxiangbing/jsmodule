@@ -9,8 +9,10 @@ $set(title,手机端选择日期)
 <p>手机联动选择日期
 <em>这个组件是从<a href="https://github.com/tianxiangbing/mobile-select-area">mobile-select-area</a> 继承过来的，所以调用方法基本相同</em></p>
 <b style="color:red;">请切换手机调试模式或用手机浏览器访问此demo</b>
+<link rel="stylesheet" type="text/css" href="example/mobile-select-date/dialog.css">
 <link rel="stylesheet" type="text/css" href="example/mobile-select-date/mobile-select-area.css">
-<input type="text" id="txt_date" value="2014/03/23"/>
+<p>居中显示：<input type="text" id="txt_date" value="2014/03/23"/></p>
+<p>置底固定显示：<input type="text" id="txt_date2" value="2014/03/23"/></p>
 <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="example/mobile-select-date/dialog.js"></script>
 <script type="text/javascript" src="example/mobile-select-date/mobile-select-area.js"></script>
@@ -18,6 +20,8 @@ $set(title,手机端选择日期)
 <script>
 var selectDate = new MobileSelectDate();
 selectDate.init({trigger:'#txt_date'});
+var selectDate2 = new MobileSelectDate();
+selectDate2.init({trigger:'#txt_date2',position:'bottom'});
 </script>
 <h1>
 <a id="用法" class="anchor" href="#%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>用法</h1>

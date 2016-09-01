@@ -26,6 +26,7 @@
 		this.index = 0;
 		this.value = [0, 0, 0];
 		this.oldvalue;
+		this.oldtext;
 		this.text = ['', '', ''];
 		this.level = 3;
 		this.mtop = 30;
@@ -45,6 +46,7 @@
 			this.value = (this.settings.value && this.settings.value.split(",")) || [0, 0, 0];
 			this.text = this.settings.text || this.trigger.val().split(' ') || ['', '', ''];
 			this.oldvalue = this.value.concat([]);
+			this.oldtext = this.text.concat([]);
 			this.min = new Date(this.settings.min || "1900/01/01");
 			this.settings.max ? this.max = new Date(this.settings.max) : this.max = new Date();
 			this.getData();
@@ -80,17 +82,35 @@
 		bindEvent: function() {
 			var _this = this;
 			this.trigger.click(function(e) {
-				$.confirm('<div class="ui-scroller-mask"><div id="' + _this.id + '" class="ui-scroller"><div></div><div ></div><div></div><p></p></div></div>', null, function(t, c) {
+
+				var settings,buttons;
+				if( _this.settings.position == "bottom"){
+					settings ={
+						position:"bottom",
+						width:"100%",
+						className:"ui-dialog-bottom",
+						animate:false
+					}
+					var buttons=[{
+							'no': '取消'
+						},{
+							'yes': '确定'
+						}];
+				}
+				
+				$.confirm('<div class="ui-scroller-mask"><div id="' + _this.id + '" class="ui-scroller"><div></div><div ></div><div></div><p></p></div></div>', buttons, function(t, c) {
 					if (t == "yes") {
 						_this.submit()
 					}
-					if (t = 'no') {
+					if (t == 'no') {
 						_this.cancel();
 					}
 					this.dispose();
-				}, {
-					fixed: true
-				});
+				}, $.extend({
+					width: 320,
+					height: 215
+				},settings));
+				
 				_this.scroller = $('#' + _this.id);
 				_this.format();
 				var start = 0,
@@ -210,6 +230,7 @@
 		},
 		submit: function() {
 			this.oldvalue = this.value.concat([]);
+			this.oldtext = this.text.concat([]);
 			if (this.trigger[0].nodeType == 1) {
 				//input
 				this.trigger.val(this.text.join(this.separator));
@@ -220,6 +241,7 @@
 		},
 		cancel: function() {
 			this.value = this.oldvalue.concat([]);
+			this.text = this.oldtext.concat([]);
 		}
 	}
 	return MobileSelectDate;

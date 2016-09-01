@@ -1,1 +1,98 @@
-"use strict";function _classCallCheck(t,n){if(!(t instanceof n))throw new TypeError("Cannot call a class as a function")}function _typeof(t){return t&&"undefined"!=typeof Symbol&&t.constructor===Symbol?"symbol":typeof t}var _createClass=function(){function t(t,n){for(var i=0;i<n.length;i++){var e=n[i];e.enumerable=e.enumerable||!1,e.configurable=!0,"value"in e&&(e.writable=!0),Object.defineProperty(t,e.key,e)}}return function(n,i,e){return i&&t(n.prototype,i),e&&t(n,e),n}}();!function(t,n){"function"==typeof define&&define.amd?define(["$"],n):"object"===("undefined"==typeof exports?"undefined":_typeof(exports))?module.exports=n():t.Audio=n(window.Zepto||window.jQuery||$)}(window,function(t){t.fn.Audio=function(i){var e=[];return t(this).each(function(){var o=new n,a=t.extend({target:t(this)},i);o.init(a),e.push(o)}),e};var n=function(){function n(){_classCallCheck(this,n)}return _createClass(n,[{key:"contructor",value:function(){}},{key:"init",value:function(n){var i=Math.random().toString().replace(".","");this.id="audio_"+i,this.settings={},this.controller=null;var e=this;this.settings=t.extend(this.settings,n),this.audio=t(this.settings.target).get(0),this.createDom(),e.duration=e.audio.duration,"Infinity"!=e.duration?e.durationContent.html(Math.floor(e.duration)+"s"):e.durationContent.html(t(e.settings.target).attr("duration")||""),this.settings.target.on("canplaythrough",function(){if(e.duration=e.audio.duration,"Infinity"!=e.duration)e.durationContent.html(Math.floor(e.duration)+"s");else{var n=t(e.settings.target).attr("duration");n?e.durationContent.html(t(e.settings.target).attr("duration")+"s"):e.durationContent.html("")}}),this.bindEvent()}},{key:"createDom",value:function(){var n='<div id="'+this.id+'" class="ui-audio"><i></i></div>';this.settings.target.hide().after(n),this.controller=t("#"+this.id),this.durationContent=t('<div class="ui-duration"></div>'),this.controller.append(this.durationContent)}},{key:"bindEvent",value:function(){var n=this,i=this;this.controller.on("click",function(){i.play()}),t(this.audio).on("ended",function(){return i.stop()}),t(this.audio).on("timeupdate",function(){return n.settings.updateCallback&&n.settings.updateCallback.call(n,n.audio,n.audio.duration,n.durationContent)}),t(this.audio).on("error",function(){alert("加载音频文件出现错误!")})}},{key:"play",value:function(){this.audio.paused?(this.audio.play(),this.controller.addClass("play")):(this.audio.pause(),this.controller.removeClass("play")),this.settings.playCallback&&this.settings.playCallback.call(this,this.audio,this.audio.paused,this.durationContent)}},{key:"stop",value:function(){this.controller.removeClass("play"),this.settings.stopCallback&&this.settings.stopCallback.call(this,this.audio,this.audio.paused,this.durationContent)}}]),n}();return n});
+/*
+ * Created with Sublime Text 2.
+ * license: http://www.lovewebgames.com/jsmodule/index.html
+ * User: 田想兵
+ * Date: 2015-03-16
+ * Time: 20:27:54
+ * Contact: 55342775@qq.com
+ */
+"use strict";;
+(function(root, factory) {
+	//amd
+	if (typeof define === 'function' && define.amd) {
+		define(['$'], factory);
+	} else if (typeof exports === 'object') { //umd
+		module.exports = factory();
+	} else {
+		root.Audio = factory(window.Zepto || window.jQuery || $);
+	}
+})(window, function($) {
+	$.fn.Audio = function(settings) {
+		var list = [];
+		$(this).each(function() {
+			var audio = new Audio();
+			var options = $.extend({
+				target: $(this)
+			}, settings);
+			audio.init(options);
+			list.push(audio);
+		});
+		return list;
+	};
+	class Audio {
+		contructor() {}
+		init(options) {
+			let rnd = Math.random().toString().replace('.', '');
+			this.id = 'audio_' + rnd;
+			this.settings = {};
+			this.controller = null;
+			var _this = this;
+			this.settings = $.extend(this.settings, options);
+			this.audio = $(this.settings.target).get(0);
+			this.createDom();
+			_this.duration = _this.audio.duration;
+			if (_this.duration != "Infinity") {
+				_this.durationContent.html(Math.floor(_this.duration) + 's');
+			} else {
+				_this.durationContent.html($(_this.settings.target).attr('duration')||"");
+			}
+			this.settings.target.on('canplaythrough', function() {
+				_this.duration = _this.audio.duration;
+				if (_this.duration != "Infinity") {
+					_this.durationContent.html(Math.floor(_this.duration) + 's');
+				} else {
+					var attr = $(_this.settings.target).attr('duration');
+					if(attr){
+						_this.durationContent.html($(_this.settings.target).attr('duration')+"s");
+					}else{
+						_this.durationContent.html('');
+					}
+				}
+			});
+			this.bindEvent();
+		}
+		createDom() {
+			var html = '<div id="' + this.id + '" class="ui-audio"><i></i></div>';
+			this.settings.target.hide().after(html);
+			this.controller = $('#' + this.id);
+			this.durationContent = $('<div class="ui-duration"></div>');
+			this.controller.append(this.durationContent);
+		}
+		bindEvent() {
+			var _this = this;
+			this.controller.on('click', function() {
+				_this.play();
+			});
+			$(this.audio).on('ended', () => _this.stop());
+			$(this.audio).on('timeupdate', () => this.settings.updateCallback && this.settings.updateCallback.call(this, this.audio, this.audio.duration, this.durationContent))
+			$(this.audio).on('error',()=>{
+				alert('加载音频文件出现错误!')
+			});
+		}
+		play() {
+			if (this.audio.paused) {
+				this.audio.play();
+				this.controller.addClass('play');
+			} else {
+				this.audio.pause();
+				this.controller.removeClass('play');
+			}
+			this.settings.playCallback && this.settings.playCallback.call(this, this.audio, this.audio.paused, this.durationContent);
+		}
+		stop() {
+			this.controller.removeClass('play');
+			this.settings.stopCallback && this.settings.stopCallback.call(this, this.audio, this.audio.paused, this.durationContent);
+		}
+	}
+	return Audio
+});

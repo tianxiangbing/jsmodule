@@ -2,6 +2,6 @@
 .carousel-image div{position: absolute;}
 .carousel-image a{display: block;float:left;background-color: #f2f2f2;}
 .carousel-image a img{margin:0;border:none;}
-.carousel-num {position: absolute;bottom:.2rem;margin:0 auto;width:100%;text-align: center;}
+.carousel-num {position: absolute;bottom:.2em;margin:0 auto;width:100%;text-align: center;}
 .carousel-num i{font-size:0px;opacity:.5;cursor: pointer; font-style:normal;background-color:#fff;color:#fff;font-size: 0;height: 7px;width: 7px;border-radius:  4px;overflow: hidden;margin-left: 10px;display: inline-block;border:1px solid #cecece;background-clip:padding-box;}
 .carousel-num i.current{background-color: #d34241;}

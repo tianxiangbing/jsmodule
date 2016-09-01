@@ -9,8 +9,13 @@
  */
 ;
 (function(root, factory) {
-	//amd
-	if (typeof define === 'function' && define.amd) {
+	//cmd
+	if (typeof define === 'function' && define.cmd){
+		define(function(require, exports, module) {
+			var $ = require("$");
+			return factory($);
+		});
+	}else if (typeof define === 'function' && define.amd) {
 		define(['$'], factory);
 	} else if (typeof exports === 'object') { //umd
 		module.exports = factory();
@@ -111,8 +116,12 @@
 		_removeLoading: function(target) {
 			var content = $(target || "html");
 			var loading = $(content).data('loading');
-			loading.remove();
-			$(content).data('loading', null);
+			var index = loading.data('index')||0;
+			index --;
+			if(index<=0){
+				loading.remove();
+			}
+			loading.data('index',index);
 		},
 		_loading: function(target) {
 			var _this = this;
@@ -121,13 +130,15 @@
 			if (!loading) {
 				loading = $(_this.loadingTpl);
 				$('body').append(loading);
+				var index = loading.data('index')||0;
+				loading.data('index',index+1)
 				$(content).data('loading', loading);
 			}
 			var ch = $(content).outerHeight();
 			var cw = $(content).outerWidth();
 			if (!target) {
 				ch = Math.max($('html').height(), $(window).height());
-				cw = Math.max($('html').height(), $(window).width());
+				cw = Math.max($('html').width(), $(window).width());
 			}
 			console.log(cw,ch)
 			loading.height(ch).width(cw);

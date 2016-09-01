@@ -46,14 +46,17 @@
 <p>手机联动选择地区</p>
 <b style="color:red;">请切换手机调试模式或用手机浏览器访问此demo</b>
 <p>请选择地区:<input type="text" id="txt_area" value="浙江省 杭州市 滨江区"/><input type="hidden" id="hd_area" value="1,1,1"/></p>
+<p>我固定显示在底部:<input type="text" id="txt_area2" value="浙江省 杭州市 滨江区"/><input type="hidden" id="hd_area" value="1,1,1"/></p>
 <link rel="stylesheet" type="text/css" href="example/mobile-select-area/mobile-select-area.css">
-<link rel="stylesheet" type="text/css" href="example/dialog/dialog.min.css">
+<link rel="stylesheet" type="text/css" href="example/dialog/dialog.css">
 <script type="text/javascript" src="example/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="example/dialog/dialog.js"></script>
 <script type="text/javascript" src="example/mobile-select-area/mobile-select-area.js"></script>
 <script>
 var selectArea = new MobileSelectArea();
 selectArea.init({trigger:$('#txt_area'),value:$('#hd_area').val(),data:'json/area.html'});
+var selectArea2 = new MobileSelectArea();
+selectArea2.init({trigger:$('#txt_area2'),value:$('#hd_area').val(),data:'json/area.html',position:"bottom"});
 </script>
 <h1>
 <a id="用法" class="anchor" href="#%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>用法</h1>
@@ -65,10 +68,10 @@ selectArea.init({trigger:$('#txt_area'),value:$('#hd_area').val(),data:'json/are
             &lt;title&gt;选择地区&lt;/title&gt;
             &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"&gt;
             &lt;link rel="stylesheet" type="text/css" href="../dist/mobile-select-area.css"&gt;
-            &lt;link rel="stylesheet" type="text/css" href="../dist/dialog.min.css"&gt;
+            &lt;link rel="stylesheet" type="text/css" href="../dist/dialog.css"&gt;
             &lt;script type="text/javascript" src="../dist/zepto.js"&gt;&lt;/script&gt;
             &lt;script type="text/javascript" src="../dist/dialog.js"&gt;&lt;/script&gt;
-            &lt;script type="text/javascript" src="../dist/dialog-jquery.min.js"&gt;&lt;/script&gt;
+            &lt;script type="text/javascript" src="../dist/dialog.js"&gt;&lt;/script&gt;
             &lt;script type="text/javascript" src="../dist/mobile-select-area.js"&gt;&lt;/script&gt;
         &lt;/head&gt;
         &lt;body&gt;

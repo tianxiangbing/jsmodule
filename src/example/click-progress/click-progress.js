@@ -51,15 +51,24 @@
 			this.power = 1;
 			this.bindEvent();
 		},
-		touch: function(obj, trigger, fn) {
-			var move;
+		touch: function(trigger, fn) {
+			var move, timer;
+			var _this = this;
 			var istouch = false;
 			if (typeof trigger === "function") {
 				fn = trigger;
 			};
-			$(obj).on('touchmove', trigger, function(e) {
+			$(trigger).on('touchstart mousedown', function(e) {
+				e.preventDefault();
+				if (_this.settings.event == "press") {
+					timer = setInterval(function() {
+						fn.call(this, e, 'touch');
+					}, 50);
+				}
+			}).on('touchmove', function(e) {
+				e.preventDefault();
 				move = true;
-			}).on('touchend', trigger, function(e) {
+			}).on('touchend mouseup', function(e) {
 				e.preventDefault();
 				if (!move) {
 					var returnvalue = fn.call(this, e, 'touch');
@@ -69,8 +78,12 @@
 					}
 				}
 				move = false;
+				if (_this.settings.event == 'press') {
+					clearInterval(timer)
+					_this.settings.callback && _this.settings.callback.call(this, _this.trigger, _this.target, _this.power);
+				}
 			});
-			$(obj).on('mousedown', trigger, click);
+			$(trigger).on('mousedown', click);
 
 			function click(e) {
 				return fn.call(this, e);
@@ -78,8 +91,11 @@
 		},
 		bindEvent: function() {
 			var _this = this;
-			this.touch(this.trigger, function() {
 				_this.v = _this.dv;
+			this.touch(this.trigger, function() {
+				if(_this.settings.event !="press"){
+					_this.v = _this.dv;
+				}
 				_this.setup();
 				_this.settings.clicked && _this.settings.clicked(_this.trigger, _this.target, _this.power);
 				return false;
@@ -91,9 +107,26 @@
 				//clearInterval(this.timer);
 				return;
 			}
-			this.timer = setInterval(function() {
-				_this.animate();
-			}, this.time);
+			if (_this.settings.event == "press") {
+				var _this = this;
+				_this.power = _this.finish[_this.change]();
+				_this.power += _this.v;
+				_this.power = Math.max(0, _this.power);
+				if (_this.power >= _this.full && _this.v > 0) {
+					_this.v = _this.v * -1;
+					_this.power = _this.full + _this.v;
+				}
+				if (_this.power <= 0 && _this.v < 0) {
+					_this.v = _this.v * -1;
+					_this.power = 0 + _this.v;
+				}
+				console.log('v:' + _this.v, "p:" + _this.power)
+				_this.finish[_this.change](_this.power);
+			} else {
+				this.timer = setInterval(function() {
+					_this.animate();
+				}, this.time);
+			}
 		},
 		animate:function(){
 			var _this =this;

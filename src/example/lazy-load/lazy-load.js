@@ -42,6 +42,7 @@
 			this.settings = $.extend(this.settings, settings);
 			this.elements = $(this.settings.elements);
 			this.loadImg = this.settings.loadImg || this.loadImg;
+			this.loadDom = this.settings.loadDom;
 			this.bindEvent();
 			if (this.settings.event == "scroll") {
 				this.load();
@@ -54,6 +55,19 @@
 				var $this = $(this);
 				if (($this.attr('src') === undefined || $this.attr('src') === false || $this.attr('src') == "") && $this.is('img')) {
 					$this.attr('src', _this.loadImg);
+					if(_this.settings.loadDom){
+						var loadDom = $(_this.settings.loadDom).clone();
+						$this.parent().append(loadDom);
+						loadDom.parent().css('position','relative');
+						loadDom.css({
+							'position':'absolute',
+							'top':$this.position().top,
+							'left':$this.position().left,
+							width:'100%',
+							height:'100%',
+							"text-align": "center"
+						}).prop('class','load-dom');
+					}
 				}
 			})
 		},
@@ -103,6 +117,8 @@
 				} else {
 					$this.css('background-image', "url('" + original + "')");
 				}
+				console.log($this.siblings('.load-dom'))
+				$this.siblings('.load-dom').remove();
 				$this[_this.settings.effect](_this.settings.effectArgs);
 			});
 		}

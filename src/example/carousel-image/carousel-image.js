@@ -7,8 +7,13 @@
  * Contact: 55342775@qq.com
  */
 (function(root, factory) {
-	//amd
-	if (typeof define === 'function' && define.amd) {
+	//cmd
+	if (typeof define === 'function' && define.cmd){
+		define(function(require, exports, module) {
+			var $ = require("$");
+			return factory($);
+		});
+	}else if(typeof define === 'function' && define.amd) {//amd
 		define(['$'], factory);
 	} else if (typeof exports === 'object') { //umd
 		module.exports = factory();
@@ -33,7 +38,7 @@
 	CarouselImage.prototype = {
 		init: function(settings) {
 			var _this = this;
-			this.settings = settings;
+			this.settings = $.extend({auto:true,resizeImg:true},settings);
 			this.index = 0;
 			this.container = settings.target;
 			this.content = this.container.children().first();
@@ -43,7 +48,7 @@
 			this.list = this.content.children();
 			this.size = this.list.length;
 			this.repeat = settings.repeat || false;
-			this.step = this.container.width();
+			this.step = settings.step || this.container.width();
 			if (this.repeat) {
 				var firstc = this.list.first().clone();
 				var lastc = this.list.last().clone();
@@ -66,6 +71,7 @@
 			this.bindEvent();
 			this.auto();
 			this.formatNum();
+			this.settings.callback&&this.settings.callback.call(this);
 		},
 		setHeightWidth: function() {
 			var settings = this.settings;
@@ -75,7 +81,7 @@
 			if (settings.height) {
 				this.container.height(settings.height);
 			}
-			this.step = this.container.width();
+			//this.step = this.container.width();
 			if (settings.repeat) {
 				this.content.width((this.list.length + 2) * this.step);
 			} else {
@@ -87,29 +93,33 @@
 			}
 			var _this = this;
 			//_this.container.find('img').width(this.container.width());
-			this.container.find('a').css({
-				width: this.step,
-				height: this.container.height(),
-				position: 'relative'
-			});
+			if(this.settings.resizeImg){
+				this.container.find('a').css({
+					width: this.step,
+					height: this.container.height(),
+					position: 'relative'
+				});
+			}
 			this.container.find('img').each(function() {
 				var img = new Image();
 				img.src = $(this).attr('src');
-				var i = $(this).data('index');;
-				(function(img, i) {
-					if (img.complete) {
-						setObj.call(img, i);
-					} else {
-						img.onreadystatechange = function() {
-							if (this.readystate == "complete" || this.readyState == "loaded") {
+				var i = $(this).data('index');
+				if(_this.settings.resizeImg){
+					(function(img, i) {
+						if (img.complete) {
+							setObj.call(img, i);
+						} else {
+							img.onreadystatechange = function() {
+								if (this.readystate == "complete" || this.readyState == "loaded") {
+									setObj.call(this, i);
+								}
+							}
+							img.onload = function() {
 								setObj.call(this, i);
 							}
 						}
-						img.onload = function() {
-							setObj.call(this, i);
-						}
-					}
-				})(img, i);
+					})(img, i);
+				}
 			});
 
 			function setObj(i) {
@@ -146,7 +156,7 @@
 				var left = (_this.container.width() - iw) / 2;
 				$('.carousel-' + i, c).css({
 					left: left,
-					top: top,
+					//top: top,
 					position: "absolute"
 				});
 			}
@@ -183,10 +193,13 @@
 				end = {},
 				move = false;
 			var curPos = {};
+			var ismove = 0;
 			this.content.on('touchstart', function(e) {
 				var events =  (e.changedTouches || e.originalEvent.changedTouches);
+				ismove=0;
 				start = {
-					x: events[0].pageX
+					x: events[0].pageX,
+					y: events[0].pageY
 				};
 				if (events.length == 2) {
 					move = false;
@@ -202,8 +215,23 @@
 				}
 				move = true;
 				end = {
-					x: events[0].pageX
+					x: events[0].pageX,
+					y: events[0].pageY
 				};
+				if(Math.abs(end.y - start.y)>10 && ismove==0){
+					ismove=2;
+				}
+				if(ismove==2){
+					console.log('ismove:'+ismove);
+					return;
+				}
+				if (/*!_this.bloom &&*/ Math.abs(end.x - start.x)>10 && ismove==0) {
+					ismove = 1;
+					//return false;
+				}
+				if(ismove==1){
+					e.preventDefault();
+				}
 				// var curPos = $(this).position();
 				if (!_this.bloom) {
 					//只移动x轴
@@ -217,10 +245,14 @@
 					}
 					$(this).css(curPos);
 				}
+				console.log(Math.abs(end.x - start.x))
 				start = end;
-				return false;
 			}).on('touchend', function(e) {
 				var events =  (e.changedTouches || e.originalEvent.changedTouches);
+				if(ismove ==2){
+					console.log('ismove:'+ismove);
+					return;
+				}
 				end = {
 					x: events[0].pageX
 				};
@@ -229,22 +261,26 @@
 					left: curPos.left + (end.x - start.x)
 				};
 				$(this).css(stopPos);
-				if (end.x > istartleft+10) {
+				if (end.x > istartleft+50) {
 					_this.index--;
-					_this.go();
-				} else if (end.x < istartleft-10) {
+					// _this.go();
+				} else if (end.x < istartleft-50) {
 					_this.index++;
-					_this.go();
 				}
+				_this.go();
 				move = false;
 				_this.auto();
-				//return false;
+				console.log("ismove:"+ismove)
+				ismove=0;
 			});
 			_this.touch(_this.num, "i", function() {
 				clearInterval(_this.interval);
 				_this.index = $(this).index();
 				_this.go();
 				_this.auto();
+			});
+			$(window).on('touchend',function(){
+				ismove=0;
 			});
 			$(window).resize(function() {
 				if (!_this.settings.width) {
@@ -269,6 +305,7 @@
 					html += '<i class="' + cls + '">' + (i + 1) + '</i>';
 				};
 				this.num.html(html);
+				this.settings.formatNumCallback&&this.settings.formatNumCallback.call(this);
 			}
 		},
 		go: function() {
@@ -309,8 +346,12 @@
 					_this.formatNum();
 				});
 			}
+			this.settings.changeCallback&&this.settings.changeCallback.call(this);
 		},
 		auto: function() {
+			if(!this.settings.auto){
+				return;
+			}
 			var _this = this;
 			if (this.interval) {
 				_this.stop();

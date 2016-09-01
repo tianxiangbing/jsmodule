@@ -51,7 +51,7 @@
 		<input type="button" id="btn_dialog" value="打开浮层"/>
 		<div id="dialog-content" style="display:none;">这是内容</div>
 		<script src="example/dialog/jquery-1.9.1.min.js"></script>
-		<script src="example/dialog/dialog-jquery.js"></script>
+		<script src="example/dialog/dialog.js"></script>
 		<script>
 		var dialog = new Dialog();
 		dialog.init({target:"#dialog-content",trigger:"#btn_dialog",mask:true,width:300,height:200,title:'标题',animate:true});
@@ -149,6 +149,12 @@ $('#btn_confirmdefault').click(function(){
 	<h3>
 	<a id="trigger" class="anchor" href="#trigger" aria-hidden="true"><span class="octicon octicon-link"></span></a>trigger:</h3>
 	<pre><code>    触发对象
+	</code></pre>
+	<h3>fixed:默认为false</h3>
+	<pre><code>    是否固定显示在中间
+	</code></pre>
+	<h3>position:"bottom"</h3>
+	<pre><code>    是否固定显示在底部,默认显示在中间
 	</code></pre>
 	<h3>
 	<a id="target" class="anchor" href="#target" aria-hidden="true"><span class="octicon octicon-link"></span></a>target:</h3>
