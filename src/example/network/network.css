@@ -1,4 +1,0 @@
-.ui-ajaxing{color:#666;border:1px solid #ccc;cursor: default;}
-.ui-ajax-loading{position:absolute;left:0;top:0;z-index: 9999;}
-.ui-ajax-loading .ui-ajax-mask{ position:absolute;top:0;left:0;background-color: #000;opacity: .2;z-index: 1}
-.ui-ajax-loading i{height: 90px;width:90px; display: block;background: url(loading.gif) no-repeat center center;background-size:100% 100%;position: absolute;z-index: 2}

@@ -25,7 +25,7 @@ var List = {
 		files: ["mobile-upload.js"]
 	},
 	"paging": {
-		files: ["query.js","paging.js", "paging.css"]
+		files: ["query.js", "paging.js", "paging.css"]
 	},
 	"query": {
 		files: ['query.js']
@@ -34,7 +34,7 @@ var List = {
 		files: ['scroll-load']
 	},
 	table: {
-		files: ["query.js","paging.js","table.js"],
+		files: ["query.js", "paging.js", "table.js"],
 		module: ["dialog", "paging"]
 	},
 	upload: {
@@ -47,39 +47,39 @@ var List = {
 	"format-number": {
 		files: ["format-number.js"]
 	}
-	,"network":{
-		files:['network.js','network.css']
+	, "network": {
+		files: ['network.js', 'network.css']
 	}
-	,'loading':{
-		files:['loading.css','loading.js']
+	, 'loading': {
+		files: ['loading.css', 'loading.js']
 	}
-	,'tip':{
-		files:['tip.css','tip.js']
+	, 'tip': {
+		files: ['tip.css', 'tip.js']
 	},
-	"carousel-image":{
-		files:['carousel-image.js','carousel-image.css']
+	"carousel-image": {
+		files: ['carousel-image.js', 'carousel-image.css']
 	},
-	"calendar":{
-		files:['calendar.js','calendar.css']
+	"calendar": {
+		files: ['calendar.js', 'calendar.css']
 	},
-	"click-progress":{
-		files:['click-progress.js','click-progress.css']
+	"click-progress": {
+		files: ['click-progress.js', 'click-progress.css']
 	},
-	"autosearch":{
-		files:['autosearch.js','autosearch.css']
+	"autosearch": {
+		files: ['autosearch.js', 'autosearch.css']
 	},
-	"select":{
-		files:['select.js','select.css']
+	"select": {
+		files: ['select.js', 'select.css']
 	},
-	"localStorage-cache":{
-		files:['localStorage-cache.js']
+	"localStorage-cache": {
+		files: ['localStorage-cache.js']
 	},
-	"area":{
-		files:[
-		'area.js',"area.css","area-data.js"]
+	"area": {
+		files: [
+			'area.js', "area.css", "area-data.js"]
 	},
-	"audio":{
-		files:["audio.js","audio.css","audio.jpg","audio.gif"]
+	"audio": {
+		files: ["audio.js", "audio.css", "audio.jpg", "audio.gif"]
 	}
 };
 var http = require('http');
@@ -118,7 +118,21 @@ function loadModule(module, p) {
 	var arr = List[dirname];
 	var dir = 'src/example/' + (p || dirname);
 	createDir(dir);
-	arr.files.forEach(function(o) {
+	// arr.files.forEach(function (o) {
+	// 	var url = 'http://rawgit.com/tianxiangbing/' + dirname + '/master/src/' + o;
+	// 	var filename = o;
+	// 	if (o.indexOf('http') != -1) {
+	// 		url = o;
+	// 		filename = o.split('/').pop();
+	// 	}
+	// 	console.log('======dir========')
+	// 	console.log(dir)
+	// 	console.log('==============')
+	// 	getContent(dir + '/' + filename, url);
+	// });
+	function loadjs(){
+		if(arr.files.length ==0)return ;
+		let o = arr.files.shift();
 		var url = 'http://rawgit.com/tianxiangbing/' + dirname + '/master/src/' + o;
 		var filename = o;
 		if (o.indexOf('http') != -1) {
@@ -127,11 +141,14 @@ function loadModule(module, p) {
 		}
 		console.log('======dir========')
 		console.log(dir)
-		console.log('==============')
-		getContent(dir + '/' + filename, url);
-	});
+		getContent(dir + '/' + filename, url).then(function(){
+			loadjs();
+		});
+	}
+	loadjs();
+
 	if (arr.module) {
-		arr.module.forEach(function(m) {
+		arr.module.forEach(function (m) {
 			loadModule(m, dirname)
 		})
 	}
@@ -139,20 +156,24 @@ function loadModule(module, p) {
 //'http://cdn.rawgit.com/tianxiangbing/mobile-select-area/master/src/mobile-select-area.js'
 function getContent(file, url) {
 	console.log(url)
-	http.get(url, function(res) {
-		var str = '';
-		res.on('data', function(d) {
-			//process.stdout.write(d);
-			str+=d;
-		})
-		res.on('end', function(d) {
-			save(file, str);
+	let p = new Promise(function (resolve,reject) {
+		http.get(url, function (res) {
+			var str = '';
+			res.on('data', function (d) {
+				//process.stdout.write(d);
+				str += d;
+			})
+			res.on('end', function (d) {
+				save(file, str);
+				resolve();
+			});
 		});
 	});
+	return p;
 };
 
 function save(file, content) {
-	fs.writeFile(file, content, function(err) {
+	fs.writeFile(file, content, function (err) {
 		if (err) throw err;
 	});
 };
